@@ -1,0 +1,24 @@
+- highways
+	- vertical
+	- in perspective!
+- notes
+	- circle notes
+	- circle containers
+- note effects
+	- subtle glow effect when notes are going down
+	- bright glow effect when notes are pressed
+	- notes get thanos snapped Really Fast
+- in-game score
+	- good/perfect/missed: respective sides of highway
+		- basically, two indicators, one per side
+	- highway glows when score is getting too skewed
+	- seesaw? justice scale? (rabbit holds the scale!!!)
+	- 1 rabbit/side tas gets fatter?
+- post-game score
+	- 1/2/3 crowns
+- backgrounds
+	- if doable, parallax
+	- else, static
+- main menu
+	- has bunnies at center then move when something is selected
+	- buttons on the left	
