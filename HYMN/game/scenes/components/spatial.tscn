@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://game/scenes/components/growth_play_area.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=2]
+[ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=3]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5, 10 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 5, -5, 0 )
+texture = ExtResource( 2 )
+
+[node name="GrowthPlayArea" parent="Sprite3D" instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 347, 294 )
+
+[node name="BackgroundSprite" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 0 )
+texture = ExtResource( 3 )
