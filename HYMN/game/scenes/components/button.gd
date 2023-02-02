@@ -5,6 +5,7 @@ var input_key = "KEY_E"
 
 var is_button_pressed = false
 var is_there_a_hittable_note = false
+var current_judgement
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,8 @@ func _physics_process(delta):
 
 func _on_JudgementPerfect_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	# if button is pressed, then emit signal to score a perfect on this column
+	if 
+	
 	
 	pass # Replace with function body.
 

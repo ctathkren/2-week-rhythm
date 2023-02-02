@@ -45,7 +45,7 @@ shape = SubResource( 3 )
 [node name="JudgementMissLate" type="Area2D" parent="."]
 
 [node name="JudgementMissLateHitbox" type="CollisionShape2D" parent="JudgementMissLate"]
-position = Vector2( 0, 51 )
+position = Vector2( 0, 54 )
 shape = SubResource( 4 )
 
 [connection signal="area_shape_entered" from="JudgementPerfect" to="." method="_on_JudgementPerfect_area_shape_entered"]
