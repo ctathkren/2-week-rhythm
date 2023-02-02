@@ -1,11 +1,13 @@
-extends Area2D
+extends Node2D
 
 var COLUMN_NUMBER = -1
 
+var hittable_notes = [] # Queue data structure; make sure that a button can only hit one note/hold at a time
 
-var is_button_pressed = false
-var is_there_a_hittable_note = false
-var current_judgement
+signal do_nothing
+signal hit_perfect
+signal hit_good
+signal hit_miss
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,13 +16,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
-	
-	# ---
-	
 	if Input.is_action_just_pressed(getInputKey()):
-		# change sprite to <pressed key> version
-		pass
+		if hittable_notes.size() > 0:		
+			var current_note = hittable_notes.pop_front()
+			
+			if current_note.has_method("getNoteType"):
+				if current_note.getNoteType() == "note":
+					emit_signal(current_note.getJudgement())
+					current_note.beHit()
+				elif current_note.getNoteType() == "hold":
+					# TODO
+					pass
 	
 # ---
 
@@ -37,22 +43,62 @@ func getInputKey():
 	
 	return input_key
 
-func _on_JudgementPerfect_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	# if button is pressed, then emit signal to score a perfect on this column
-	
-	pass # Replace with function body.
+# ---
 
-func _on_JudgementGood_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	# if button is pressed, then emit signal to score a good on this column
-	
-	pass # Replace with function body.
-
-func _on_JudgementMissEarly_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_JudgementMissEarly_area_entered(area):
 	# if button is pressed, then emit signal to score a miss on this column (too early)
 
-	pass # Replace with function body.
+	# make sure that area is a note or a hold before adding it to hittable_notes
+	if area.has_method("getNoteType"):
+		if area.getNoteType() == "note":
+			hittable_notes.append(area)
+			area.setJudgement("hit_miss")
+		elif area.getNoteType() == "hold":
+			# TODO
+			pass
 
-func _on_JudgementMissLate_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+func _on_JudgementGoodEarly_area_entered(area):
+	if area.has_method("getNoteType"):
+		if area.getNoteType() == "note":
+			area.setJudgement("hit_good")
+		elif area.getNoteType() == "hold":
+			# TODO
+			pass
+			
+func _on_JudgementPerfect_area_entered(area):
+	if area.has_method("getNoteType"):
+		if area.getNoteType() == "note":
+			area.setJudgement("hit_perfect")
+		elif area.getNoteType() == "hold":
+			# TODO
+			pass
+
+func _on_JudgementGoodLate_area_entered(area):
+	if area.has_method("getNoteType"):
+		if area.getNoteType() == "note":
+			area.setJudgement("hit_good")
+		elif area.getNoteType() == "hold":
+			# TODO
+			pass
+
+func _on_JudgementMissLate_area_entered(area):
 	# if a note reaches this part without being pressed, then emit signal to score a miss on this column
+	
+	# make sure that area is a note or a hold before adding it to hittable_notes
+	if area.has_method("getNoteType"):
+		emit_signal("hit_miss")
+		
+		# remove area from hittable_notes; area is actually hittable_notes[0]
+		hittable_notes.pop_front()
 
-	pass # Replace with function body.
+		# hit area
+		area.beHit()
+
+
+
+
+
+
+
+
+
