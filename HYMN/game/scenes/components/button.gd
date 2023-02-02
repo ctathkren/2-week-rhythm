@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 var COLUMN_NUMBER
 var input_key = "KEY_E"

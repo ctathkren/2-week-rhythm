@@ -5,6 +5,7 @@
 [ext_resource path="res://game/scenes/main/gameplay.gd" type="Script" id=3]
 
 [node name="Gameplay" type="Node2D"]
+position = Vector2( 815, 399 )
 script = ExtResource( 3 )
 
 [node name="Background" type="Sprite" parent="."]
