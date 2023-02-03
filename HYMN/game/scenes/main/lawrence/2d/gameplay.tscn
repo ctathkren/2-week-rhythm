@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://game/scenes/components/note.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/scenes/components/growth_play_area.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/scenes/components/decay_play_area.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/scenes/components/lawrence/note/note.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/scenes/components/lawrence/growth_play_area/growth_play_area.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/scenes/components/lawrence/decay_play_area/decay_play_area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/scenes/main/lawrence/2d/gameplay.gd" type="Script" id=4]
 
 [node name="Gameplay" type="Node2D"]

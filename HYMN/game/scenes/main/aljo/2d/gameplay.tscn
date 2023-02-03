@@ -2,9 +2,9 @@
 
 [ext_resource path="res://game/scenes/main/aljo/2d/gameplay.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/fonts/font_exbrat.tres" type="DynamicFont" id=2]
-[ext_resource path="res://game/scenes/components/button/button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://game/scenes/components/note/note.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/scenes/components/conductor/conductor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/scenes/components/aljo/button/button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/scenes/components/aljo/note/note.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/scenes/components/aljo/conductor/conductor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/assets/sound/music/drafts/song_4.ogg" type="AudioStream" id=6]
 [ext_resource path="res://game/assets/art/backgrounds/draft.png" type="Texture" id=7]
 [ext_resource path="res://game/assets/sound/music/drafts/decay_draft_v2.ogg" type="AudioStream" id=8]

@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://game/scenes/components/decay_play_area.gd" type="Script" id=1]
-[ext_resource path="res://game/scenes/components/button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/scenes/components/lawrence/decay_play_area/decay_play_area.gd" type="Script" id=1]
+[ext_resource path="res://game/scenes/components/lawrence/button/button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=3]
+
 
 [node name="DecayPlayArea" type="Node2D"]
 script = ExtResource( 1 )
