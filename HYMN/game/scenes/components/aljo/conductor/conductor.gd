@@ -219,6 +219,7 @@ func play_from_beat(seconds, beats_offset):
 
 # idk where this is used yet, wasn't mentioned in vid
 # possible: button.gd or note.gd
+# possible: used for play_from_beat(), passes vector2
 func get_closest_beat(seconds, nth_beat): # time, beat
 	var current_beat
 	current_beat = (seconds / seconds_per_beat)
