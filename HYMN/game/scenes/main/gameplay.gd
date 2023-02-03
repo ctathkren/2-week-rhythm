@@ -15,7 +15,8 @@ func _ready():
 	$Note8.setColumnNumber(-2)
 	$Note9.setColumnNumber(3)
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		resetLevel()
 	
@@ -23,4 +24,4 @@ func _physics_process(delta):
 # ---
 
 func resetLevel():
-	get_tree().reload_current_scene()
+	var _reload = get_tree().reload_current_scene()

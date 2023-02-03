@@ -55,7 +55,6 @@ shape = SubResource( 4 )
 [connection signal="area_entered" from="JudgementMissEarly" to="." method="_on_JudgementMissEarly_area_entered"]
 [connection signal="area_entered" from="JudgementGoodEarly" to="." method="_on_JudgementGoodEarly_area_entered"]
 [connection signal="area_entered" from="JudgementPerfect" to="." method="_on_JudgementPerfect_area_entered"]
-[connection signal="area_shape_entered" from="JudgementPerfect" to="." method="_on_JudgementPerfect_area_shape_entered"]
 [connection signal="area_entered" from="JudgementGoodLate" to="." method="_on_JudgementGoodLate_area_entered"]
 [connection signal="area_entered" from="JudgementMissLate" to="." method="_on_JudgementMissLate_area_entered"]
 [connection signal="area_shape_entered" from="JudgementMissLate" to="." method="_on_JudgementMissLate_area_shape_entered"]
