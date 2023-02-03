@@ -2,11 +2,27 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://game/scenes/components/button/button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/scenes/main/2d/gameplay.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var BPM
+
+# ---
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
 
 [node name="Gameplay" type="Node2D"]
 position = Vector2( 815, 399 )
-script = ExtResource( 3 )
+script = SubResource( 1 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( -1, -39.875 )
