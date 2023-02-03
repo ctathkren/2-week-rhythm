@@ -32,9 +32,22 @@ var instance
 
 func _ready():
 	randomize()
+
+	"""
+	Ways to Start the Level
+		- from beat 0
+			- uncomment $Conductor.play_beats_before_start(beats)
+		- from certain time or beat
+			- uncomment $Conductor.play_from_beat(seconds, beat)
+			- pass the arguments
+		- DON'T FORGET TO COMMENT THE OTHER
+	"""
+
+	# start level
 	$Conductor.play_beats_before_start(8) 
-	# argument should be a var
-	# or an if statement depending on the song
+		# argument should be a var
+		# or an if statement depending on the song
+	# $Conductor.play_from_beat(seconds, beat)
 
 
 func _input(event):

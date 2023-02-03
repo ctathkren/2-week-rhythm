@@ -125,8 +125,6 @@ func report_beat_to_game():
 
 
 # ONREADY (once, called in Game.gd)
-# play_beats_before_start starts the level normally
-# play_from_beat jumps to a certain point
 
 # Play needed notes before start of song
 func set_beats_before_start(beats):
@@ -169,11 +167,13 @@ func _on_StartTimer_timeout():
 	# at start of level
 	if position_in_beats < beats_before_start - 1:
 		# recall: beats_before_start was just set using set_beats_before_start()
+		
 		$StartTimer.start()
 	
 	# on the beat right before song starts
 	elif position_in_beats == beats_before_start - 1:
 		# accounts for delay before AudioStreamPlayer.play() works
+		
 		var wait_time_adjustments = get_wait_time_adjustments()
 		$StartTimer.wait_time = $StartTimer.wait_time - wait_time_adjustments
 
@@ -189,12 +189,17 @@ func _on_StartTimer_timeout():
 
 
 func play_beats_before_start(beats):
-	# called only once in "Game.gd" under "_ready()"
-	# used to set how many beats before start song
-	# sets and starts the one-shot timer
-	# argument (beats) is set manaually IN Game.gd
-		# might want to move it here as export along with bpm and measures
+	"""
+	Play Beats Before Start
 
+	- the normal way to start the level
+	- called only once in Game.gd under _ready()
+	- used to set how many beats before start song
+	- sets and starts the one-shot timer
+	- argument (beats) is set manaually IN Game.gd
+		- might want to move it here as export along with bpm and measures
+	"""
+	
 	beats_before_start = set_beats_before_start(beats)
 	set_start_timer()
 
@@ -212,7 +217,8 @@ func play_from_beat(seconds, beats_offset):
 	measure = position_in_beats % measures
 
 
-# idk where this is used yet
+# idk where this is used yet, wasn't mentioned in vid
+# possible: button.gd or note.gd
 func get_closest_beat(seconds, nth_beat): # time, beat
 	var current_beat
 	current_beat = (seconds / seconds_per_beat)
