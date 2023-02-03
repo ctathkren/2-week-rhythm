@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red L3 Glow.png-e7f9e8aa7564c28dbe80e112d4fa9668.stex"
+path="res://.import/Red L1 Glow.png-61dcda6a4a058b9faea82fb38e47f152.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Red L3 Glow.png"
-dest_files=[ "res://.import/Red L3 Glow.png-e7f9e8aa7564c28dbe80e112d4fa9668.stex" ]
+source_file="res://game/assets/art/general/Notes/Red L1 Glow.png"
+dest_files=[ "res://.import/Red L1 Glow.png-61dcda6a4a058b9faea82fb38e47f152.stex" ]
 
 [params]
 
