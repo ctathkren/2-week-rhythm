@@ -7,11 +7,12 @@ var BPM
 func _ready():
 	pass
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("ui_down"):
 		resetLevel()
 
 # ---
 
 func resetLevel():
-	get_tree().reload_current_scene()
+	var _reload = get_tree().reload_current_scene()

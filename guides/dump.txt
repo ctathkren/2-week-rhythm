@@ -1,0 +1,4 @@
+- from aljo
+	- can we have a simple sequence before the title screen?
+	- i think the first paragraph from gdd is a good/funny premise xD
+	- can just be text on a bg for a bit then music/title screen kicks in

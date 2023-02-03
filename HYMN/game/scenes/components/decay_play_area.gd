@@ -7,7 +7,8 @@ var SCROLL_SPEED
 func _ready():
 	pass 
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	$Button_Decay1.COLUMN_NUMBER = -1
 	$Button_Decay2.COLUMN_NUMBER = -2
 	$Button_Decay3.COLUMN_NUMBER = -3
