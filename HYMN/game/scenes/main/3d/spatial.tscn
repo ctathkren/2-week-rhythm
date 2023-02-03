@@ -24,4 +24,5 @@ position = Vector2( 347, 294 )
 
 [node name="BackgroundSprite" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 0 )
+visible = false
 texture = ExtResource( 3 )
