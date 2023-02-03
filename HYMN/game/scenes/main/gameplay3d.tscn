@@ -18,6 +18,7 @@ viewport_path = NodePath("placeholder_GameplayViewportContaine/GameplayViewport"
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 7.7 )
+current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
