@@ -1,0 +1,17 @@
+Structure
+        [Intro Sequence]
+        Title Screen
+                Track Selection*
+                        Tracks
+                                Level
+                                        Gameplay
+                                        Pause
+                                                Unpause
+                                                Restart
+                                                Options
+                                                Exit Level
+                              Options
+                        Back to Title Screen
+                Options
+                Credits
+                Exit Game

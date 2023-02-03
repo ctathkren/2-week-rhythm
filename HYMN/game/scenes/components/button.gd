@@ -15,7 +15,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	if Input.is_action_just_pressed(getInputKey()):
 		if hittable_notes.size() > 0:		
 			var current_note = hittable_notes.pop_front()
@@ -27,8 +28,7 @@ func _physics_process(delta):
 				elif current_note.getNoteType() == "hold":
 					# TODO
 					pass
-	
-# ---
+
 
 # get Input Map name of input key from column number
 func getInputKey():
@@ -43,7 +43,6 @@ func getInputKey():
 	
 	return input_key
 
-# ---
 
 func _on_JudgementMissEarly_area_entered(area):
 	# if button is pressed, then emit signal to score a miss on this column (too early)
