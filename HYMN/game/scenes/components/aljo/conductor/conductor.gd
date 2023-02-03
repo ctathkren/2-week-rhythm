@@ -208,7 +208,7 @@ func play_beats_before_start(beats):
 func play_from_beat(seconds, beats_offset):
 	# jump to time
 	play()
-	seek(seconds * seconds_per_beat)
+	seek(seconds * seconds_per_beat) # AudioStreamPlayer.seek()
 
 	# set offset before music
 	beats_before_start = beats_offset
