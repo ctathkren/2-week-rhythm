@@ -7,6 +7,7 @@ var SCROLL_SPEED
 func _ready():
 	pass 
 
+
 func _physics_process(_delta):
 	$Button_Growth1.COLUMN_NUMBER = 1
 	$Button_Growth2.COLUMN_NUMBER = 2
