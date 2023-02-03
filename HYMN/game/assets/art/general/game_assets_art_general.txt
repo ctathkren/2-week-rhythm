@@ -1,4 +1,0 @@
-- highway
-- notes
-- perfect/ good/ miss effects
-- growth/ decay indicators

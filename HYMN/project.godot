@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="HYMN"
-run/main_scene="res://game/scenes/main/2d/gameplay.tscn"
+run/main_scene="res://game/scenes/main/gameplay.tscn"
 config/icon="res://icon.png"
 
 [display]
