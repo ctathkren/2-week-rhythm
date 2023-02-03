@@ -7,7 +7,7 @@ var COLUMN_NUMBER
 var correct_hit_time
 var actual_hit_time
 
-var SCROLL_SPEED = 100
+var SCROLL_SPEED = 300
 
 # ---
 
@@ -15,6 +15,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	position.y += SCROLL_SPEED * delta
 	# move down by SCROLL_SPEED * delta * whatever mess is caused by the highway parallax
 	# also move to the left/right based on the parallax
 	pass
