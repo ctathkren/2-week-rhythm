@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://game/scenes/components/growth_play_area.gd" type="Script" id=1]
+[ext_resource path="res://game/scenes/components/lawrence/growth_play_area/growth_play_area.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=2]
-[ext_resource path="res://game/scenes/components/button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/scenes/components/lawrence/button/button.tscn" type="PackedScene" id=3]
 
 [node name="GrowthPlayArea" type="Node2D"]
 script = ExtResource( 1 )
