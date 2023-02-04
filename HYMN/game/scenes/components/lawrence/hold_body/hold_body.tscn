@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game/assets/art/general/vines/Red Vine L1.png" type="Texture" id=1]
-[ext_resource path="res://game/scenes/components/lawrence/hold/hold_body.gd" type="Script" id=2]
+[ext_resource path="res://game/scenes/components/lawrence/hold_body/hold_body.gd" type="Script" id=2]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L6.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/general/vines/Red Vine L2.png" type="Texture" id=4]
 [ext_resource path="res://game/assets/art/general/vines/Red Vine L3.png" type="Texture" id=5]
