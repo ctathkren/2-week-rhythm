@@ -1,0 +1,42 @@
+extends Node2D
+
+var SCROLL_SPEED
+
+# ---
+
+func _ready():
+	pass 
+
+func _physics_process(_delta):
+	$Button_Decay1.column_number = -1
+	$Button_Decay2.column_number = -2
+	$Button_Decay3.column_number = -3
+
+# ---
+
+func _on_Button_Decay1_hit_perfect():
+	print("perfect")
+
+func _on_Button_Decay1_hit_good():
+	print("good")
+
+func _on_Button_Decay1_hit_miss():
+	print("miss")
+
+func _on_Button_Decay2_hit_perfect():
+	print("perfect")
+
+func _on_Button_Decay2_hit_good():
+	print("good")
+
+func _on_Button_Decay2_hit_miss():
+	print("miss")
+
+func _on_Button_Decay3_hit_perfect():
+	print("perfect")
+
+func _on_Button_Decay3_hit_good():
+	print("good")
+
+func _on_Button_Decay3_hit_miss():
+	print("miss")
