@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Purple Bar Adjacent.png-60afc00cf755ae88dc652cd35fb42ced.stex"
+path="res://.import/Purple Bar Adjacent.png-8ef159e3d2f8bb3bae352c0560a755e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Bars/Purple Bar Adjacent.png"
-dest_files=[ "res://.import/Purple Bar Adjacent.png-60afc00cf755ae88dc652cd35fb42ced.stex" ]
+source_file="res://game/assets/art/general/bars/Purple Bar Adjacent.png"
+dest_files=[ "res://.import/Purple Bar Adjacent.png-8ef159e3d2f8bb3bae352c0560a755e5.stex" ]
 
 [params]
 

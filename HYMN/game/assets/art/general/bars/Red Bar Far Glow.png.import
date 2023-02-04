@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red Bar Far Glow.png-5d67388480cdc67ea66d06ae5db976bf.stex"
+path="res://.import/Red Bar Far Glow.png-1ca085d274e47f11827675343cc1e044.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Bars/Red Bar Far Glow.png"
-dest_files=[ "res://.import/Red Bar Far Glow.png-5d67388480cdc67ea66d06ae5db976bf.stex" ]
+source_file="res://game/assets/art/general/bars/Red Bar Far Glow.png"
+dest_files=[ "res://.import/Red Bar Far Glow.png-1ca085d274e47f11827675343cc1e044.stex" ]
 
 [params]
 

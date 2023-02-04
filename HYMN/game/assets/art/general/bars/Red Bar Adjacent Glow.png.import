@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red Bar Adjacent Glow.png-6e8623a2630720c40ce0f692c91bc067.stex"
+path="res://.import/Red Bar Adjacent Glow.png-a3293d2154226f6249f1db9cc61d0b38.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Bars/Red Bar Adjacent Glow.png"
-dest_files=[ "res://.import/Red Bar Adjacent Glow.png-6e8623a2630720c40ce0f692c91bc067.stex" ]
+source_file="res://game/assets/art/general/bars/Red Bar Adjacent Glow.png"
+dest_files=[ "res://.import/Red Bar Adjacent Glow.png-a3293d2154226f6249f1db9cc61d0b38.stex" ]
 
 [params]
 

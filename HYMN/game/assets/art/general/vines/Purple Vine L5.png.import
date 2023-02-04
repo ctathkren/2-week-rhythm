@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Purple Vine L5.png-4169007d59543e102f6f44cea7c04a25.stex"
+path="res://.import/Purple Vine L5.png-aefc8b37eb7c61ebaba64399e3fa1b93.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Vines/Purple Vine L5.png"
-dest_files=[ "res://.import/Purple Vine L5.png-4169007d59543e102f6f44cea7c04a25.stex" ]
+source_file="res://game/assets/art/general/vines/Purple Vine L5.png"
+dest_files=[ "res://.import/Purple Vine L5.png-aefc8b37eb7c61ebaba64399e3fa1b93.stex" ]
 
 [params]
 

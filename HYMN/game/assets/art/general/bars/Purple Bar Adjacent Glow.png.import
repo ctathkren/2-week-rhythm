@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Purple Bar Adjacent Glow.png-134bc87ab6453dff58b9e3915861f420.stex"
+path="res://.import/Purple Bar Adjacent Glow.png-af61c3346a579041cb72f24217ffaf69.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Bars/Purple Bar Adjacent Glow.png"
-dest_files=[ "res://.import/Purple Bar Adjacent Glow.png-134bc87ab6453dff58b9e3915861f420.stex" ]
+source_file="res://game/assets/art/general/bars/Purple Bar Adjacent Glow.png"
+dest_files=[ "res://.import/Purple Bar Adjacent Glow.png-af61c3346a579041cb72f24217ffaf69.stex" ]
 
 [params]
 
