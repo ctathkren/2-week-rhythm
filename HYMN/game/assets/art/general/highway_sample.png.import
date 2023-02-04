@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/playarea_sample.png-e9ef49d3604363d47863e0b82060d777.s3tc.stex"
-path.etc="res://.import/playarea_sample.png-e9ef49d3604363d47863e0b82060d777.etc.stex"
+path.s3tc="res://.import/highway_sample.png-247fbbeeed8063602f65ccac0ccd7b17.s3tc.stex"
+path.etc="res://.import/highway_sample.png-247fbbeeed8063602f65ccac0ccd7b17.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://game/assets/art/general/playarea_sample.png"
-dest_files=[ "res://.import/playarea_sample.png-e9ef49d3604363d47863e0b82060d777.s3tc.stex", "res://.import/playarea_sample.png-e9ef49d3604363d47863e0b82060d777.etc.stex" ]
+source_file="res://game/assets/art/general/highway_sample.png"
+dest_files=[ "res://.import/highway_sample.png-247fbbeeed8063602f65ccac0ccd7b17.s3tc.stex", "res://.import/highway_sample.png-247fbbeeed8063602f65ccac0ccd7b17.etc.stex" ]
 
 [params]
 
