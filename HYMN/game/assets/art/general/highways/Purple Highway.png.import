@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Purple Highway.png-64e302527c0ab2c1d9d0d28ed67b11e2.s3tc.stex"
-path.etc="res://.import/Purple Highway.png-64e302527c0ab2c1d9d0d28ed67b11e2.etc.stex"
+path.s3tc="res://.import/Purple Highway.png-04ee0bd2d8b59958c378de6b780e60b8.s3tc.stex"
+path.etc="res://.import/Purple Highway.png-04ee0bd2d8b59958c378de6b780e60b8.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://game/assets/art/general/Purple Highway.png"
-dest_files=[ "res://.import/Purple Highway.png-64e302527c0ab2c1d9d0d28ed67b11e2.s3tc.stex", "res://.import/Purple Highway.png-64e302527c0ab2c1d9d0d28ed67b11e2.etc.stex" ]
+source_file="res://game/assets/art/general/highways/Purple Highway.png"
+dest_files=[ "res://.import/Purple Highway.png-04ee0bd2d8b59958c378de6b780e60b8.s3tc.stex", "res://.import/Purple Highway.png-04ee0bd2d8b59958c378de6b780e60b8.etc.stex" ]
 
 [params]
 
