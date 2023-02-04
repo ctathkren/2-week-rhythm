@@ -1,46 +1,57 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://game/scenes/main/lawrence/2d/gameplay.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/scenes/components/lawrence/growth_play_area/growth_play_area.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/scenes/main/gameplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=3]
-[ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=4]
 [ext_resource path="res://game/assets/art/general/Purple Highway.png" type="Texture" id=5]
 [ext_resource path="res://game/assets/art/general/Red Highway.png" type="Texture" id=6]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("GameplayViewportContainer/GameplayViewport")
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("CanvasLayer/BackgroundViewportContainer/BackgroundViewport")
 
 [sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("BackgroundViewportContainer/BackgroundViewport")
+viewport_path = NodePath("placeholder_BackgroundViewportContainer/BackgroundViewport")
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("placeholder_GameplayViewportContaine/GameplayViewport")
 
 [node name="Gameplay3D" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.387, 10 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 7.7 )
+current = true
 
-[node name="GrowthPlayAreaRender" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.433013, 0, -0.866025, 0.25, 8.00759, -6.01844, 4.04801 )
-visible = false
-texture = ExtResource( 4 )
-
-[node name="GrowthPlayArea" parent="GrowthPlayAreaRender" instance=ExtResource( 2 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 visible = false
 
-[node name="DecayPlayAreaRender" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.375, 0.866025, 0, -0.649519, 0.5, 12.2, -5, 3 )
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 visible = false
-texture = ExtResource( 4 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = SubResource( 7 )
 
-[node name="GrowthPlayArea2" parent="DecayPlayAreaRender" instance=ExtResource( 2 )]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="GameplayViewportContainer" type="ViewportContainer" parent="."]
-margin_left = 76.0
-margin_top = -1235.0
-margin_right = 1996.0
-margin_bottom = -155.0
+[node name="BackgroundViewportSprite3D" type="Sprite3D" parent="."]
+transform = Transform( 4.9, 0, 0, 0, 4.9, 0, 0, 0, 1, 9.6, -5.4, -30 )
+transparent = false
+alpha_cut = 2
+texture = SubResource( 2 )
 
-[node name="GameplayViewport" type="Viewport" parent="GameplayViewportContainer"]
+[node name="GameplayViewportSprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.522498, 0.85264, 0, -0.85264, 0.522498, 9.6, -3.85, -9.1 )
+alpha_cut = 2
+render_priority = 1
+texture = SubResource( 1 )
+
+[node name="placeholder_BackgroundViewportContainer" type="ViewportContainer" parent="."]
+margin_left = 62.0
+margin_top = -1142.0
+margin_right = 1982.0
+margin_bottom = -62.0
+
+[node name="BackgroundViewport" type="Viewport" parent="placeholder_BackgroundViewportContainer"]
 size = Vector2( 1920, 1080 )
 transparent_bg = true
 handle_input_locally = false
@@ -49,53 +60,32 @@ usage = 0
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="Gameplay" parent="GameplayViewportContainer/GameplayViewport" instance=ExtResource( 1 )]
-
-[node name="GameplayViewportTexture" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 12, -6, 0 )
-texture = SubResource( 1 )
-
-[node name="BackgroundViewportContainer" type="ViewportContainer" parent="."]
-margin_left = 2068.0
-margin_top = 18.0
-margin_right = 3988.0
-margin_bottom = 1098.0
-
-[node name="BackgroundViewport" type="Viewport" parent="BackgroundViewportContainer"]
-size = Vector2( 1920, 1080 )
-transparent_bg = true
-handle_input_locally = false
-render_target_v_flip = true
-render_target_update_mode = 3
-
-[node name="BackgroundSprite2" type="Sprite" parent="BackgroundViewportContainer/BackgroundViewport"]
+[node name="BackgroundSprite" type="Sprite" parent="placeholder_BackgroundViewportContainer/BackgroundViewport"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="GrowthHighwaySprite2" type="Sprite" parent="BackgroundViewportContainer/BackgroundViewport"]
-position = Vector2( 412, 746 )
+[node name="GrowthHighwaySprite" type="Sprite" parent="placeholder_BackgroundViewportContainer/BackgroundViewport"]
+position = Vector2( 594, 579.5 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 6 )
 
-[node name="DecayHighwaySprite2" type="Sprite" parent="BackgroundViewportContainer/BackgroundViewport"]
-position = Vector2( 1508, 746 )
+[node name="DecayHighwaySprite" type="Sprite" parent="placeholder_BackgroundViewportContainer/BackgroundViewport"]
+position = Vector2( 1326, 579.5 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 5 )
 
-[node name="BackgroundSprite" type="Sprite3D" parent="BackgroundViewportContainer/BackgroundViewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 0 )
-visible = false
-texture = ExtResource( 3 )
+[node name="placeholder_GameplayViewportContaine" type="ViewportContainer" parent="."]
+margin_left = 2354.0
+margin_right = 4274.0
+margin_bottom = 1080.0
 
-[node name="GrowthHighwaySprite" type="Sprite3D" parent="BackgroundViewportContainer/BackgroundViewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12, -7.46, 0 )
-visible = false
-texture = ExtResource( 6 )
+[node name="GameplayViewport" type="Viewport" parent="placeholder_GameplayViewportContaine"]
+size = Vector2( 1920, 1800 )
+transparent_bg = true
+handle_input_locally = false
+keep_3d_linear = true
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
 
-[node name="DecayHighwaySprite" type="Sprite3D" parent="BackgroundViewportContainer/BackgroundViewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.08, -7.46, 0 )
-visible = false
-texture = ExtResource( 5 )
-
-[node name="BackgroundViewportTexture" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, -5.4, 4 )
-visible = false
-texture = SubResource( 2 )
+[node name="Gameplay" parent="placeholder_GameplayViewportContaine/GameplayViewport" instance=ExtResource( 1 )]

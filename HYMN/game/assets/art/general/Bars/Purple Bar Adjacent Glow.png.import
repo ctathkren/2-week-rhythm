@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red L2 Regular.png-52cd131e9bc844a8a499697f901050dc.stex"
+path="res://.import/Purple Bar Adjacent Glow.png-134bc87ab6453dff58b9e3915861f420.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Red L2 Regular.png"
-dest_files=[ "res://.import/Red L2 Regular.png-52cd131e9bc844a8a499697f901050dc.stex" ]
+source_file="res://game/assets/art/general/Bars/Purple Bar Adjacent Glow.png"
+dest_files=[ "res://.import/Purple Bar Adjacent Glow.png-134bc87ab6453dff58b9e3915861f420.stex" ]
 
 [params]
 

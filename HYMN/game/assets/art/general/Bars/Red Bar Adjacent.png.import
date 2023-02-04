@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/draft_2.png-2a074e4c06d4e5ab531b4b03e957dd87.stex"
+path="res://.import/Red Bar Adjacent.png-cd3a62954df22e78566bba7bdbf9fbb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Notes/draft_2.png"
-dest_files=[ "res://.import/draft_2.png-2a074e4c06d4e5ab531b4b03e957dd87.stex" ]
+source_file="res://game/assets/art/general/Bars/Red Bar Adjacent.png"
+dest_files=[ "res://.import/Red Bar Adjacent.png-cd3a62954df22e78566bba7bdbf9fbb7.stex" ]
 
 [params]
 
