@@ -31,6 +31,7 @@ texture = ExtResource( 9 )
 stretch_mode = 1
 
 [node name="Gameplay" type="Node2D" parent="."]
+visible = false
 
 [node name="Conductor" parent="Gameplay" instance=ExtResource( 3 )]
 
