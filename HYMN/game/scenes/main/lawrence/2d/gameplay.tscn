@@ -5,6 +5,7 @@
 [ext_resource path="res://game/scenes/components/lawrence/decay_play_area/decay_play_area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/scenes/main/lawrence/2d/gameplay.gd" type="Script" id=4]
 
+
 [node name="Gameplay" type="Node2D"]
 position = Vector2( 472, 648 )
 script = ExtResource( 4 )

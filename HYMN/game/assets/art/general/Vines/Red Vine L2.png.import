@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red L3 Regular.png-4898d98469dd32ec1ed2b12f4112725e.stex"
+path="res://.import/Red Vine L2.png-da16c4840324955a0c0aaaba4fc6bddf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Red L3 Regular.png"
-dest_files=[ "res://.import/Red L3 Regular.png-4898d98469dd32ec1ed2b12f4112725e.stex" ]
+source_file="res://game/assets/art/general/Vines/Red Vine L2.png"
+dest_files=[ "res://.import/Red Vine L2.png-da16c4840324955a0c0aaaba4fc6bddf.stex" ]
 
 [params]
 

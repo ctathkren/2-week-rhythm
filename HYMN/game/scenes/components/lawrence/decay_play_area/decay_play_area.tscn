@@ -9,16 +9,17 @@
 script = ExtResource( 1 )
 
 [node name="DecayPlayAreaSkeleton" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 
 [node name="Button_Decay1" parent="." instance=ExtResource( 2 )]
-position = Vector2( -200, 425 )
+position = Vector2( -200, 810 )
 
 [node name="Button_Decay2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 425 )
+position = Vector2( 0, 800 )
 
 [node name="Button_Decay3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 200, 425 )
+position = Vector2( 200, 800 )
 
 [connection signal="hit_good" from="Button_Decay1" to="." method="_on_Button_Decay1_hit_good"]
 [connection signal="hit_miss" from="Button_Decay1" to="." method="_on_Button_Decay1_hit_miss"]

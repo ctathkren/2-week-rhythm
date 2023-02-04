@@ -1,6 +1,6 @@
 extends Node2D
 
-var COLUMN_NUMBER = -1
+var column_number = -1
 
 var hittable_notes = [] # Queue data structure; make sure that a button can only hit one note/hold at a time
 
@@ -34,12 +34,12 @@ func _physics_process(_delta):
 func getInputKey():
 	var input_key = "button_"
 	
-	if COLUMN_NUMBER > 0:
+	if column_number > 0:
 		input_key += "growth"
-	elif COLUMN_NUMBER < 0:
+	elif column_number < 0:
 		input_key += "decay"
 
-	input_key += String(abs(COLUMN_NUMBER))
+	input_key += String(abs(column_number))
 	
 	return input_key
 
