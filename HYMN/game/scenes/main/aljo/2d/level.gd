@@ -57,6 +57,7 @@ var spawn_notes_measure_3 = 1
 	# why is this 1?
 var spawn_notes_measure_4 = 0
 
+# for optimization
 var measure_to_spawn_notes = {
 		1 : spawn_notes_measure_1,
 		2 : spawn_notes_measure_2,
@@ -259,23 +260,32 @@ func level_end():
 	switch_scene_level_end()
 
 
-func spawn_notes(to_spawn):
+# Spawn Notes
+func instantiate_note():
+	instance = note.instance()
+	instance.initialize(lane)
+	add_child(instance)
+
+
+func spawn_notes(notes_to_spawn):
 	# called from _on_Conductor_send_measure()
-	# recall: to_spawn is the function parameter
+	# recall: notes_to_spawn is the function parameter
 
-	if to_spawn > 0:
+	# 1-note spawns
+	if notes_to_spawn == 1:
+		# random lane
 		lane = randi() % 3
-		instance = note.instance()
-		instance.initialize(lane)
-		add_child(instance)
 
-	if to_spawn > 1:
+		instantiate_note()
+
+	# multi-note spawns
+	if notes_to_spawn > 1:
+		# idk, but works for multiple notes
 		while rand == lane:
 			rand = randi() % 3
 		lane = rand
-		instance = note.instance()
-		instance.initialize(lane)
-		add_child(instance)
+		
+		instantiate_note()
 
 
 # Increment Score
