@@ -10,16 +10,21 @@ export var input = ""
 # Tracking
 var current_note = null
 
-# Feedback
+# Feedback and Scoring
 var hit_perfect = false
-var hit_good = false
-var hit_okay = false
+var hit_good    = false
+var hit_okay    = false
 
-# Scoring
 const SCORE_PERFECT = 3
-const SCORE_GOOD = 2
-const SCORE_OKAY = 1
-const SCORE_MISS = 0
+const SCORE_GOOD    = 2
+const SCORE_OKAY    = 1
+const SCORE_MISS    = 0
+
+var hit_feedbacks_to_score = {
+	hit_perfect : SCORE_PERFECT,
+	hit_good    : SCORE_GOOD,
+	hit_okay    : SCORE_OKAY,
+}
 
 
 # FUNCTIONS
@@ -57,8 +62,9 @@ func _unhandled_input(event):
 func hit_score_and_destroy(score):
 	get_parent().increment_score(score)
 
+	# defined in Note.gd
 	current_note.destroy(score)
-
+	
 
 func reset_note():
 	current_note = null
@@ -75,6 +81,12 @@ func hit_feedback():
 		# .increment_score(score) called in Game.gd
 		# .destroy(score) called in Note.gd
 		
+		# attempted optimization for if-statement
+		# couldn't get dictionary to run how i wanted
+		"""
+		for pair in hit_feedbacks_to_score:
+		"""
+
 		if hit_perfect:
 			hit_score_and_destroy(SCORE_PERFECT)
 		elif hit_good:
@@ -102,8 +114,8 @@ func _on_PushTimer_timeout():
 # NOTE CHECKING
 
 # Okay Areas
-# doubles as checker for considering if input should have an effect
-# ex. if in okay area, can hit; else not
+	# double as checker for considering if input should have an effect
+	# ex. if in okay area, can hit; else not
 func _on_OkayArea_area_entered(area):
 	if area.is_in_group("note"):
 		hit_okay = true
