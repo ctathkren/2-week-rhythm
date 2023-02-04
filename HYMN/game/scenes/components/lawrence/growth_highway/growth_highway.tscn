@@ -1,25 +1,25 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://game/scenes/components/lawrence/growth_play_area/growth_play_area.gd" type="Script" id=1]
-[ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=2]
-[ext_resource path="res://game/scenes/components/lawrence/button/button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/assets/art/general/playarea_sample.png" type="Texture" id=1]
+[ext_resource path="res://game/scenes/components/lawrence/button/button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/scenes/components/lawrence/growth_highway/growth_highway.gd" type="Script" id=3]
 
-[node name="GrowthPlayArea" type="Node2D"]
+[node name="GrowthHighway" type="Node2D"]
 z_index = -5
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
-[node name="GrowthPlayAreaSkeleton" type="Sprite" parent="."]
+[node name="GrowthHighwaySkeleton" type="Sprite" parent="."]
 visible = false
 z_index = -4
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 
-[node name="Button_Growth1" parent="." instance=ExtResource( 3 )]
+[node name="Button_Growth1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -200, 800 )
 
-[node name="Button_Growth2" parent="." instance=ExtResource( 3 )]
+[node name="Button_Growth2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 800 )
 
-[node name="Button_Growth3" parent="." instance=ExtResource( 3 )]
+[node name="Button_Growth3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 200, 800 )
 
 [connection signal="hit_good" from="Button_Growth1" to="." method="_on_Button_Growth1_hit_good"]
