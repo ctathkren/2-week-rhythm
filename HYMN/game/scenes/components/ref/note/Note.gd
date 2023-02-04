@@ -8,6 +8,8 @@ const TARGET_Y = 164 # ~button Y
 
 const DIST_TO_TARGET = TARGET_Y - SPAWN_Y
 
+const HIGHWAY_BOTTOM_Y = 200
+
 # Lane Positions (x, y)
 const LEFT_LANE_SPAWN   = Vector2(120, SPAWN_Y)
 const CENTER_LANE_SPAWN = Vector2(160, SPAWN_Y)
@@ -28,30 +30,64 @@ Note Movement Speed
 
 var time_to_target = 2.0 
 	
-# Tracking
-var hit = false
+# Movement Tracking
+var button_hit_ok = false
 
-# Sprites
+# Sprite Handling
 var sprite_frames_to_lane_positions = {
 	0 : LEFT_LANE_SPAWN,
 	1 : CENTER_LANE_SPAWN,
 	2 : RIGHT_LANE_SPAWN,
 }
 
+# Hit Feedback
+var feedback_score_to_texts_to_colors = [
+		[3, "GREAT", "f6d6bd"],
+		[2, "GOOD" , "c3a38a"],
+		[1, "OKAY" , "997577"],
+	]
+
 
 # FUNCTIONS
 # LOCAL
 func _physics_process(delta):
-	if !hit:
-		position.y += speed * delta
-		if position.y > 200:
-			queue_free()
-			get_parent().reset_combo()
-	else:
-		$Node2D.position.y -= speed * delta
+	# recall: button_hit_ok means the correct button was pressed while note is in Okay Area
+	
+	if not button_hit_ok:
+		# while note hasn't reached highway bottom
+		if position.y <= HIGHWAY_BOTTOM_Y:
+			move_down(delta)
+
+		# if button press missed and beyond highway bottom
+		else:
+			miss_delete()		
+	else: 
+		# if button_hit_ok
+		
+		label_move_up(delta)
+			
+			
+func move_down(delta):
+	position.y += speed * delta
+				
+
+func label_move_up(delta):
+	"""
+	Node2D here is a parent that has the feedback label!
+	Label is inside a Node2D for the Transform tab in editor
+		reference wanted the label to move up for a while before timer deletes it and note
+	"""
+
+	$Node2D.position.y -= speed * delta
+
+
+func miss_delete():
+	queue_free()
+	get_parent().reset_combo()
 
 
 # GLOBAL
+# Initialize
 func set_frame_and_position(lane):
 	# reference used an AnimatedSprite
 		# for arrow image directions, not animations
@@ -72,16 +108,19 @@ func set_frame_and_position(lane):
 		return
 	"""
 
-	# optimization for above if-elif-else statement:
+	# optimization for above if statement:
 
-	for frame in range(len(sprite_frames_to_lane_positions.keys())):
+	for frame in sprite_frames_to_lane_positions.keys():
 		# frame #0,1,2...
+		# don't need to use range(len(dict.keys())) because keys == range
+			# recall: keys = [0,1,2]; range(3) = [0,1,2]
 
 		if lane == frame:
-			# recall: lane is the function argument
+			# recall: lane is the function parameter
 
 			$AnimatedSprite.frame = frame
 			position = sprite_frames_to_lane_positions[frame]
+			
 		else:
 			printerr("Invalid lane set for note: " + str(lane))
 			return
@@ -100,31 +139,59 @@ func initialize(lane):
 	speed = set_speed()
 
 
-func destroy(score):
-	# called from ArrowButton.gd
-
+#Destroy
+func visual_effects():
 	$CPUParticles2D.emitting = true
 	$AnimatedSprite.visible = false
-	
-	$Timer.start()
-	
-	hit = true
-	
+
+
+func feedback_label(score):
+
+	"""
 	if score == 3:
-		$Node2D/Label.text = "GREAT"
-		$Node2D/Label.modulate = Color("f6d6bd")
+		$Node2D/Label.text = 'GREAT'
+		$Node2D/Label.modulate = Color('f6d6bd')
 	elif score == 2:
-		$Node2D/Label.text = "GOOD"
-		$Node2D/Label.modulate = Color("c3a38a")
+		$Node2D/Label.text = 'GOOD'
+		$Node2D/Label.modulate = Color('c3a38a')
 	elif score == 1:
-		$Node2D/Label.text = "OKAY"
-		$Node2D/Label.modulate = Color("997577")
+		$Node2D/Label.text = 'OKAY'
+		$Node2D/Label.modulate = Color('997577')
 	else:
 		pass
-		# empty for now to make accommodate SCORE_MISS
-		# in note_ ArrowButton.gd
+	"""
+
+	# optimization for above if-statement
+
+	for row in feedback_score_to_texts_to_colors:
+		if score == row[0]:
+			$Node2D/Label.text = row[1]
+			$Node2D/Label.modulate = Color(row[2])
+		else:
+			pass
+		# empty for now to accommodate const SCORE_MISS
+			# defined in hit_score_and_destroy(score)
+			# under ArrowButton.gd
+
+
+func destroy(score):
+	# called from ArrowButton.gd
+	# an "on-every-valid-button-press" function
+
+	visual_effects()
+	
+	# "_on_Timer_timeout()" handles "queue_free()"
+	$Timer.start()
+	
+	# Movement Tracking (_physics_process())
+	button_hit_ok = true
+
+	feedback_label(score)
 
 
 # SIGNALS
+# Note Deleting
 func _on_Timer_timeout():
+	# gives time for particle effects and feedback label before deleting note
+
 	queue_free()

@@ -45,8 +45,8 @@ var time_off_beat = 0.0
 
 # SIGNALS
 	# report EVERY CURRENT beat & measure TO GAME SCENE
-signal send_beat(position)
-signal send_measure(position)
+signal send_measure(current_measure)
+signal send_beat(current_beat)
 
 
 # FUNCTIONS
