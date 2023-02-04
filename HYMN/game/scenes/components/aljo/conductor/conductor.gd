@@ -208,7 +208,7 @@ func play_beats_before_start(beats):
 func play_from_beat(seconds, beats_offset):
 	# jump to time
 	play()
-	seek(seconds * seconds_per_beat)
+	seek(seconds * seconds_per_beat) # AudioStreamPlayer.seek()
 
 	# set offset before music
 	beats_before_start = beats_offset
@@ -219,6 +219,8 @@ func play_from_beat(seconds, beats_offset):
 
 # idk where this is used yet, wasn't mentioned in vid
 # possible: button.gd or note.gd
+# possible: used for play_from_beat(), passes vector2
+# lawrence says: it's a failsafe, but we'll have to figure out where to call it
 func get_closest_beat(seconds, nth_beat): # time, beat
 	var current_beat
 	current_beat = (seconds / seconds_per_beat)
