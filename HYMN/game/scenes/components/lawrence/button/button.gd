@@ -24,7 +24,7 @@ func _physics_process(_delta):
 			
 			if current_note.has_method("get_note_type"):
 				if current_note.get_note_type() == "note":
-					emit_signal(current_note.getJudgement())
+					emit_signal(current_note.get_judgement())
 					current_note.be_hit()
 				elif current_note.get_note_type() == "hold":
 					# TODO
