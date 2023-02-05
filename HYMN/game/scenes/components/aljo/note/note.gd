@@ -34,6 +34,8 @@ var time_to_target = 2.0
 var button_hit_ok = false
 
 # Sprite Handling
+var note_type
+
 var sprite_frames_to_lane_positions = {
 	0 : LEFT_LANE_SPAWN,
 	1 : CENTER_LANE_SPAWN,
@@ -55,7 +57,7 @@ func _ready():
 
 
 func set_note_type():
-	var note_type = get_parent().highway_type
+	note_type = get_parent().highway_type
 	$SpritesButton.animation = note_type
 	$SpritesGlow.animation   = note_type
 
@@ -212,6 +214,9 @@ func destroy(score):
 	button_hit_ok = true
 
 	feedback_label(score)
+
+	# tell highway what note type -> combo color
+	get_parent().set("note_type", note_type)	
 
 
 # SIGNALS

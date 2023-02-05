@@ -17,11 +17,17 @@ const SCORE_MISS = 0
 var combo = 0
 var max_combo = 0
 
+var note_type # to be assigned via signal
+onready var combo_label_theme = $ComboLabel.get("theme")
+
 # Note Hit Feedback
 var button_hit_great = 0
 var button_hit_good = 0
 var button_hit_okay = 0
 var button_hit_miss = 0
+
+const COLOR_GROWTH = "eb8f54"
+const COLOR_DECAY  = "393ea2"
 
 # Tracking how many of each feedback
 # used in count_hit_feedback
@@ -77,6 +83,7 @@ var instance
 export var highway_type := "growth"
 
 
+
 # FUNCTIONS
 
 # LOOPS
@@ -91,12 +98,19 @@ func _input(event):
 """
 
 # ON READY
-func _ready():
+func _ready():	
 	# reference uses random lanes for note spawning
 	randomize()
-
+	set_combo_color()
 	choose_level_start()
-	
+
+
+func set_combo_color():
+	if highway_type == "growth":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+	elif highway_type == "decay":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+
 
 func choose_level_start():
 	"""
@@ -342,14 +356,22 @@ func count_hit_feedback(score_to_add):
 
 
 func update_score_label():
-	$Score.text = str(score)
+	$ScoreLabel.text = str(score)
 
 
 func update_combo_label():
+	# Color
+	if note_type == "growth":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+	elif note_type == "decay":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+
+
+	# Text
 	if combo > 0:
-		$Combo.text = str(combo) + " COMBO!"
+		$ComboLabel.text = str(combo) + " COMBO!"
 	else:
-		$Combo.text = ""
+		$ComboLabel.text = ""
 
 
 func increment_score(score_to_add):
@@ -371,4 +393,4 @@ func reset_combo():
 	# called from Note.gd, physics_process() -> miss_delete()
 
 	combo = 0
-	$Combo.text = ""
+	$ComboLabel.text = ""
