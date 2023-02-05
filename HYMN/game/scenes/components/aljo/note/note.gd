@@ -139,7 +139,6 @@ func set_speed():
 	return DIST_TO_TARGET / time_to_target
 
 
-"""PASSED"""
 func initialize(lane): 
 	# called by level.gd under _spawn_notes(to_spawn)
 	# separate function because called outside
@@ -149,7 +148,6 @@ func initialize(lane):
 	speed = set_speed()
 
 
-"""FAIL"""
 #Destroy
 func visual_effects():
 	$CPUParticles2D.emitting = true
@@ -185,6 +183,7 @@ func feedback_label(score):
 			pass
 		
 	"""
+
 
 func destroy(score):
 	# called from button.gd
