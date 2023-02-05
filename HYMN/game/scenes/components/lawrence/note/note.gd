@@ -6,8 +6,6 @@ var column_number = 1
 var scroll_speed = 500		# pixels per second
 
 # not sure if we'll use these variables if our timing is Area2D-based
-var correct_hit_time
-var actual_hit_time
 var judgement = "do_nothing"
 
 var partner_note
