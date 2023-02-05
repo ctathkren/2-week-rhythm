@@ -34,7 +34,6 @@ var time_to_target = 2.0
 var button_hit_ok = false
 
 # Sprite Handling
-
 var sprite_frames_to_lane_positions = {
 	0 : LEFT_LANE_SPAWN,
 	1 : CENTER_LANE_SPAWN,
@@ -51,6 +50,16 @@ var feedback_score_to_texts_to_colors = [
 
 # FUNCTIONS
 # LOCAL
+func _ready():
+	set_note_type()
+
+
+func set_note_type():
+	var note_type = get_parent().highway_type
+	$SpritesButton.animation = note_type
+	$SpritesGlow.animation   = note_type
+
+
 func _physics_process(delta):
 	# recall: button_hit_ok means the correct button was pressed while note is in Okay Area
 	
@@ -82,7 +91,6 @@ func label_move_up(delta):
 	$Node2D.position.y -= speed * delta
 
 
-"""PASSED"""
 func miss_delete(): 
 	# since destroy -> timer only called if note hit
 		# need to delete note here if miss
@@ -100,13 +108,16 @@ func set_frame_and_position(lane):
 	# position: self.position
 
 	if lane == 0:
-		$AnimatedSprite.frame = 0
+		$SpritesButton.frame = 0
+		$SpritesGlow.frame   = 0
 		position = LEFT_LANE_SPAWN
 	elif lane == 1:
-		$AnimatedSprite.frame = 1
+		$SpritesButton.frame = 1
+		$SpritesGlow.frame   = 2
 		position = CENTER_LANE_SPAWN
 	elif lane == 2:
-		$AnimatedSprite.frame = 2
+		$SpritesButton.frame = 2
+		$SpritesGlow.frame   = 2
 		position = RIGHT_LANE_SPAWN
 	else:
 		printerr('Invalid lane set for note: ' + str(lane))
@@ -126,7 +137,8 @@ func set_frame_and_position(lane):
 		if lane == frame:
 			# recall: lane is the function parameter
 
-			$AnimatedSprite.frame = frame
+			$SpritesButton.frame = frame
+			$SpritesGlow.frame   = frame
 			position = sprite_frames_to_lane_positions[frame]
 			
 		else:
@@ -151,7 +163,9 @@ func initialize(lane):
 #Destroy
 func visual_effects():
 	$CPUParticles2D.emitting = true
-	$AnimatedSprite.visible = false
+
+	$SpritesButton.visible = false
+	$SpritesGlow.visible = false
 
 
 func feedback_label(score):
@@ -191,8 +205,8 @@ func destroy(score):
 
 	visual_effects()
 	
-	# "_on_Timer_timeout()" handles "queue_free()"
-	$Timer.start()
+	# "_on_NoteDeleteTimer_timeout()" handles "queue_free()"
+	$NoteDeleteTimer.start()
 	
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
@@ -202,7 +216,7 @@ func destroy(score):
 
 # SIGNALS
 # Note Deleting
-func _on_Timer_timeout():
+func _on_NoteDeleteTimer_timeout():
 	# gives time for particle effects and feedback label before deleting note
 
 	queue_free()

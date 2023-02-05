@@ -73,6 +73,9 @@ var rand = 0
 var note = load("res://game/scenes/components/aljo/note/note.tscn")
 var instance
 
+# Appearance
+export var highway_type := "growth"
+
 
 # FUNCTIONS
 
