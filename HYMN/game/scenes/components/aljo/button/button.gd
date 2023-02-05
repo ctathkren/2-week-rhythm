@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Sprite
 
 # VARIABLES
 # Button Identifier
@@ -24,34 +24,21 @@ const SCORE_MISS = 0
 
 # FUNCTIONS
 func _unhandled_input(event):
-	if event.is_action(input):
+	if event.is_action_pressed(input, false):
+		# registers all hits at the moment!
+		# consider: .is_action_just_pressed
 
-		if event.is_action_pressed(input, false):
-			# registers all hits at the moment!
-			# consider: .is_action_just_pressed
+		"""
+		notes on 2nd argument of:
+		.is_action_pressed(action: String, exact: bool)
 
-			"""
-			notes on 2nd argument of:
-			.is_action_pressed(action: String, exact: bool)
+		- if exact == false
+			- ignores additional input modifiers 
+			- for InputEventKey and InputEventMouseButton events
+			- and the direction for InputEventJoypadMotion events.
+		"""
 
-			- if exact == false
-				- ignores additional input modifiers 
-				- for InputEventKey and InputEventMouseButton events
-				- and the direction for InputEventJoypadMotion events.
-			"""
-
-			hit_feedback()
-
-			frame = 1
-				# note: was under another if-statement with same condition
-				# except 2nd argument was not given
-
-		elif event.is_action_released(input):
-			# consider: .is_action_just_released
-
-			$AnimationTimer.start()
-			# recall: timer is for reseting animation frame
-
+		hit_feedback()
 
 # ON KEY PRESS
 func hit_score_and_destroy(score):
@@ -90,16 +77,6 @@ func hit_feedback():
 
 
 # SIGNALS
-
-# ANIMATION FRAME TIMER
-func _on_AnimationTimer_timeout():
-	# reverts animation to default
-	# reference uses 2-frame anim
-	# highly customizable for us
-	
-	frame = 0
-
-
 # NOTE CHECKING
 
 # Okay Areas
