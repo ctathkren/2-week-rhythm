@@ -3,4 +3,5 @@
 [ext_resource path="res://game/scenes/components/aljo/test/test.gd" type="Script" id=1]
 
 [node name="Test" type="Node2D"]
+position = Vector2( 292, 157 )
 script = ExtResource( 1 )
