@@ -8,7 +8,7 @@ var correct_hit_time
 var actual_hit_time
 var judgement = "hit_miss"
 
-var partner_note
+var partner_note_column
 var partner_note_bar
 
 # ---

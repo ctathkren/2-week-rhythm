@@ -12,7 +12,7 @@
 extents = Vector2( 75, 200 )
 
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("HoldBodySpriteViewport")
+viewport_path = NodePath("HoldBodySpriteRepeater/HoldBodySpriteViewport")
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -59,12 +59,16 @@ texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 125, 600 )
 
-[node name="HoldBodySpriteViewport" type="Viewport" parent="."]
+[node name="HoldBodySpriteViewport" type="Viewport" parent="HoldBodySpriteRepeater"]
 size = Vector2( 125, 400 )
 transparent_bg = true
 usage = 0
 
-[node name="HoldBodySprite" type="AnimatedSprite" parent="HoldBodySpriteViewport"]
+[node name="HoldBodySprite" type="AnimatedSprite" parent="HoldBodySpriteRepeater/HoldBodySpriteViewport"]
 position = Vector2( 62.5, 200 )
 frames = SubResource( 2 )
 animation = "growth1"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
