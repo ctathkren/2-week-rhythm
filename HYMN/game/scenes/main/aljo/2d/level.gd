@@ -57,6 +57,7 @@ var spawn_notes_measure_3 = 1
 	# why is this 1?
 var spawn_notes_measure_4 = 0
 
+# for optimization
 var measure_to_spawn_notes = {
 		1 : spawn_notes_measure_1,
 		2 : spawn_notes_measure_2,
@@ -69,8 +70,7 @@ var lane = 0
 var rand = 0
 
 # Spawning
-var NOTE_PATH = "res://game/scenes/components/aljo/note/note.tscn"
-var note = load(NOTE_PATH)
+var note = load("res://game/scenes/components/aljo/note/note.tscn")
 var instance
 
 
@@ -108,7 +108,7 @@ func choose_level_start():
 
 	$Conductor.play_beats_before_start(beats_before_start)
 
-	# $Conductor.play_from_beat(seconds, beat)
+	# $Conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
@@ -126,7 +126,7 @@ func _on_Conductor_send_measure(current_measure):
 		spawn_notes(spawn_notes_measure_4)
 	"""
 
-	# proposed optimization for the above if-statement
+	# proposed optimization for the above if-statement:
 
 	for measure in measure_to_spawn_notes:
 		# recall: current_measure is the function parameter
@@ -259,23 +259,32 @@ func level_end():
 	switch_scene_level_end()
 
 
-func spawn_notes(to_spawn):
+# Spawn Notes
+func instantiate_note():
+	instance = note.instance()
+	instance.initialize(lane)
+	add_child(instance)
+
+
+func spawn_notes(notes_to_spawn):
 	# called from _on_Conductor_send_measure()
-	# recall: to_spawn is the function parameter
+	# recall: notes_to_spawn is the function parameter
 
-	if to_spawn > 0:
+	# 1-note spawns
+	if notes_to_spawn == 1:
+		# random lane
 		lane = randi() % 3
-		instance = note.instance()
-		instance.initialize(lane)
-		add_child(instance)
 
-	if to_spawn > 1:
+		instantiate_note()
+
+	# multi-note spawns
+	if notes_to_spawn > 1:
+		# idk, but works for multiple notes
 		while rand == lane:
 			rand = randi() % 3
 		lane = rand
-		instance = note.instance()
-		instance.initialize(lane)
-		add_child(instance)
+		
+		instantiate_note()
 
 
 # Increment Score
@@ -298,7 +307,7 @@ func update_score(score_to_add):
 func count_hit_feedback(score_to_add):
 	# for showing numbers of note accuracies at end of game
 
-	"""
+	
 	if score_to_add == SCORE_PERFECT:
 		button_hit_great += 1
 	elif score_to_add == SCORE_GOOD:
@@ -310,20 +319,24 @@ func count_hit_feedback(score_to_add):
 	# possible replacement for last condition if optimizing as for loop
 	# elif score_to_add == SCORE_MISS:
 		# button_hit_miss += 1
-	"""
+	
 
 	# proposed optimization for above if statement:
-	
+	# RULING: doesn't work because var button_hit is NOT the actual variables being assigned to
+		# doesn't change the values these variables hold
+
+	"""
 	for score_feedback in score_feedback_to_button_hit_feedback:
 		# godot dictionary for loop variables return keys
 
 		if score_to_add == score_feedback:
 			var button_hit = score_feedback_to_button_hit_feedback[score_feedback]
 			button_hit += 1
+	"""
 
 
 func update_score_label():
-	$Label.text = str(score)
+	$Score.text = str(score)
 
 
 func update_combo_label():

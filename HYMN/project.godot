@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="HYMN"
-run/main_scene="res://game/scenes/main/lawrence/2d/gameplay.tscn"
+run/main_scene="res://game/scenes/main/aljo/2d/level.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://game/scenes/components/aljo/global/global.tscn"
 
 [display]
 
