@@ -124,7 +124,7 @@ func report_beat_to_game():
 		update_last_reported_beat_and_measure()
 
 
-# ONREADY (once, called in Game.gd)
+# ONREADY (once, called in level.gd)
 
 # Play needed notes before start of song
 func set_beats_before_start(beats):
@@ -155,7 +155,7 @@ func _on_StartTimer_timeout():
 		- 1 timeout = 1 beat in seconds
 		
 		- Desired effect:
-			- if Game.gd passes 8 beats to play_beats_before_start(beats)
+			- if level.gd passes 8 beats to play_beats_before_start(beats)
 			- then, the timer will wait the time in seconds to play 1 beat
 			- it will do this 8 times
 			- then, it plays the song
@@ -193,10 +193,10 @@ func play_beats_before_start(beats):
 	Play Beats Before Start
 
 	- the normal way to start the level
-	- called only once in Game.gd under _ready()
+	- called only once in level.gd under _ready()
 	- used to set how many beats before start song
 	- sets and starts the one-shot timer
-	- argument (beats) is set manaually IN Game.gd
+	- argument (beats) is set manaually IN level.gd
 		- might want to move it here as export along with bpm and measures
 	"""
 	

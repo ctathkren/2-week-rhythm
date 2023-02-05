@@ -70,8 +70,7 @@ var lane = 0
 var rand = 0
 
 # Spawning
-var NOTE_PATH = "res://game/scenes/components/aljo/note/note.tscn"
-var note = load(NOTE_PATH)
+var note = load("res://game/scenes/components/aljo/note/note.tscn")
 var instance
 
 
@@ -109,7 +108,7 @@ func choose_level_start():
 
 	$Conductor.play_beats_before_start(beats_before_start)
 
-	# $Conductor.play_from_beat(seconds, beat)
+	# $Conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
@@ -308,7 +307,7 @@ func update_score(score_to_add):
 func count_hit_feedback(score_to_add):
 	# for showing numbers of note accuracies at end of game
 
-	"""
+	
 	if score_to_add == SCORE_PERFECT:
 		button_hit_great += 1
 	elif score_to_add == SCORE_GOOD:
@@ -320,20 +319,24 @@ func count_hit_feedback(score_to_add):
 	# possible replacement for last condition if optimizing as for loop
 	# elif score_to_add == SCORE_MISS:
 		# button_hit_miss += 1
-	"""
+	
 
 	# proposed optimization for above if statement:
-	
+	# RULING: doesn't work because var button_hit is NOT the actual variables being assigned to
+		# doesn't change the values these variables hold
+
+	"""
 	for score_feedback in score_feedback_to_button_hit_feedback:
 		# godot dictionary for loop variables return keys
 
 		if score_to_add == score_feedback:
 			var button_hit = score_feedback_to_button_hit_feedback[score_feedback]
 			button_hit += 1
+	"""
 
 
 func update_score_label():
-	$Label.text = str(score)
+	$Score.text = str(score)
 
 
 func update_combo_label():
