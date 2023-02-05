@@ -66,7 +66,6 @@ margin_top = 996.0
 margin_right = 1080.0
 margin_bottom = 1088.0
 theme = SubResource( 3 )
-text = "X COMBO"
 align = 1
 
 [node name="Score" type="Label" parent="."]
