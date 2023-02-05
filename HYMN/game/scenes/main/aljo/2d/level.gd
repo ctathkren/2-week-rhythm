@@ -126,7 +126,7 @@ func _on_Conductor_send_measure(current_measure):
 		spawn_notes(spawn_notes_measure_4)
 	"""
 
-	# proposed optimization for the above if-statement
+	# proposed optimization for the above if-statement:
 
 	for measure in measure_to_spawn_notes:
 		# recall: current_measure is the function parameter
