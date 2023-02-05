@@ -114,8 +114,7 @@ func choose_level_start():
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
 func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
-
-	"""
+	
 	if current_measure == 1:
 		spawn_notes(spawn_notes_measure_1)
 	elif current_measure == 2:
@@ -124,9 +123,13 @@ func _on_Conductor_send_measure(current_measure):
 		spawn_notes(spawn_notes_measure_3)
 	elif current_measure == 4:
 		spawn_notes(spawn_notes_measure_4)
+	
 	"""
-
 	# proposed optimization for the above if-statement:
+	# PROBLEM:
+		# doesn't allow for many notes on same measure
+		# possible cause: uses variables to pass values, not actual value
+		# resolution: revert to original
 
 	for measure in measure_to_spawn_notes:
 		# recall: current_measure is the function parameter
@@ -134,7 +137,7 @@ func _on_Conductor_send_measure(current_measure):
 		if current_measure == measure:
 			var notes_to_spawn = measure_to_spawn_notes[measure]
 			spawn_notes(notes_to_spawn)
-
+	"""
 
 # currently has the note mapping system from reference
 func _on_Conductor_send_beat(current_beat):

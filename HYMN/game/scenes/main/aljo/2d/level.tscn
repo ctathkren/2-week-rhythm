@@ -23,6 +23,10 @@ Label/styles/normal = null
 script = ExtResource( 5 )
 beats_before_start = 5
 
+[node name="Conductor" parent="." instance=ExtResource( 3 )]
+stream = ExtResource( 6 )
+bpm = 360
+
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -34,10 +38,6 @@ margin_left = 575.0
 margin_right = 1325.0
 margin_bottom = 1000.0
 texture = ExtResource( 7 )
-
-[node name="Conductor" parent="." instance=ExtResource( 3 )]
-stream = ExtResource( 6 )
-bpm = 360
 
 [node name="Left" parent="." instance=ExtResource( 2 )]
 position = Vector2( 697, 910 )
