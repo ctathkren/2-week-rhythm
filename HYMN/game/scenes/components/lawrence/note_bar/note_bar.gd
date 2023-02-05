@@ -9,30 +9,33 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	if getNoteBarLength() == "adjacent":
+	if get_note_bar_length() == "adjacent":
 		position.x = left_note.position.x + 100
-	elif getNoteBarLength() == "far":
+	elif get_note_bar_length() == "far":
 		position.x = left_note.position.x + 200
 	
 	position.y = left_note.position.y
 
 # ---
 
-func updateNoteBarSprite():
-	var animation_name = getNoteBarHighway() + "_" + getNoteBarLength()
+func update_note_bar_sprite():
+	var animation_name = get_note_bar_highway() + "_" + get_note_bar_length()
 	$NoteBarSprite.play(animation_name)
+	$NoteBarGlowSprite.play(animation_name)
 	
-func getNoteBarHighway():
-	if left_note.getColumnNumber() > 0 && right_note.getColumnNumber() > 0:
+func get_note_bar_highway():
+	if left_note.get_column_number() > 0 && right_note.get_column_number() > 0:
 		return "growth"
-	elif left_note.getColumnNumber() < 0 && right_note.getColumnNumber() < 0:
+	elif left_note.get_column_number() < 0 && right_note.get_column_number() < 0:
 		return "decay"
 		
-func getNoteBarLength():
-	if right_note.getColumnNumber() - left_note.getColumnNumber() == 1:
+func get_note_bar_length():
+	if right_note.get_column_number() - left_note.get_column_number() == 1:
 		return "adjacent"
-	elif right_note.getColumnNumber() - left_note.getColumnNumber() == 2:
+	elif right_note.get_column_number() - left_note.get_column_number() == 2:
 		return "far"
+
+# ---
 
 func beHit():
 	# fade out
