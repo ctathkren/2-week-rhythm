@@ -49,7 +49,7 @@ func _unhandled_input(event):
 		elif event.is_action_released(input):
 			# consider: .is_action_just_released
 
-			$PushTimer.start()
+			$AnimationTimer.start()
 			# recall: timer is for reseting animation frame
 
 
@@ -72,7 +72,7 @@ func hit_feedback():
 	if not current_note == null:
 		# recall: current_note is controlled by if note is in/out of Okay Area
 
-		# .increment_score(score) called in Game.gd
+		# .increment_score(score) called in level.gd
 		# .destroy(score) called in Note.gd
 		
 		if hit_perfect:
@@ -81,17 +81,18 @@ func hit_feedback():
 			hit_score_and_destroy(SCORE_GOOD)
 		elif hit_okay:
 			hit_score_and_destroy(SCORE_OKAY)
-
 		reset_note()
-
 	else:
-		hit_score_and_destroy(SCORE_MISS)
+		# THIS LINE USED TO CAUSE A LOT OF BUGS
+		# because was set as "hit_score_and_destroy()"
+		# when should only be "increment_score"
+		get_parent().increment_score(SCORE_MISS)		
 
 
 # SIGNALS
 
 # ANIMATION FRAME TIMER
-func _on_PushTimer_timeout():
+func _on_AnimationTimer_timeout():
 	# reverts animation to default
 	# reference uses 2-frame anim
 	# highly customizable for us
