@@ -8,28 +8,27 @@ var score = 0
 
 # Scoring
 # copied from button.gd
-const SCORE_PERFECT = 3
-const SCORE_GOOD = 2
-const SCORE_OKAY = 1
-const SCORE_MISS = 0
+enum Judgements {
+	SCORE_MISS,
+	SCORE_GOOD,
+	SCORE_PERFECT
+}
 
 # Combos
 var combo = 0
 var max_combo = 0
 
 # Note Hit Feedback
-var button_hit_great = 0
+var button_hit_perfect = 0
 var button_hit_good = 0
-var button_hit_okay = 0
 var button_hit_miss = 0
 
 # Tracking how many of each feedback
 # used in count_hit_feedback
 var score_feedback_to_button_hit_feedback = {
-	SCORE_PERFECT : button_hit_great,
-	SCORE_GOOD : button_hit_good,
-	SCORE_OKAY : button_hit_okay,
-	SCORE_MISS : button_hit_miss,
+	Judgements.SCORE_PERFECT : button_hit_perfect,
+	Judgements.SCORE_GOOD : button_hit_good,
+	Judgements.SCORE_MISS : button_hit_miss
 }
 
 # SONG TRACKING
@@ -247,9 +246,8 @@ func update_global_scores():
 
 
 func update_global_grade():
-	Global.button_hit_great = button_hit_great
+	Global.button_hit_perfect = button_hit_perfect
 	Global.button_hit_good = button_hit_good
-	Global.button_hit_okay = button_hit_okay
 	Global.button_hit_miss = button_hit_miss
 
 
@@ -314,12 +312,10 @@ func count_hit_feedback(score_to_add):
 	# for showing numbers of note accuracies at end of game
 
 	
-	if score_to_add == SCORE_PERFECT:
-		button_hit_great += 1
-	elif score_to_add == SCORE_GOOD:
+	if score_to_add == Judgements.SCORE_PERFECT:
+		button_hit_perfect += 1
+	elif score_to_add == Judgements.SCORE_GOOD:
 		button_hit_good += 1
-	elif score_to_add == SCORE_OKAY:
-		button_hit_okay += 1
 	else:
 		button_hit_miss += 1
 	# possible replacement for last condition if optimizing as for loop
