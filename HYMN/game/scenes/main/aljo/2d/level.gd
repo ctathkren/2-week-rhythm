@@ -74,8 +74,6 @@ var measure_to_spawn_notes = {
 var note = load("res://game/scenes/components/aljo/note/note.tscn")
 
 
-
-
 # FUNCTIONS
 
 # LOOPS
@@ -90,12 +88,21 @@ func _input(event):
 """
 
 # ON READY
-func _ready():
+func _ready():	
 	# reference uses random lanes for note spawning
 	randomize()
-
+	set_labels_color()
 	choose_level_start()
-	
+
+
+func set_labels_color():
+	if highway_type == "growth":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+		feedback_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+	elif highway_type == "decay":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+		feedback_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+
 
 func choose_level_start():
 	"""
@@ -116,7 +123,8 @@ func choose_level_start():
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
 func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
-	
+	level_current_measure = current_measure
+
 	if current_measure == 1:
 		spawn_notes_randomly(spawn_notes_measure_1)
 	elif current_measure == 2:
@@ -180,10 +188,10 @@ func _on_Conductor_send_beat(current_beat):
 	"""
 
 	if song_position_in_beats > 36:
-		spawn_notes_measure_1 = 1
-		spawn_notes_measure_2 = 1
+		spawn_notes_measure_1 = 0
+		spawn_notes_measure_2 = 0
 		spawn_notes_measure_3 = 1
-		spawn_notes_measure_4 = 1
+		spawn_notes_measure_4 = 0
 	if song_position_in_beats > 98:
 		spawn_notes_measure_1 = 2
 		spawn_notes_measure_2 = 0
@@ -259,7 +267,6 @@ func instantiate_note(lane):
 	instance.initialize(lane)
 	add_child(instance)
 
-
 func spawn_notes_randomly(number_of_notes_to_spawn):
 	# called from _on_Conductor_send_measure()
 	# recall: number_of_notes_to_spawn is the function parameter
@@ -279,9 +286,9 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 	for l in chosen_lanes:
 		instantiate_note(lane)
 
-# ---
+# On Button Hit OK (Increment Score)
 
-# Increment Score
+
 func update_combo(input_type, score_to_add):
 	# current combo
 	if score_to_add != 0:
@@ -300,13 +307,60 @@ func count_hit_feedback(input_type, score_to_add):
 	score_stats[input_type].score_feedback_to_button_hit_feedback[score_to_add] += 1
 
 func update_score_label():
-	$Score.text = str(score_stats.combined.score)
+	$ScoreLabel.text = str(score_stats.combined.score)
 
 func update_combo_label():
 	if score_stats.growth.combo > 0:
 		$Combo.text = str(score_stats.growth.combo) + " COMBO!"
+
+	# Color
+	if note_type == "growth":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+	elif note_type == "decay":
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))	# Text
+	if combo > 0:
+		$ComboLabel.text = str(combo) + " COMBO!"	else:
+		$ComboLabel.text = ""
+
+
+func update_feedback_label(feedback):
+	# visibility
+	$FeedbackLabel.visible = true
+
+	# color
+	if note_type == "growth":
+		feedback_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
+	elif note_type == "decay":
+		feedback_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+
+	# text
+	if feedback == Judgements.SCORE_PERFECT:
+		$FeedbackLabel.text = TEXT_PERFECT
+	elif feedback == Judgements.SCORE_GOOD:
+		$FeedbackLabel.text = TEXT_GOOD
 	else:
-		$Combo.text = ""
+		$FeedbackLabel.text = TEXT_MISS
+
+	# timer
+	var measure = level_current_measure
+	var notes
+	
+	if measure == 1:
+		notes = spawn_notes_measure_1
+	elif measure == 2:
+		notes = spawn_notes_measure_2
+	elif measure == 3:
+		notes = spawn_notes_measure_3
+	elif measure == 4:
+		notes = spawn_notes_measure_4
+
+	# resolve zero-division error
+	if notes == 0:
+		notes = 1
+	
+	$FeedbackLabel/FeedbackVisibleTimer.wait_time = (seconds_per_beat / notes) - (0.025)
+	
+	$FeedbackLabel/FeedbackVisibleTimer.start()
 
 
 func increment_score(score_to_add):
@@ -321,6 +375,7 @@ func increment_score(score_to_add):
 	# Labels
 	update_score_label()
 	update_combo_label()
+	update_feedback_label(score_to_add)
 
 
 # ON MISSED BUTTON PRESS
@@ -329,3 +384,6 @@ func reset_combo():
 	score_stats.growth.combo = 0
 	
 	update_combo_label()
+
+func _on_FeedbackVisibleTimer_timeout():
+	$FeedbackLabel.visible = false

@@ -45,8 +45,8 @@ func _unhandled_input(event):
 func hit_score_and_destroy(score):
 	get_parent().increment_score(score)
 
+	current_note.destroy(score)
 	hittable_notes[0].destroy(score)
-
 func reset_note():
 	# remove the bottommost note
 	hittable_notes.pop_front()
