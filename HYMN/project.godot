@@ -16,7 +16,7 @@ config/icon="res://ui/assets/art/general/logo/hymn logo for dark bg.png"
 
 [autoload]
 
-Global="*res://game/scenes/components/aljo/global/global.tscn"
+Global="*res://game/scenes/global.gd"
 
 [display]
 
