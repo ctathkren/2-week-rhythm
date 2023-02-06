@@ -1,15 +1,9 @@
 extends Area2D
 
-var NOTE_TYPE = "note"
+var NOTE_TYPE = "hold_body"
 var column_number = 1
 
-var scroll_speed = 500		# pixels per second
-
-# not sure if we'll use these variables if our timing is Area2D-based
-var judgement = "do_nothing"
-
-var partner_note
-var partner_note_bar
+var hold_duration_in_beats
 
 # ---
 
@@ -18,11 +12,6 @@ func _ready():
 
 func _physics_process(delta):
 	update_note_sprite()
-	
-	# move down by SCROLL_SPEED * delta * whatever mess is caused by the highway parallax
-	# also move to the left/right based on the parallax
-	position.y += scroll_speed * delta	
-	pass
 
 # ---
 
@@ -36,8 +25,10 @@ func update_note_sprite():
 	
 	animation_name += String(abs(column_number))
 	
-	$NoteSprite.play(animation_name)
-	$NoteGlowSprite.play(animation_name)
+	#$HoldBodySprite.play(animation_name)
+	#$HoldBodyGlowSprite.play(animation_name)
+	
+	#$HoldBodySprite
 
 func get_note_type():
 	return NOTE_TYPE
@@ -49,12 +40,6 @@ func set_column_number(col):
 	column_number = col
 	update_note_sprite()
 
-func get_judgement():
-	return judgement
-	
-func set_judgement(j):
-	judgement = j
-
 # ---
 
 func be_hit():
@@ -63,11 +48,10 @@ func be_hit():
 	
 	# delete note
 	queue_free()
-
+	
 func be_missed():
 	# disappear abruptly
 	
 	
 	# delete note
 	queue_free()
-	
