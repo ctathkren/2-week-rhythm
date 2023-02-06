@@ -1,11 +1,9 @@
 extends Area2D
 
-
 # VARIABLES
 # Vertical Positions (y)
 const SPAWN_Y = -80
 const TARGET_Y = 910 # ~button Y
-
 const DIST_TO_TARGET = TARGET_Y - SPAWN_Y
 
 const HIGHWAY_BOTTOM_Y = 1050
@@ -40,12 +38,22 @@ var sprite_frames_to_lane_positions = {
 	2 : RIGHT_LANE_SPAWN,
 }
 
-# Hit Feedback
-var feedback_score_to_texts_to_colors = [
-		[3, "GREAT", "f6d6bd"],
-		[2, "GOOD" , "c3a38a"],
-		[1, "OKAY" , "997577"],
-	]
+# Judgements
+enum Judgements {
+	SCORE_MISS,
+	SCORE_GOOD,
+	SCORE_PERFECT
+}
+
+# Hit Feedback to Label Text and Label Color
+var feedback_score_to_text_and_color = {
+  Judgements.SCORE_PERFECT : ["PERFECT", "f6d6b6"],
+  Judgements.SCORE_GOOD : ["GOOD", "c3a38a"],
+}
+
+# Partner Note, for making a note bar spawn
+var partner_note
+var partner_note_bar
 
 
 # FUNCTIONS
@@ -53,12 +61,10 @@ var feedback_score_to_texts_to_colors = [
 func _ready():
 	set_note_type()
 
-
 func set_note_type():
 	var note_type = get_parent().highway_type
 	$SpritesButton.animation = note_type
 	$SpritesGlow.animation   = note_type
-
 
 func _physics_process(delta):
 	# recall: button_hit_ok means the correct button was pressed while note is in Okay Area
@@ -75,12 +81,10 @@ func _physics_process(delta):
 		# if button_hit_ok
 		
 		label_move_up(delta)
-			
-			
+				
 func move_down(delta):
 	position.y += speed * delta
 				
-
 func label_move_up(delta):
 	"""
 	Node2D here is a parent that has the feedback label!
@@ -89,7 +93,6 @@ func label_move_up(delta):
 	"""
 
 	$Node2D.position.y -= speed * delta
-
 
 func miss_delete(): 
 	# since destroy -> timer only called if note hit
@@ -113,7 +116,7 @@ func set_frame_and_position(lane):
 		position = LEFT_LANE_SPAWN
 	elif lane == 1:
 		$SpritesButton.frame = 1
-		$SpritesGlow.frame   = 2
+		$SpritesGlow.frame   = 1
 		position = CENTER_LANE_SPAWN
 	elif lane == 2:
 		$SpritesButton.frame = 2
@@ -147,9 +150,8 @@ func set_frame_and_position(lane):
 	"""
 
 
-func set_speed():
+func get_speed():
 	return DIST_TO_TARGET / time_to_target
-
 
 func initialize(lane): 
 	# called by level.gd under _spawn_notes(to_spawn)
@@ -157,52 +159,29 @@ func initialize(lane):
 
 	set_frame_and_position(lane)
 
-	speed = set_speed()
+	speed = get_speed()
 
 
-#Destroy
+# Destroy
 func visual_effects():
 	$CPUParticles2D.emitting = true
 
 	$SpritesButton.visible = false
 	$SpritesGlow.visible = false
 
-
-func feedback_label(score):
-
-	if score == 3:
-		$Node2D/Label.text = 'GREAT'
-		$Node2D/Label.modulate = Color('f6d6bd')
-	elif score == 2:
-		$Node2D/Label.text = 'GOOD'
-		$Node2D/Label.modulate = Color('c3a38a')
-	elif score == 1:
-		$Node2D/Label.text = 'OKAY'
-		$Node2D/Label.modulate = Color('997577')
+func update_feedback_label(score):	
+	if score != Judgements.SCORE_MISS:
+		$Node2D/Label.text = feedback_score_to_text_and_color[score][0]
+		$Node2D/Label.modulate = feedback_score_to_text_and_color[score][1]
 	else:
 		pass
 		# empty for now to accommodate const SCORE_MISS
 			# defined in hit_score_and_destroy(score)
 			# under button.gd
-	
-
-	"""
-	# proposed optimization for above if-statement
-
-	for row in feedback_score_to_texts_to_colors:
-		if score == row[0]:
-			$Node2D/Label.text = row[1]
-			$Node2D/Label.modulate = Color(row[2])
-		else:
-			pass
 		
-	"""
-
-
 func destroy(score):
 	# called from button.gd
 	# an "on-every-valid-button-press" function
-
 	visual_effects()
 	
 	# "_on_NoteDeleteTimer_timeout()" handles "queue_free()"
@@ -211,12 +190,11 @@ func destroy(score):
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
 
-	feedback_label(score)
+	update_feedback_label(score)
 
 
 # SIGNALS
 # Note Deleting
 func _on_NoteDeleteTimer_timeout():
 	# gives time for particle effects and feedback label before deleting note
-
 	queue_free()
