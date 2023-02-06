@@ -36,7 +36,7 @@ beats_before_start = 5
 
 [node name="Conductor" parent="." instance=ExtResource( 3 )]
 stream = ExtResource( 6 )
-bpm = 360
+bpm = 180
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1920.0
@@ -68,8 +68,10 @@ margin_right = 1659.0
 margin_bottom = 840.0
 rect_rotation = 90.0
 theme = SubResource( 3 )
-text = "PERFECT!"
 align = 1
+
+[node name="FeedbackVisibleTimer" type="Timer" parent="FeedbackLabel"]
+one_shot = true
 
 [node name="ComboLabel" type="Label" parent="."]
 margin_left = 1350.0
@@ -85,8 +87,8 @@ margin_top = 13.0
 margin_right = 1651.0
 margin_bottom = 105.0
 theme = SubResource( 3 )
-text = "0"
 align = 1
 
 [connection signal="send_beat" from="Conductor" to="." method="_on_Conductor_send_beat"]
 [connection signal="send_measure" from="Conductor" to="." method="_on_Conductor_send_measure"]
+[connection signal="timeout" from="FeedbackLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]

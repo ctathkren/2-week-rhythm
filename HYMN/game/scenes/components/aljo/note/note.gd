@@ -171,6 +171,7 @@ func visual_effects():
 	$SpritesButton.visible = false
 	$SpritesGlow.visible = false
 
+"""
 func update_feedback_label(score):	
 	if score != Judgements.SCORE_MISS:
 		$Node2D/Label.text = feedback_score_to_text_and_color[score][0]
@@ -180,8 +181,9 @@ func update_feedback_label(score):
 		# empty for now to accommodate const SCORE_MISS
 			# defined in hit_score_and_destroy(score)
 			# under button.gd
-		
-func destroy(score):
+"""
+
+func destroy():
 	# called from button.gd
 	# an "on-every-valid-button-press" function
 	visual_effects()
@@ -192,7 +194,7 @@ func destroy(score):
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
 
-	update_feedback_label(score)
+	# update_feedback_label(score)
 
 	# tell highway what note type -> combo color
 	get_parent().set("note_type", note_type)	
