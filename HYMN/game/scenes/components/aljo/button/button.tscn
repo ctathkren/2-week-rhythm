@@ -3,14 +3,14 @@
 [ext_resource path="res://game/scenes/components/aljo/button/button.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/buttons/draft.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33, 16 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33, 50 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 33, 72 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 33, 16 )
 
 [node name="Button" type="Sprite"]
 scale = Vector2( 0.365, 0.365 )
@@ -18,27 +18,28 @@ texture = ExtResource( 2 )
 script = ExtResource( 1 )
 input = "button_growth1"
 
-[node name="PerfectArea" type="Area2D" parent="."]
+[node name="EarlyMissArea" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PerfectArea"]
-shape = SubResource( 2 )
+[node name="EarlyMissAreaHitbox" type="CollisionShape2D" parent="EarlyMissArea"]
+position = Vector2( 0, -65.7534 )
+shape = SubResource( 3 )
 
 [node name="GoodArea" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoodArea"]
+[node name="GoodAreaHitbox" type="CollisionShape2D" parent="GoodArea"]
 shape = SubResource( 1 )
 
-[node name="OkayArea" type="Area2D" parent="."]
+[node name="PerfectArea" type="Area2D" parent="."]
 scale = Vector2( 2, 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OkayArea"]
-shape = SubResource( 3 )
+[node name="PerfectAreaHitbox" type="CollisionShape2D" parent="PerfectArea"]
+shape = SubResource( 2 )
 
-[connection signal="area_entered" from="PerfectArea" to="." method="_on_PerfectArea_area_entered"]
-[connection signal="area_exited" from="PerfectArea" to="." method="_on_PerfectArea_area_exited"]
+[connection signal="area_entered" from="EarlyMissArea" to="." method="_on_EarlyMissArea_area_entered"]
+[connection signal="area_exited" from="EarlyMissArea" to="." method="_on_EarlyMissArea_area_exited"]
 [connection signal="area_entered" from="GoodArea" to="." method="_on_GoodArea_area_entered"]
 [connection signal="area_exited" from="GoodArea" to="." method="_on_GoodArea_area_exited"]
-[connection signal="area_entered" from="OkayArea" to="." method="_on_OkayArea_area_entered"]
-[connection signal="area_exited" from="OkayArea" to="." method="_on_OkayArea_area_exited"]
+[connection signal="area_entered" from="PerfectArea" to="." method="_on_PerfectArea_area_entered"]
+[connection signal="area_exited" from="PerfectArea" to="." method="_on_PerfectArea_area_exited"]
