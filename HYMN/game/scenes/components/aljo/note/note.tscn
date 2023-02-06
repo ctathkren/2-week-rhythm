@@ -14,9 +14,6 @@
 [ext_resource path="res://game/assets/art/general/Notes/Purple L6 Glow.png" type="Texture" id=12]
 [ext_resource path="res://game/assets/art/general/Notes/Purple L4 Regular.png" type="Texture" id=13]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 33, 1.5 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
@@ -43,11 +40,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 33, 1.5 )
+
 [node name="Note" type="Area2D" groups=["note"]]
 script = ExtResource( 2 )
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
 
 [node name="SpritesGlow" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.365, 0.365 )
@@ -58,6 +55,9 @@ animation = "decay"
 scale = Vector2( 0.365, 0.365 )
 frames = SubResource( 3 )
 animation = "decay"
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
