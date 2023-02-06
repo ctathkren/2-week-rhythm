@@ -2,33 +2,39 @@ extends Node2D
 
 # VARIABLES
 
+# Appearance
+export var highway_type := "growth"
+
 # SCORING & FEEDBACK
-# Scoring
-var score = 0
-
-# Scoring
-# copied from button.gd
-enum Judgements {
-	SCORE_MISS,
-	SCORE_GOOD,
-	SCORE_PERFECT
-}
-
-# Combos
-var combo = 0
-var max_combo = 0
-
-# Note Hit Feedback
-var button_hit_perfect = 0
-var button_hit_good = 0
-var button_hit_miss = 0
-
-# Tracking how many of each feedback
-# used in count_hit_feedback
-var score_feedback_to_button_hit_feedback = {
-	Judgements.SCORE_PERFECT : button_hit_perfect,
-	Judgements.SCORE_GOOD : button_hit_good,
-	Judgements.SCORE_MISS : button_hit_miss
+var score_stats = {
+	"growth": {	
+		# Combos
+		"combo": 0,
+		"max_combo": 0,
+		
+		# Note Hit Feedback
+		score_feedback_to_button_hit_feedback = {
+			Global.Judgements.SCORE_PERFECT : 0,
+			Global.Judgements.SCORE_GOOD : 0,
+			Global.Judgements.SCORE_MISS : 0
+		}
+	},
+	"decay": {		
+		# Combos
+		"combo": 0,
+		"max_combo": 0,
+		
+		# Note Hit Feedback
+		score_feedback_to_button_hit_feedback = {
+			Global.Judgements.SCORE_PERFECT : 0,
+			Global.Judgements.SCORE_GOOD : 0,
+			Global.Judgements.SCORE_MISS : 0
+		}
+	},
+	"combined": {
+		# Scoring
+		"score": 0
+	}
 }
 
 # SONG TRACKING
@@ -58,22 +64,16 @@ var spawn_notes_measure_4 = 0
 
 # for optimization
 var measure_to_spawn_notes = {
-		1 : spawn_notes_measure_1,
-		2 : spawn_notes_measure_2,
-		3 : spawn_notes_measure_3,
-		4 : spawn_notes_measure_4,
-	}
-
-# Spawn Note on a Lane
-var lane = 0
-var rand = 0
+	1 : spawn_notes_measure_1,
+	2 : spawn_notes_measure_2,
+	3 : spawn_notes_measure_3,
+	4 : spawn_notes_measure_4,
+}
 
 # Spawning
 var note = load("res://game/scenes/components/aljo/note/note.tscn")
-var instance
 
-# Appearance
-export var highway_type := "growth"
+
 
 
 # FUNCTIONS
@@ -118,13 +118,13 @@ func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
 	
 	if current_measure == 1:
-		spawn_notes(spawn_notes_measure_1)
+		spawn_notes_randomly(spawn_notes_measure_1)
 	elif current_measure == 2:
-		spawn_notes(spawn_notes_measure_2)
+		spawn_notes_randomly(spawn_notes_measure_2)
 	elif current_measure == 3:
-		spawn_notes(spawn_notes_measure_3)
+		spawn_notes_randomly(spawn_notes_measure_3)
 	elif current_measure == 4:
-		spawn_notes(spawn_notes_measure_4)
+		spawn_notes_randomly(spawn_notes_measure_4)
 	
 	"""
 	# proposed optimization for the above if-statement:
@@ -239,111 +239,72 @@ func _on_Conductor_send_beat(current_beat):
 	if song_position_in_beats > 404:
 		level_end()
 
+# ---
 
-func update_global_scores():
-	Global.set_score(score)
-	Global.combo = max_combo
-
-
-func update_global_grade():
-	Global.button_hit_perfect = button_hit_perfect
-	Global.button_hit_good = button_hit_good
-	Global.button_hit_miss = button_hit_miss
-
+func update_global_score_stats():
+	Global.set_score_stats(score_stats)
 
 func switch_scene_level_end():
 	if get_tree().change_scene("res://Scenes/End.tscn") != OK:
 		print ("Error changing scene to End")
 
-
 func level_end():
-	update_global_scores()
-	update_global_grade()
+	update_global_score_stats()
 
 	switch_scene_level_end()
 
-
 # Spawn Notes
-func instantiate_note():
-	instance = note.instance()
+func instantiate_note(lane):
+	var instance = note.instance()
 	instance.initialize(lane)
 	add_child(instance)
 
 
-func spawn_notes(notes_to_spawn):
+func spawn_notes_randomly(number_of_notes_to_spawn):
 	# called from _on_Conductor_send_measure()
-	# recall: notes_to_spawn is the function parameter
+	# recall: number_of_notes_to_spawn is the function parameter
 
-	# 1-note spawns
-	if notes_to_spawn == 1:
-		# random lane
-		lane = randi() % 3
+	# Spawn Note on a Lane
+	var lane_numbers = [0, 1, 2]
+	var chosen_lanes = []
+	var lane
 
-		instantiate_note()
-
-	# multi-note spawns
-	if notes_to_spawn > 1:
-		# idk, but works for multiple notes
-		while rand == lane:
-			rand = randi() % 3
-		lane = rand
+	for i in range(number_of_notes_to_spawn):
+		lane = lane_numbers[randi() % lane_numbers.size()]
+		while lane in chosen_lanes:	
+			lane = lane_numbers[randi() % lane_numbers.size()]
 		
-		instantiate_note()
+		chosen_lanes.append(lane)
 
+	for l in chosen_lanes:
+		instantiate_note(lane)
+
+# ---
 
 # Increment Score
-func update_combo(score_to_add):
+func update_combo(input_type, score_to_add):
 	# current combo
 	if score_to_add != 0:
-		combo += 1
+		score_stats[input_type].combo += 1
+		
+		# max combo
+		if score_stats[input_type].combo > score_stats[input_type].max_combo:
+			score_stats[input_type].max_combo = score_stats[input_type].combo
 	else:
-		combo = 0
+		score_stats[input_type].combo = 0
 
-	# max combo
-	if combo > max_combo:
-		max_combo = combo
+func update_score(input_type, score_to_add):
+	score_stats.combined.score += score_to_add * score_stats[input_type].combo
 
-
-func update_score(score_to_add):
-	score += score_to_add * combo
-
-
-func count_hit_feedback(score_to_add):
-	# for showing numbers of note accuracies at end of game
-
-	
-	if score_to_add == Judgements.SCORE_PERFECT:
-		button_hit_perfect += 1
-	elif score_to_add == Judgements.SCORE_GOOD:
-		button_hit_good += 1
-	else:
-		button_hit_miss += 1
-	# possible replacement for last condition if optimizing as for loop
-	# elif score_to_add == SCORE_MISS:
-		# button_hit_miss += 1
-	
-
-	# proposed optimization for above if statement:
-	# RULING: doesn't work because var button_hit is NOT the actual variables being assigned to
-		# doesn't change the values these variables hold
-
-	"""
-	for score_feedback in score_feedback_to_button_hit_feedback:
-		# godot dictionary for loop variables return keys
-
-		if score_to_add == score_feedback:
-			var button_hit = score_feedback_to_button_hit_feedback[score_feedback]
-			button_hit += 1
-	"""
-
+func count_hit_feedback(input_type, score_to_add):
+	score_stats[input_type].score_feedback_to_button_hit_feedback[score_to_add] += 1
 
 func update_score_label():
-	$Score.text = str(score)
-
+	$Score.text = str(score_stats.combined.score)
 
 func update_combo_label():
-	if combo > 0:
-		$Combo.text = str(combo) + " COMBO!"
+	if score_stats.growth.combo > 0:
+		$Combo.text = str(score_stats.growth.combo) + " COMBO!"
 	else:
 		$Combo.text = ""
 
@@ -353,9 +314,9 @@ func increment_score(score_to_add):
 	# 1 big function because called outside
 
 	# Tracking
-	update_combo(score_to_add)
-	update_score(score_to_add)
-	count_hit_feedback(score_to_add)
+	update_combo(highway_type, score_to_add)
+	update_score(highway_type, score_to_add)
+	count_hit_feedback(highway_type, score_to_add)
 	
 	# Labels
 	update_score_label()
@@ -365,6 +326,6 @@ func increment_score(score_to_add):
 # ON MISSED BUTTON PRESS
 func reset_combo():
 	# called from Note.gd, physics_process() -> miss_delete()
-
-	combo = 0
-	$Combo.text = ""
+	score_stats.growth.combo = 0
+	
+	update_combo_label()
