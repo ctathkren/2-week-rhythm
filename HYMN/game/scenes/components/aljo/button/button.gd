@@ -14,7 +14,7 @@ var current_note = null
 var hit_feedbacks = {
 	"hit_perfect": false,
 	"hit_good": false,
-	"hit_miss": false
+	"hit_miss": false,
 }
 
 # Scoring
@@ -47,7 +47,7 @@ func _unhandled_input(event):
 func hit_score_and_destroy(score):
 	get_parent().increment_score(score)
 
-	current_note.destroy(score)
+	current_note.destroy()
 
 
 func reset_note():

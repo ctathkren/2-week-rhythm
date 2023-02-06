@@ -32,6 +32,8 @@ var time_to_target = 2.0
 var button_hit_ok = false
 
 # Sprite Handling
+var note_type
+
 var sprite_frames_to_lane_positions = {
 	0 : LEFT_LANE_SPAWN,
 	1 : CENTER_LANE_SPAWN,
@@ -62,7 +64,7 @@ func _ready():
 	set_note_type()
 
 func set_note_type():
-	var note_type = get_parent().highway_type
+	note_type = get_parent().highway_type
 	$SpritesButton.animation = note_type
 	$SpritesGlow.animation   = note_type
 
@@ -169,6 +171,7 @@ func visual_effects():
 	$SpritesButton.visible = false
 	$SpritesGlow.visible = false
 
+"""
 func update_feedback_label(score):	
 	if score != Judgements.SCORE_MISS:
 		$Node2D/Label.text = feedback_score_to_text_and_color[score][0]
@@ -178,8 +181,9 @@ func update_feedback_label(score):
 		# empty for now to accommodate const SCORE_MISS
 			# defined in hit_score_and_destroy(score)
 			# under button.gd
-		
-func destroy(score):
+"""
+
+func destroy():
 	# called from button.gd
 	# an "on-every-valid-button-press" function
 	visual_effects()
@@ -190,7 +194,10 @@ func destroy(score):
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
 
-	update_feedback_label(score)
+	# update_feedback_label(score)
+
+	# tell highway what note type -> combo color
+	get_parent().set("note_type", note_type)	
 
 
 # SIGNALS
