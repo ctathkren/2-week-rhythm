@@ -58,6 +58,11 @@ func _ready():
 
 	$SpritesGlow.animation   = note_type
 
+func set_note_type():
+	note_type = get_parent().highway_type
+	$SpritesButton.animation = note_type
+	$SpritesGlow.animation   = note_type
+
 func _physics_process(delta):
 	# recall: button_hit_ok means the correct button was pressed while note is in Okay Area
 	

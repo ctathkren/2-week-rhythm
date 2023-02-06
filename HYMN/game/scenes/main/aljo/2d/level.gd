@@ -37,6 +37,20 @@ var score_stats = {
 	}
 }
 
+var note_type # to be assigned via signal
+onready var combo_label_theme = $ComboLabel.get("theme")
+
+var level_current_measure
+
+onready var feedback_label_theme = $FeedbackLabel.get("theme")
+
+const TEXT_MISS = "MISS"
+const TEXT_GOOD = "GOOD"
+const TEXT_PERFECT = "PERFECT!"
+
+const COLOR_GROWTH = "eb8f54"
+const COLOR_DECAY  = "393ea2"
+
 # SONG TRACKING
 var bpm = 115
 	# seems only used for seconds_per_beat
@@ -55,7 +69,7 @@ export var beats_before_start := 8
 
 # NOTE SPAWNING
 # Spawn Note on Measure
-	# want to rename these with "measure" in them
+	# want to rename t1se with "measure" in them
 var spawn_notes_measure_1 = 0
 var spawn_notes_measure_2 = 0
 var spawn_notes_measure_3 = 1
@@ -311,15 +325,18 @@ func update_score_label():
 
 func update_combo_label():
 	if score_stats.growth.combo > 0:
-		$Combo.text = str(score_stats.growth.combo) + " COMBO!"
+		$ComboLabel.text = str(score_stats.growth.combo) + " COMBO!"
 
 	# Color
 	if note_type == "growth":
 		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
 	elif note_type == "decay":
-		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))	# Text
-	if combo > 0:
-		$ComboLabel.text = str(combo) + " COMBO!"	else:
+		combo_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
+		
+	# Text
+	if score_stats.growth.combo > 0:
+		$ComboLabel.text = str(score_stats.growth.combo) + " COMBO!"
+	else:
 		$ComboLabel.text = ""
 
 
@@ -334,9 +351,9 @@ func update_feedback_label(feedback):
 		feedback_label_theme.set("Label/colors/font_color", Color(COLOR_DECAY))
 
 	# text
-	if feedback == Judgements.SCORE_PERFECT:
+	if feedback == Global.Judgements.SCORE_PERFECT:
 		$FeedbackLabel.text = TEXT_PERFECT
-	elif feedback == Judgements.SCORE_GOOD:
+	elif feedback == Global.Judgements.SCORE_GOOD:
 		$FeedbackLabel.text = TEXT_GOOD
 	else:
 		$FeedbackLabel.text = TEXT_MISS
