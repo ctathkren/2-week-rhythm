@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/draft.png-a70b3cfd23d098fcdb81494ab69e158b.stex"
+path="res://.import/main menu.png-394c2f34e41cfca7f40b1b389463c244.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/backgrounds/draft.png"
-dest_files=[ "res://.import/draft.png-a70b3cfd23d098fcdb81494ab69e158b.stex" ]
+source_file="res://game/assets/art/backgrounds/concepts/main menu.png"
+dest_files=[ "res://.import/main menu.png-394c2f34e41cfca7f40b1b389463c244.stex" ]
 
 [params]
 

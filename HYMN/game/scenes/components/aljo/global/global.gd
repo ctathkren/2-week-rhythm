@@ -2,6 +2,9 @@ extends Node2D
 
 # VARIABLES
 
+# Level Unlocks
+var decay_unlocked = false
+
 # In-Game Scoring
 var combo = 0
 
