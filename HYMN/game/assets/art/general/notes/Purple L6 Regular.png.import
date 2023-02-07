@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Purple L6 Regular.png-563d096fc09e647118337ddaa31c2ea3.stex"
+path="res://.import/Purple L6 Regular.png-6d231f4c8556b5c07192b406bec7169a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Notes/Purple L6 Regular.png"
-dest_files=[ "res://.import/Purple L6 Regular.png-563d096fc09e647118337ddaa31c2ea3.stex" ]
+source_file="res://game/assets/art/general/notes/Purple L6 Regular.png"
+dest_files=[ "res://.import/Purple L6 Regular.png-6d231f4c8556b5c07192b406bec7169a.stex" ]
 
 [params]
 

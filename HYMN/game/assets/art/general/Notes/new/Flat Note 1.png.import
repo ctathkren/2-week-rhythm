@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Flat Note 1.png-0dee247f3592c3f9280b66a165e4fa15.stex"
+path="res://.import/Flat Note 1.png-9ee3294894cb924125ad20e7deea9451.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Notes/new/Flat Note 1.png"
-dest_files=[ "res://.import/Flat Note 1.png-0dee247f3592c3f9280b66a165e4fa15.stex" ]
+source_file="res://game/assets/art/general/notes/new/Flat Note 1.png"
+dest_files=[ "res://.import/Flat Note 1.png-9ee3294894cb924125ad20e7deea9451.stex" ]
 
 [params]
 
