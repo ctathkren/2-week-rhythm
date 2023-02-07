@@ -16,7 +16,6 @@ viewport_path = NodePath("GameplayPerspectivized/Gameplay3DViewport")
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 5 )
-beats_before_start = 1
 
 [node name="Background" type="Node2D" parent="."]
 
