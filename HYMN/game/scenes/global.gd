@@ -1,8 +1,6 @@
 extends Node2D
 
 # VARIABLES
-# Levels
-var level
 
 # Level Unlocks
 var growth_passed := false
