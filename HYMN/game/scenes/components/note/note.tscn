@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://game/assets/art/general/Notes/new/Flat Note 1.png" type="Texture" id=1]
+[ext_resource path="res://game/assets/art/general/Notes/Flat Note 1.png" type="Texture" id=1]
 [ext_resource path="res://game/scenes/components/note/note.gd" type="Script" id=2]
-[ext_resource path="res://game/assets/art/general/Notes/new/Flat Note 2.png" type="Texture" id=3]
+[ext_resource path="res://game/assets/art/general/Notes/Flat Note 2.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
