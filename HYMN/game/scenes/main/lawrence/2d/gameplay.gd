@@ -5,10 +5,6 @@ extends Node2D
 # SCORING & FEEDBACK
 var score_stats = {
 	"growth": {	
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Global.Judgements.SCORE_PERFECT : 0,
@@ -17,10 +13,6 @@ var score_stats = {
 		}
 	},
 	"decay": {		
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Global.Judgements.SCORE_PERFECT : 0,
@@ -30,12 +22,43 @@ var score_stats = {
 	},
 	"combined": {
 		# Scoring
-		"score": 0
+		"score": 0,
+		
+		# Combos
+		"combo": 0,
+		"max_combo": 0,
+		
+		# Note Hit Feedback
+		score_feedback_to_button_hit_feedback = {
+			Global.Judgements.SCORE_PERFECT : 0,
+			Global.Judgements.SCORE_GOOD : 0,
+			Global.Judgements.SCORE_MISS : 0
+		}
 	}
 }
 
+var level_current_measure
+
+onready var combo_label = $UI/ComboLabel
+onready var score_label = $UI/ScoreLabel
+
+var feedback_label
+var feedback_label_timer
+
+onready var feedback_growth_label = $UI/FeedbackGrowthLabel
+onready var feedback_growth_label_timer = $UI/FeedbackGrowthLabel/FeedbackVisibleTimer
+onready var feedback_decay_label = $UI/FeedbackDecayLabel
+onready var feedback_decay_label_timer = $UI/FeedbackDecayLabel/FeedbackVisibleTimer
+
+const TEXT_MISS = "MISS"
+const TEXT_GOOD = "GOOD"
+const TEXT_PERFECT = "PERFECT!"
+
+#const COLOR_GROWTH = "eb8f54"
+#const COLOR_DECAY  = "393ea2"
+
 # SONG TRACKING
-var bpm = 115
+var bpm = 180
 	# seems only used for seconds_per_beat
 	# which seems unused
 
@@ -124,57 +147,95 @@ func level_end():
 # ---
 
 # Increment Score
-func update_combo(input_type, score_to_add):
-	# current combo
-	if score_to_add != 0:
-		score_stats[input_type].combo += 1
+func update_combo(score_to_add):
+	if score_to_add != Global.Judgements.SCORE_MISS:
+		# current combo
+		score_stats.combined.combo += 1
 		
 		# max combo
-		if score_stats[input_type].combo > score_stats[input_type].max_combo:
-			score_stats[input_type].max_combo = score_stats[input_type].combo
+		if score_stats.combined.combo > score_stats.combined.max_combo:
+			score_stats.combined.max_combo = score_stats.combined.combo
 	else:
-		score_stats[input_type].combo = 0
+		# if miss received, reset current combo
+		score_stats.combined.combo = 0
 
-func update_score(input_type, score_to_add):
-	score_stats.combined.score += score_to_add * score_stats[input_type].combo
+func update_score(score_to_add):
+	score_stats.combined.score += score_to_add * score_stats.combined.combo
 
 func count_hit_feedback(input_type, score_to_add):
 	score_stats[input_type].score_feedback_to_button_hit_feedback[score_to_add] += 1
+	score_stats.combined.score_feedback_to_button_hit_feedback[score_to_add] += 1
 
 func update_score_label():
-	$Score.text = str(score_stats.combined.score)
+	score_label.text = str(score_stats.combined.score)
 
-func update_combo_labels():
-	if score_stats.growth.combo > 0:
-		$GrowthCombo.text = str(score_stats.growth.combo) + " COMBO!"
+func update_combo_label():
+	if score_stats.combined.combo > 0:
+		combo_label.text = "COMBO\n" + str(score_stats.combined.combo) + "x"
 	else:
-		$GrowthCombo.text = ""
-		
-	if score_stats.decay.combo > 0:
-		$DecayCombo.text = str(score_stats.decay.combo) + " COMBO!"
-	else:
-		$DecayCombo.text = ""
+		combo_label.text = ""
 
+func update_feedback_label(input_type, score_to_add):
+	if input_type == "growth":
+		feedback_label = feedback_growth_label
+		feedback_label_timer = feedback_growth_label_timer
+	elif input_type == "decay":
+		feedback_label = feedback_decay_label
+		feedback_label_timer = feedback_decay_label_timer
+	
+	feedback_label.visible = true
+
+	# text
+	if score_to_add == Global.Judgements.SCORE_PERFECT:
+		feedback_label.text = TEXT_PERFECT
+	elif score_to_add == Global.Judgements.SCORE_GOOD:
+		feedback_label.text = TEXT_GOOD
+	else:
+		feedback_label.text = TEXT_MISS
+
+	# timer
+	var measure = level_current_measure
+	var notes
+	
+	if measure == 1:
+		notes = spawn_notes_measure_1
+	elif measure == 2:
+		notes = spawn_notes_measure_2
+	elif measure == 3:
+		notes = spawn_notes_measure_3
+	elif measure == 4:
+		notes = spawn_notes_measure_4
+
+	# resolve zero-division error
+	if notes == 0:
+		notes = 1
+	
+	feedback_label_timer.wait_time = (seconds_per_beat / 2) - (0.025)
+	feedback_label_timer.start()
 
 func increment_score(input_type, score_to_add):
 	# called from button.gd under hit_score_and_destroy(score)
 	# 1 big function because called outside
 
 	# Tracking
-	update_combo(input_type, score_to_add)
-	update_score(input_type, score_to_add)
+	update_combo(score_to_add)
+	update_score(score_to_add)
 	count_hit_feedback(input_type, score_to_add)
 	
 	# Labels
 	update_score_label()
-	update_combo_labels()
+	update_combo_label()
+	update_feedback_label(input_type, score_to_add)
 
 
 # SIGNALS
 
 func _on_Gameplay3D_score_incremented(input_type, score_to_add):
-	print("gameplay3d score incremented")
+	print('input type: ' + str(input_type) + ', score_to_add: ' + str(score_to_add))
 	increment_score(input_type, score_to_add)
 
 func _on_Gameplay3D_level_ended():
 	level_end()
+	
+func _on_FeedbackVisibleTimer_timeout():
+	feedback_label.visible = false
