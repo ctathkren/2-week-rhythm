@@ -3,7 +3,8 @@ extends Control
 # VARIABLES
 export var growth_passed := false
 
-const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
+const GROWTH_LEVEL_PATH = "res://game/scenes/main/lawrence/2d/gameplay.tscn"
+const DECAY_LEVEL_PATH = GROWTH_LEVEL_PATH # to change later if decide on separate scene
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 
@@ -32,8 +33,7 @@ func _on_GrowthButton_mouse_exited():
 	default_on()
 
 func _on_GrowthButton_pressed():
-	Global.level = "growth"
-	change_scene(LEVEL_PATH)
+	change_scene(GROWTH_LEVEL_PATH)
 
 
 # Decay Button
@@ -57,8 +57,7 @@ func _on_DecayButton_mouse_exited():
 
 func _on_DecayButton_pressed():
 	if Global.growth_passed:
-		Global.level = "decay"
-		change_scene(LEVEL_PATH)
+		change_scene(DECAY_LEVEL_PATH)
 
 
 # Back Button (Title Screen)
