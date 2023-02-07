@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/main menu.png-3b256d911f35c297dbb7b7041f21cdc8.stex"
+path="res://.import/Hymn_BG 2.png-f2c377bb8288f4bdf0d60a48ddccd084.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/backgrounds/main menu.png"
-dest_files=[ "res://.import/main menu.png-3b256d911f35c297dbb7b7041f21cdc8.stex" ]
+source_file="res://game/assets/art/backgrounds/Hymn_BG 2.png"
+dest_files=[ "res://.import/Hymn_BG 2.png-f2c377bb8288f4bdf0d60a48ddccd084.stex" ]
 
 [params]
 
