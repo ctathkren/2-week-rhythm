@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/play2.png-491541e2b524716f4b952ec5fb301aed.stex"
+path="res://.import/HYMN BG 2 Final.png-b15f581cd525f2b3e58cf7feafd9aa22.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/art/ref/play_button/play2.png"
-dest_files=[ "res://.import/play2.png-491541e2b524716f4b952ec5fb301aed.stex" ]
+source_file="res://game/assets/art/backgrounds/HYMN BG 2 Final.png"
+dest_files=[ "res://.import/HYMN BG 2 Final.png-b15f581cd525f2b3e58cf7feafd9aa22.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

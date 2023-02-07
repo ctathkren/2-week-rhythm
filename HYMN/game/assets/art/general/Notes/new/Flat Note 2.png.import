@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/play1.png-36f3185f9f34fa927f797289ae3bf624.stex"
+path="res://.import/Flat Note 2.png-b6015b893047c57ec0861367187c8d21.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/art/ref/play_button/play1.png"
-dest_files=[ "res://.import/play1.png-36f3185f9f34fa927f797289ae3bf624.stex" ]
+source_file="res://game/assets/art/general/Notes/new/Flat Note 2.png"
+dest_files=[ "res://.import/Flat Note 2.png-b6015b893047c57ec0861367187c8d21.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

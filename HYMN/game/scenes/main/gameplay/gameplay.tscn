@@ -2,7 +2,7 @@
 
 [ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
-[ext_resource path="res://game/assets/art/backgrounds/Hymn_BG 1.png" type="Texture" id=3]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/general/highways/Purple Highway.png" type="Texture" id=4]
 [ext_resource path="res://game/scenes/main/gameplay/gameplay.gd" type="Script" id=5]
 [ext_resource path="res://game/assets/art/general/fonts/gameplay_decay.tres" type="Theme" id=7]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
 [ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
+[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
@@ -28,10 +29,10 @@ corner_radius_bottom_left = 75
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 2 )
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 margin_right = 1916.0
 margin_bottom = 1076.0
-color = Color( 0.196078, 0.109804, 0.411765, 1 )
+texture = ExtResource( 4 )
 
 [node name="Content" type="MarginContainer" parent="."]
 margin_right = 1916.0
@@ -66,7 +67,7 @@ custom_constants/separation = 50
 
 [node name="LevelSelect" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
 margin_right = 1416.0
-margin_bottom = 74.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -75,7 +76,7 @@ custom_constants/margin_left = 100
 [node name="LevelSelectButton" type="Button" parent="Content/VBoxContainer/Buttons/LevelSelect"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 74.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
@@ -84,31 +85,10 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Start"
 
-[node name="Options" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 124.0
-margin_right = 1416.0
-margin_bottom = 199.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
-
-[node name="OptionsButton" type="Button" parent="Content/VBoxContainer/Buttons/Options"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 75.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 1 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-text = "Options"
-
 [node name="Credits" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 249.0
+margin_top = 166.0
 margin_right = 1416.0
-margin_bottom = 324.0
+margin_bottom = 282.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -117,7 +97,7 @@ custom_constants/margin_left = 100
 [node name="CreditsButton" type="Button" parent="Content/VBoxContainer/Buttons/Credits"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 75.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
@@ -127,7 +107,7 @@ custom_styles/normal = SubResource( 5 )
 text = "Credits"
 
 [node name="Exit" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 374.0
+margin_top = 332.0
 margin_right = 1416.0
 margin_bottom = 449.0
 size_flags_horizontal = 3
@@ -138,7 +118,7 @@ custom_constants/margin_left = 100
 [node name="ExitButton" type="Button" parent="Content/VBoxContainer/Buttons/Exit"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 75.0
+margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
@@ -148,6 +128,5 @@ custom_styles/normal = SubResource( 5 )
 text = "Exit"
 
 [connection signal="pressed" from="Content/VBoxContainer/Buttons/LevelSelect/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/Options/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="Content/VBoxContainer/Buttons/Credits/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="Content/VBoxContainer/Buttons/Exit/ExitButton" to="." method="_on_ExitButton_pressed"]
