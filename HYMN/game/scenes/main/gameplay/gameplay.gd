@@ -81,6 +81,9 @@ func _ready():
 	pass
 	load_level("res://levels/Level2")
 
+func load_level(level_folder_path):
+	var level_info_file_path = level_folder_path
+	
 	if level_info_file_path[-1] != '/':
 		level_info_file_path += "/"
 		
