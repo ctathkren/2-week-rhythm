@@ -1,38 +1,92 @@
 extends Control
 
+export var decay_unlocked := false
+
 const GROWTH_LEVEL_PATH = "res://game/scenes/main/aljo/2d/level.tscn"
 const DECAY_LEVEL_PATH = "res://game/scenes/main/aljo/2d/level.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
+
+# MAIN FUNCTIONS
+# Testing Decay Unlock
+func _ready():
+	Global.decay_unlocked = decay_unlocked
+
+	if Global.decay_unlocked:
+		decay_text("Decay")
+	else:
+		decay_text("Locked")
+
+
+# SIGNALS
 # Growth Button
 func _on_GrowthButton_mouse_entered():
-	$Backgrounds/Decay.visible = false
-	$Music/Decay.stop()
+	default_off()
+	decay_off()
 
-	
-	$Backgrounds/Growth.visible = true
-	if $Music/Growth.playing == false:
-		$Music/Growth.play()
+	growth_on()
 
+func _on_GrowthButton_mouse_exited():
+	growth_off()
+
+	default_on()
 
 func _on_GrowthButton_pressed():
-	var _level_growth = get_tree().change_scene(GROWTH_LEVEL_PATH)
+	change_scene(GROWTH_LEVEL_PATH)
 
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
-	$Backgrounds/Growth.visible = false
-	$Music/Growth.stop()
+	if not Global.decay_unlocked:
+		return
 
-	$Backgrounds/Decay.visible = true
-	if $Music/Decay.playing == false:
-		$Music/Decay.play()
+	default_off()
+	growth_off()
 
+	# Decay On
+	decay_on()
+	decay_text("Decay")
+		
+func _on_DecayButton_mouse_exited():
+	decay_off()
+	if not Global.decay_unlocked:
+		decay_text("Locked")
+
+	default_on()
 
 func _on_DecayButton_pressed():
-	var _level_decay = get_tree().change_scene(DECAY_LEVEL_PATH)
+	if Global.decay_unlocked:
+		change_scene(DECAY_LEVEL_PATH)
 
 
 # Back Button (Title Screen)
 func _on_BackButton_pressed():
-	var _back = get_tree().change_scene(BACK_PATH)
+	change_scene(BACK_PATH)
+
+
+# HELPER FUNCTIONS
+func default_on():
+	$Backgrounds/Default.visible = true
+	$Music/Default.play()
+func default_off():
+	$Backgrounds/Default.visible = false
+	$Music/Default.stop()
+
+func growth_on():
+	$Backgrounds/Growth.visible = true
+	$Music/Growth.play()
+func growth_off():
+	$Backgrounds/Growth.visible = false
+	$Music/Growth.stop()
+
+func decay_on():
+	$Backgrounds/Decay.visible = true
+	$Music/Decay.play()
+func decay_off():
+	$Backgrounds/Decay.visible = false
+	$Music/Decay.stop()
+func decay_text(text):
+	$Content/VBoxContainer/Buttons/Decay/DecayButton.text = str(text)
+
+func change_scene(scene):
+	var _change_scene = get_tree().change_scene(scene)
