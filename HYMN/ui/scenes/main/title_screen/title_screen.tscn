@@ -1,11 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/assets/fonts/veteran typewriter.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://game/scenes/components/ref/menu/menu.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 125
-font_data = ExtResource( 1 )
+[ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
+[ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=2]
 size = 75
@@ -32,15 +29,15 @@ corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
-[node name="Menu" type="Node2D"]
+[node name="TitleScreen" type="Control"]
 script = ExtResource( 2 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BackgroundImage" type="ColorRect" parent="."]
 margin_right = 1916.0
 margin_bottom = 1076.0
 color = Color( 0.196078, 0.109804, 0.411765, 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Content" type="MarginContainer" parent="."]
 margin_right = 1916.0
 margin_bottom = 1076.0
 custom_constants/margin_right = 250
@@ -48,66 +45,62 @@ custom_constants/margin_top = 25
 custom_constants/margin_left = 250
 custom_constants/margin_bottom = 150
 
-[node name="Content" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
 margin_left = 250.0
 margin_top = 25.0
 margin_right = 1666.0
 margin_bottom = 926.0
 
-[node name="Title Text" type="Label" parent="MarginContainer/Content"]
+[node name="TitleImage" type="TextureRect" parent="Content/VBoxContainer"]
 margin_right = 1416.0
-margin_bottom = 448.0
+margin_bottom = 411.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
-text = "title text"
-align = 1
-valign = 1
-percent_visible = -0.111111
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
 
-[node name="Buttons" type="VBoxContainer" parent="MarginContainer/Content"]
-margin_top = 452.0
+[node name="Buttons" type="VBoxContainer" parent="Content/VBoxContainer"]
+margin_top = 415.0
 margin_right = 1416.0
 margin_bottom = 901.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 50
 
-[node name="Level Select" type="MarginContainer" parent="MarginContainer/Content/Buttons"]
+[node name="Start" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
 margin_right = 1416.0
-margin_bottom = 116.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
 custom_constants/margin_left = 100
 
-[node name="Button" type="Button" parent="MarginContainer/Content/Buttons/Level Select"]
+[node name="StartButton" type="Button" parent="Content/VBoxContainer/Buttons/Start"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 116.0
-focus_mode = 0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-text = "Level Select"
+text = "Start"
 
-[node name="Options" type="MarginContainer" parent="MarginContainer/Content/Buttons"]
-margin_top = 166.0
+[node name="Options" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 134.0
 margin_right = 1416.0
-margin_bottom = 282.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
 custom_constants/margin_left = 100
 
-[node name="Button" type="Button" parent="MarginContainer/Content/Buttons/Options"]
+[node name="OptionsButton" type="Button" parent="Content/VBoxContainer/Buttons/Options"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 116.0
-focus_mode = 0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -116,20 +109,19 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Options"
 
-[node name="Credits" type="MarginContainer" parent="MarginContainer/Content/Buttons"]
-margin_top = 332.0
+[node name="Credits" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 268.0
 margin_right = 1416.0
-margin_bottom = 449.0
+margin_bottom = 352.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
 custom_constants/margin_left = 100
 
-[node name="Button" type="Button" parent="MarginContainer/Content/Buttons/Credits"]
+[node name="CreditsButton" type="Button" parent="Content/VBoxContainer/Buttons/Credits"]
 margin_left = 100.0
 margin_right = 1316.0
-margin_bottom = 117.0
-focus_mode = 0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
@@ -137,3 +129,29 @@ custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Credits"
+
+[node name="Exit" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 402.0
+margin_right = 1416.0
+margin_bottom = 486.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="ExitButton" type="Button" parent="Content/VBoxContainer/Buttons/Exit"]
+margin_left = 100.0
+margin_right = 1316.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Exit"
+
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Start/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Options/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Credits/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Exit/ExitButton" to="." method="_on_ExitButton_pressed"]
