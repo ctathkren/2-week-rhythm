@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://ui/scenes/main/title_screen/start/start.gd" type="Script" id=1]
+[ext_resource path="res://ui/scenes/main/title_screen/level_select/level_select.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=2]
 [ext_resource path="res://game/assets/art/backgrounds/Hymn_BG 2.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/backgrounds/Hymn_BG 1.png" type="Texture" id=4]
@@ -28,7 +28,7 @@ corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
-[node name="Start" type="Control"]
+[node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
 
 [node name="Backgrounds" type="Control" parent="."]
