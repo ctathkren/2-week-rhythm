@@ -3,7 +3,8 @@ extends Node2D
 # VARIABLES
 
 # Level Unlocks
-var decay_unlocked = false
+var growth_passed := false
+var decay_passed := false
 
 # Global Values
 enum Judgements {

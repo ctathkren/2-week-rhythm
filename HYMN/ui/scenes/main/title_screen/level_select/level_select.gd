@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-export var decay_unlocked := false
+export var growth_passed := false
 
 const GROWTH_LEVEL_PATH = "res://game/scenes/main/lawrence/2d/gameplay.tscn"
 const DECAY_LEVEL_PATH = GROWTH_LEVEL_PATH # to change later if decide on separate scene
@@ -11,9 +11,9 @@ const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
-	Global.decay_unlocked = decay_unlocked
+	growth_passed = Global.growth_passed
 
-	if Global.decay_unlocked:
+	if Global.growth_passed:
 		decay_text("Decay")
 	else:
 		decay_text("Locked")
@@ -38,7 +38,7 @@ func _on_GrowthButton_pressed():
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
-	if not Global.decay_unlocked:
+	if not Global.growth_passed:
 		return
 
 	default_off()
@@ -50,13 +50,13 @@ func _on_DecayButton_mouse_entered():
 		
 func _on_DecayButton_mouse_exited():
 	decay_off()
-	if not Global.decay_unlocked:
+	if not Global.growth_passed:
 		decay_text("Locked")
 
 	default_on()
 
 func _on_DecayButton_pressed():
-	if Global.decay_unlocked:
+	if Global.growth_passed:
 		change_scene(DECAY_LEVEL_PATH)
 
 
