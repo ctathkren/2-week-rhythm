@@ -76,7 +76,16 @@ func _input(event):
 
 # ON READY
 func _ready():
-	pass
+	# Set Level
+	if Global.level == "growth":
+		$Backgrounds/Growth.visible = true
+		$Backgrounds/Decay.visible = false
+	elif Global.level == "decay":
+		$Backgrounds/Growth.visible = false
+		$Backgrounds/Decay.visible = true
+
+	# reference uses random lanes for note spawning
+	#randomize()
 	
 func load_level(level_file):
 	pass
