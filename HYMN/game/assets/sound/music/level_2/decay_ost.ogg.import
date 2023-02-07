@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/decay_ost.ogg-ccb6a2a4bb753f1f8fa3348bed41f05c.oggstr"
+
+[deps]
+
+source_file="res://game/assets/sound/music/level_2/decay_ost.ogg"
+dest_files=[ "res://.import/decay_ost.ogg-ccb6a2a4bb753f1f8fa3348bed41f05c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
