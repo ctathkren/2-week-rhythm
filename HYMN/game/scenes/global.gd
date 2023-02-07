@@ -14,10 +14,6 @@ enum Judgements {
 # In-Game Scoring
 var score_stats = {
 	"growth": {	
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Judgements.SCORE_PERFECT : 0,
@@ -25,11 +21,7 @@ var score_stats = {
 			Judgements.SCORE_MISS : 0
 		}
 	},
-	"decay": {
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
+	"decay": {		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Judgements.SCORE_PERFECT : 0,
@@ -39,7 +31,18 @@ var score_stats = {
 	},
 	"combined": {
 		# Scoring
-		"score": 0
+		"score": 0,
+		
+		# Combos
+		"combo": 0,
+		"max_combo": 0,
+		
+		# Note Hit Feedback
+		score_feedback_to_button_hit_feedback = {
+			Judgements.SCORE_PERFECT : 0,
+			Judgements.SCORE_GOOD : 0,
+			Judgements.SCORE_MISS : 0
+		}
 	}
 }
 
