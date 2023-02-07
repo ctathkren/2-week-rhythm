@@ -203,11 +203,9 @@ func _on_Conductor_send_beat(current_beat):
 	
 	# end of song!
 	if song_position_in_beats > 404:
-		level_end()
+		emit_signal("level_ended")
 
-func level_end():
-	emit_signal("level_ended")
-
+# ---
 
 # Spawn Notes
 func instantiate_note(lane):
