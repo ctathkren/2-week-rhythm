@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://game/scenes/main/lawrence/2d/gameplay_orthogonal.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/scenes/main/lawrence/3d/gameplay3d.gd" type="Script" id=2]
+[ext_resource path="res://game/scenes/main/gameplay_orthogonal/gameplay_orthogonal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.gd" type="Script" id=2]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/general/highways/Purple Highway.png" type="Texture" id=5]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=6]
@@ -22,12 +22,11 @@ current = true
 [node name="temp_BackgroundViewportSprite3D" type="Sprite3D" parent="."]
 transform = Transform( 4.9, 0, 0, 0, 4.9, 0, 0, 0, 1, 9.6, -5.4, -30 )
 visible = false
-transparent = false
-alpha_cut = 2
 texture = SubResource( 2 )
 
 [node name="temp_BackgroundViewport" type="Viewport" parent="temp_BackgroundViewportSprite3D"]
 size = Vector2( 1920, 1080 )
+own_world = true
 transparent_bg = true
 handle_input_locally = false
 keep_3d_linear = true
