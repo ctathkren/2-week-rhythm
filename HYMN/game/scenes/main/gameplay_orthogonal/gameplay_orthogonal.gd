@@ -74,9 +74,9 @@ func choose_level_start():
 		- DON'T FORGET TO COMMENT THE OTHER
 	"""
 
-	$Conductor.play_beats_before_start(beats_before_start)
+	#$Conductor.play_beats_before_start(beats_before_start)
 
-	# $Conductor.play_from_beat(30, 4)
+	$Conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
@@ -213,21 +213,21 @@ func level_end():
 func instantiate_note(lane):
 	var instance = note.instance()
 	instance.initialize(lane)
-	connect("note_missed", self, "_on_Note_note_missed")
+	instance.connect("note_missed", self, "_on_Note_note_missed")
 	
 	if lane > 0:
 		$HighwayGrowth.add_child(instance)
 	elif lane < 0:
 		$HighwayDecay.add_child(instance)
 
-func instantiate_multiple_notes(lane1, lane2):
+func instantiate_multiple_notes(lane1, lane2):	
 	var note1_instance = note.instance()
 	note1_instance.initialize(lane1)
-	connect("note_missed", self, "_on_Note_note_missed")
+	note1_instance.connect("note_missed", self, "_on_Note_note_missed")
 
 	var note2_instance = note.instance()
 	note2_instance.initialize(lane2)
-	connect("note_missed", self, "_on_Note_note_missed")
+	note2_instance.connect("note_missed", self, "_on_Note_note_missed")
 		
 	var note_bar_instance = note_bar.instance()
 	note_bar_instance.initialize(lane1, lane2)
@@ -270,10 +270,11 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 			lane = lane_numbers[randi() % lane_numbers.size()]
 		
 		chosen_lanes.append(lane)
+	
+	print(chosen_lanes.size())
 
 	for l in chosen_lanes:
 		instantiate_note(lane)
-
 
 # SIGNALS
 
