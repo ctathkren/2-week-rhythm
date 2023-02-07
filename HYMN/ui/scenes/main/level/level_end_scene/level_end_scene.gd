@@ -1,8 +1,6 @@
 extends Control
 
 # VARIABLES
-export var level := "growth"
-
 export var score := 0
 onready var score_label = $Content/VBoxContainer/Buttons/Score/ScoreLabel
 
@@ -18,18 +16,8 @@ const TITLE_SCREEN_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 # MAIN FUNCTIONS
 func _ready():
-    set_background()
     score_label.text = "Score: " + str(score)
     show_laurels()
-
-
-func set_background():
-    if level == "growth":
-        $Backgrounds/Growth.visible = true
-    elif level == "decay":
-        $Backgrounds/Decay.visible = true
-    else:
-        $Backgrounds/Default.visible = true
 
 
 # SIGNALS
