@@ -1,5 +1,123 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://game/assets/fonts/veteran typewriter.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/scenes/main/title_screen/credits/credits.gd" type="Script" id=2]
+[ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=3]
+
+[sub_resource type="DynamicFont" id=5]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 75
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
 
 [node name="Credits" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="BackgroundImage" type="ColorRect" parent="."]
+margin_right = 1916.0
+margin_bottom = 1076.0
+color = Color( 0.196078, 0.109804, 0.411765, 1 )
+
+[node name="Content" type="MarginContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+custom_constants/margin_right = 250
+custom_constants/margin_top = 25
+custom_constants/margin_left = 250
+custom_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+margin_left = 250.0
+margin_top = 100.0
+margin_right = 1670.0
+margin_bottom = 936.0
+
+[node name="Credits" type="MarginContainer" parent="Content/VBoxContainer"]
+margin_right = 1420.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="CreditsLabel" type="Label" parent="Content/VBoxContainer/Credits"]
+margin_left = 100.0
+margin_right = 1320.0
+margin_bottom = 112.0
+custom_fonts/font = SubResource( 5 )
+text = "CREDITS:"
+align = 1
+
+[node name="People" type="MarginContainer" parent="Content/VBoxContainer"]
+margin_top = 116.0
+margin_right = 1420.0
+margin_bottom = 823.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="PeopleLabel" type="Label" parent="Content/VBoxContainer/People"]
+margin_left = 100.0
+margin_right = 1320.0
+margin_bottom = 707.0
+custom_fonts/font = ExtResource( 3 )
+text = "
+ctath - manager
+aljo - programming
+lawrence - programming
+annika - asset art
+dani - background art
+zach - music (track 1)
+raco - music (track 2)
+
+"
+align = 1
+
+[node name="Back" type="MarginContainer" parent="Content/VBoxContainer"]
+margin_top = 827.0
+margin_right = 1420.0
+margin_bottom = 911.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="BackButton" type="Button" parent="Content/VBoxContainer/Back"]
+margin_left = 100.0
+margin_right = 1320.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "Back"
+
+[connection signal="pressed" from="Content/VBoxContainer/Back/BackButton" to="." method="_on_BackButton_pressed"]
