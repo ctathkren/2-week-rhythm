@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
 [ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
+[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
@@ -28,10 +29,10 @@ corner_radius_bottom_left = 75
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 2 )
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 margin_right = 1916.0
 margin_bottom = 1076.0
-color = Color( 0.196078, 0.109804, 0.411765, 1 )
+texture = ExtResource( 4 )
 
 [node name="Content" type="MarginContainer" parent="."]
 margin_right = 1916.0
