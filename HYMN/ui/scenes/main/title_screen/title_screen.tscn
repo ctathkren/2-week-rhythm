@@ -1,0 +1,153 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
+[ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[node name="TitleScreen" type="Control"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1916.0
+margin_bottom = 1076.0
+color = Color( 0.196078, 0.109804, 0.411765, 1 )
+
+[node name="Content" type="MarginContainer" parent="."]
+margin_right = 1916.0
+margin_bottom = 1076.0
+custom_constants/margin_right = 250
+custom_constants/margin_top = 25
+custom_constants/margin_left = 250
+custom_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+margin_left = 250.0
+margin_top = 25.0
+margin_right = 1666.0
+margin_bottom = 926.0
+
+[node name="TitleImage" type="TextureRect" parent="Content/VBoxContainer"]
+margin_right = 1416.0
+margin_bottom = 448.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Buttons" type="VBoxContainer" parent="Content/VBoxContainer"]
+margin_top = 452.0
+margin_right = 1416.0
+margin_bottom = 901.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+
+[node name="Start" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_right = 1416.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="StartButton" type="Button" parent="Content/VBoxContainer/Buttons/Start"]
+margin_left = 100.0
+margin_right = 1316.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Start"
+
+[node name="Options" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 124.0
+margin_right = 1416.0
+margin_bottom = 199.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="OptionsButton" type="Button" parent="Content/VBoxContainer/Buttons/Options"]
+margin_left = 100.0
+margin_right = 1316.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Options"
+
+[node name="Credits" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 249.0
+margin_right = 1416.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="CreditsButton" type="Button" parent="Content/VBoxContainer/Buttons/Credits"]
+margin_left = 100.0
+margin_right = 1316.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Credits"
+
+[node name="Exit" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
+margin_top = 374.0
+margin_right = 1416.0
+margin_bottom = 449.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="ExitButton" type="Button" parent="Content/VBoxContainer/Buttons/Exit"]
+margin_left = 100.0
+margin_right = 1316.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Exit"
+
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Start/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Options/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Credits/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Buttons/Exit/ExitButton" to="." method="_on_ExitButton_pressed"]

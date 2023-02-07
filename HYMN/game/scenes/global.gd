@@ -2,6 +2,9 @@ extends Node2D
 
 # VARIABLES
 
+# Level Unlocks
+var decay_unlocked = false
+
 # Global Values
 enum Judgements {
 	SCORE_MISS,
