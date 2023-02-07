@@ -73,9 +73,7 @@ func reset_note():
 
 func hit_feedback():
 	if hittable_notes.size() > 0:
-		# .increment_score(score) called in level.gd
 		# .destroy(score) called in Note.gd
-		
 		if hit_feedbacks.hit_perfect:
 			hit_score_and_destroy(Global.Judgements.SCORE_PERFECT)
 		elif hit_feedbacks.hit_good:
