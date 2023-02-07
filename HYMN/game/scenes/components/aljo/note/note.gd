@@ -40,17 +40,10 @@ var sprite_frames_to_lane_positions = {
 	2 : RIGHT_LANE_SPAWN,
 }
 
-# Judgements
-enum Judgements {
-	SCORE_MISS,
-	SCORE_GOOD,
-	SCORE_PERFECT
-}
-
 # Hit Feedback to Label Text and Label Color
 var feedback_score_to_text_and_color = {
-  Judgements.SCORE_PERFECT : ["PERFECT", "f6d6b6"],
-  Judgements.SCORE_GOOD : ["GOOD", "c3a38a"],
+  Global.Judgements.SCORE_PERFECT : ["PERFECT", "f6d6b6"],
+  Global.Judgements.SCORE_GOOD : ["GOOD", "c3a38a"],
 }
 
 # Partner Note, for making a note bar spawn
@@ -62,6 +55,8 @@ var partner_note_bar
 # LOCAL
 func _ready():
 	set_note_type()
+
+	$SpritesGlow.animation   = note_type
 
 func set_note_type():
 	note_type = get_parent().highway_type
@@ -173,7 +168,7 @@ func visual_effects():
 
 """
 func update_feedback_label(score):	
-	if score != Judgements.SCORE_MISS:
+	if score != Global.Judgements.SCORE_MISS:
 		$Node2D/Label.text = feedback_score_to_text_and_color[score][0]
 		$Node2D/Label.modulate = feedback_score_to_text_and_color[score][1]
 	else:

@@ -52,13 +52,16 @@ texture = ExtResource( 7 )
 
 [node name="LeftButton" parent="." instance=ExtResource( 2 )]
 position = Vector2( 697, 910 )
+scale = Vector2( 1, 1 )
 
 [node name="MiddleButton" parent="." instance=ExtResource( 2 )]
 position = Vector2( 950, 910 )
+scale = Vector2( 1, 1 )
 input = "button_growth2"
 
 [node name="RightButton" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1199, 910 )
+scale = Vector2( 1, 1 )
 input = "button_growth3"
 
 [node name="FeedbackLabel" type="Label" parent="."]
