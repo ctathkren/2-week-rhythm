@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/draft_2.png-2a074e4c06d4e5ab531b4b03e957dd87.stex"
+path="res://.import/draft_2.png-5f4352f3c5c19ad2a180c5401e05f039.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Notes/draft_2.png"
-dest_files=[ "res://.import/draft_2.png-2a074e4c06d4e5ab531b4b03e957dd87.stex" ]
+source_file="res://game/assets/art/general/notes/draft_2.png"
+dest_files=[ "res://.import/draft_2.png-5f4352f3c5c19ad2a180c5401e05f039.stex" ]
 
 [params]
 
