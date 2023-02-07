@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/metronome_222.wav-3dc039f50f24deaeaf71bc31f30885da.sample"
+path="res://.import/metronome_184.wav-f8393f7bc49415816a8a04825b7e931b.sample"
 
 [deps]
 
-source_file="res://game/assets/sound/music/metronome_222.wav"
-dest_files=[ "res://.import/metronome_222.wav-3dc039f50f24deaeaf71bc31f30885da.sample" ]
+source_file="res://game/assets/sound/music/metronome/metronome_184.wav"
+dest_files=[ "res://.import/metronome_184.wav-f8393f7bc49415816a8a04825b7e931b.sample" ]
 
 [params]
 
