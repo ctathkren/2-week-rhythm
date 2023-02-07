@@ -19,74 +19,34 @@ blend_mode = 1
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "decay1",
+"name": "decay",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "decay2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "decay3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "growth1",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "growth2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "growth3",
+"name": "growth",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "decay1",
+"name": "decay",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 1 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "decay2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "decay3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "growth1",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "growth2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "growth3",
+"name": "growth",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 75, 1.5 )
 
-[node name="Note" type="Area2D"]
+[node name="Note" type="Area2D" groups=["note"]]
 z_index = 2
 script = ExtResource( 2 )
 
@@ -94,12 +54,43 @@ script = ExtResource( 2 )
 material = SubResource( 5 )
 z_index = -2
 frames = SubResource( 3 )
-animation = "growth1"
+animation = "growth"
 
 [node name="NoteSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
-animation = "growth3"
+animation = "growth"
 
 [node name="NoteHitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1.5 )
 shape = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+linear_accel = -100.0
+
+[node name="NoteDeleteTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="FeedbackLabel" type="Label" parent="Node2D"]
+anchor_right = 0.046
+margin_left = -20.0
+margin_top = -8.0
+margin_right = 20.0
+margin_bottom = 6.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
+valign = 1
+
+[connection signal="timeout" from="NoteDeleteTimer" to="." method="_on_NoteDeleteTimer_timeout"]

@@ -1,119 +1,156 @@
 extends Node2D
 
-signal did_nothing
-signal hit_perfect
-signal hit_good
-signal hit_miss
+# VARIABLES
+# Button Identifier
+export var input = ""
+	# set in editor which key each button is assigned to
+	# MUST be exact key name in Project Settings>Input Map
+export var input_type = ""
+	# used for signalling the score
 
-var column_number = 1
+# Notes
+# Tracking
+var hittable_notes = []
 
-var hittable_notes = [] # Queue data structure; make sure that a button can only hit one note/hold at a time
+# Feedback
+var hit_feedbacks = {
+	"hit_perfect": false,
+	"hit_good": false,
+	"hit_miss": false
+}
 
-# ---
+var hit_feedback_areas = {
+	"hit_perfect": $PerfectArea,
+	"hit_good": $GoodArea,
+	"hit_miss": $EarlyMissArea
+}
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal score_incremented(input_type, score_to_add)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
-	if Input.is_action_just_pressed(get_input_key()):
-		if hittable_notes.size() > 0:		
-			var current_note = hittable_notes.pop_front()
+# FUNCTIONS
+#func _unhandled_input(event):
+	#if event.is_action_pressed(input, false):
+		#print("press")
+		# registers all hits at the moment!
+		# consider: .is_action_just_pressed
+
+"""
+notes on 2nd argument of:
+.is_action_pressed(action: String, exact: bool)
+
+- if exact == false
+	- ignores additional input modifiers 
+	- for InputEventKey and InputEventMouseButton events
+	- and the direction for InputEventJoypadMotion events.
+"""
+
+		#hit_feedback()
+	
+func _physics_process(delta):
+	if Input.is_action_just_pressed(input):
+		hit_feedback()
+	
+
+# ON KEY PRESS
+func hit_score_and_destroy(score):
+	emit_signal("score_incremented", input_type, score)
+
+	hittable_notes[0].destroy(score)
+
+
+func reset_note():
+	hittable_notes.pop_front()
+
+	for key in hit_feedbacks.keys():
+		hit_feedbacks[key] = false
+		
+	if hittable_notes.size() > 0:
+		for key in hit_feedbacks.keys():
+			# check every hit_feedback's judgement area if it overlaps with the new current note
+			if hittable_notes[0].overlaps_area(hit_feedback_areas[key]):
+				hit_feedbacks[key] = true
+
+func hit_feedback():
+	if hittable_notes.size() > 0:
+		# .increment_score(score) called in level.gd
+		# .destroy(score) called in Note.gd
+		
+		if hit_feedbacks.hit_perfect:
+			hit_score_and_destroy(Global.Judgements.SCORE_PERFECT)
+		elif hit_feedbacks.hit_good:
+			hit_score_and_destroy(Global.Judgements.SCORE_GOOD)
+		elif hit_feedbacks.hit_miss:
+			hit_score_and_destroy(Global.Judgements.SCORE_MISS)
 			
-			if current_note.has_method("get_note_type"):
-				if current_note.get_note_type() == "note":
-					emit_signal(current_note.get_judgement())
-					current_note.be_hit()
-				elif current_note.get_note_type() == "hold":
-					# TODO
-					pass
-					
-# ---
+		reset_note()
+	else:
+		# THIS LINE USED TO CAUSE A LOT OF BUGS
+		# because was set as "hit_score_and_destroy()"
+		# when should only be "increment_score"
+		emit_signal("score_incremented", input_type, Global.Judgements.SCORE_MISS)
 
-# get Input Map name of input key from column number
-func get_input_key():
-	var input_key = "button_"
-	
-	if column_number > 0:
-		input_key += "growth"
-	elif column_number < 0:
-		input_key += "decay"
-
-	input_key += String(abs(column_number))
-	
-	return input_key
-
-func get_column_number():
-	return column_number
-	
-func set_column_number(col):
-	column_number = col
-	
-# ---
-
-func _on_JudgementMissEarly_area_entered(area):
-	# if button is pressed, then emit signal to score a miss on this column (too early)
-
-	# make sure that area is a note or a hold before adding it to hittable_notes
-	if area.has_method("get_note_type"):
-		if area.get_note_type() == "note":
-			hittable_notes.append(area)
-			area.set_judgement("hit_miss")
-		elif area.get_note_type() == "hold_head":
-			area.set_judgement("hit_miss")
-		elif area.get_note_type() == "hold_tail":
-			area.set_judgement("hit_miss")
-
-func _on_JudgementGoodEarly_area_entered(area):
-	if area.has_method("get_note_type"):
-		if area.get_note_type() == "note":
-			area.set_judgement("hit_good")
-		elif area.get_note_type() == "hold_head":
-			area.set_judgement("hit_good")
-		elif area.get_note_type() == "hold_tail":
-			area.set_judgement("hit_good")
-			
-func _on_JudgementPerfect_area_entered(area):
-	if area.has_method("get_note_type"):
-		if area.get_note_type() == "note":
-			area.set_judgement("hit_perfect")
-		elif area.get_note_type() == "hold_head":
-			area.set_judgement("hit_perfect")
-		elif area.get_note_type() == "hold_tail":
-			area.set_judgement("hit_perfect")
-
-func _on_JudgementGoodLate_area_entered(area):
-	if area.has_method("get_note_type"):
-		if area.get_note_type() == "note":
-			area.set_judgement("hit_good")
-		elif area.get_note_type() == "hold_head":
-			area.set_judgement("hit_good")
-		elif area.get_note_type() == "hold_tail":
-			area.set_judgement("hit_good")
-
-func _on_JudgementMissLate_area_entered(area):
-	# if a note reaches this part without being pressed, then emit signal to score a miss on this column
-	
-	# make sure that area is a note or a hold before adding it to hittable_notes
-	if area.has_method("get_note_type"):
-		if area.get_note_type() == "note":
-			emit_signal("hit_miss")
-			
-			# remove area from hittable_notes; area is actually hittable_notes[0]
-			hittable_notes.pop_front()
-
-			# hit area
-			area.be_hit()
-		elif area.get_note_type() == "hold_head":
-			area.set_judgement("hit_miss")
+		# why do we hate ghost-tapping -lawrence
 
 
+# SIGNALS
+# NOTE CHECKING
 
+# Perfect Areas
+func _on_PerfectArea_area_entered(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_perfect = true
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_perfect = true
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_perfect = true
 
+func _on_PerfectArea_area_exited(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_perfect = false
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_perfect = false
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_perfect = false
 
+# Good Areas
+func _on_GoodArea_area_entered(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_good = true
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_good = true
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_good = true
 
+func _on_GoodArea_area_exited(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_good = false
+		hittable_notes.erase(area)
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_good = false
+		hittable_notes.erase(area)
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_good = false
+		hittable_notes.erase(area)
 
+# Early Miss Areas
+# doubles as checker for considering if input should have an effect
+# ex. if in early miss area, can hit; else not
+func _on_EarlyMissArea_area_entered(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_miss = true
+		hittable_notes.append(area)
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_miss = true
+		hittable_notes.append(area)
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_miss = true
+		hittable_notes.append(area)
 
-
+func _on_EarlyMissArea_area_exited(area):
+	if area.is_in_group("note"):
+		hit_feedbacks.hit_miss = false
+	elif area.is_in_group("hold_head"):
+		hit_feedbacks.hit_miss = false
+	elif area.is_in_group("hold_tail"):
+		hit_feedbacks.hit_miss = false
