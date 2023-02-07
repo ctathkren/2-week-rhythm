@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/scenes/main/level/level_end_scene/level_end_scene.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 2.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 1.png" type="Texture" id=4]
 [ext_resource path="res://game/assets/fonts/veteran typewriter.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=6]
+[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=7]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=5]
 size = 100
@@ -43,13 +46,28 @@ corner_radius_bottom_left = 75
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-score = 1000000
-laurels = 3
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 1916.0
-margin_bottom = 1076.0
-color = Color( 0.196078, 0.109804, 0.411765, 1 )
+[node name="Backgrounds" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Default" type="TextureRect" parent="Backgrounds"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 7 )
+
+[node name="Growth" type="TextureRect" parent="Backgrounds"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 6 )
+
+[node name="Decay" type="TextureRect" parent="Backgrounds"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 8 )
 
 [node name="Content" type="MarginContainer" parent="."]
 margin_right = 1916.0

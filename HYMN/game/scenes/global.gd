@@ -14,6 +14,7 @@ enum Judgements {
 	SCORE_PERFECT
 }
 
+
 var level_info = {
 	"title": "",
 	"bpm": 180, #  placeholder default BPM
