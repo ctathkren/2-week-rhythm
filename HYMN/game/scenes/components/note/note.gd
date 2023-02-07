@@ -102,24 +102,16 @@ func _set_note_type(lane):
 	if lane > 0:
 		note_type = "growth"
 		$NoteSprite.animation = "growth"
-		$NoteGlowSprite.animation = "growth"
 	elif lane < 0:
 		note_type = "decay"
 		$NoteSprite.animation = "decay"
-		$NoteGlowSprite.animation = "decay"
 
-func _set_frame_and_position(lane):
+func _set_position(lane):
 	if abs(lane) == 1:
-		$NoteSprite.frame = 0
-		$NoteGlowSprite.frame = 0
 		position = LEFT_LANE_SPAWN
 	elif abs(lane) == 2:
-		$NoteSprite.frame = 1
-		$NoteGlowSprite.frame = 1
 		position = CENTER_LANE_SPAWN
 	elif abs(lane) == 3:
-		$NoteSprite.frame = 2
-		$NoteGlowSprite.frame = 2
 		position = RIGHT_LANE_SPAWN
 	else:
 		printerr('Invalid lane set for note: ' + str(lane))
@@ -132,7 +124,7 @@ func initialize(lane):
 	# called by level.gd under _spawn_notes(to_spawn)
 	# separate function because called outside
 	_set_note_type(lane)
-	_set_frame_and_position(lane)
+	_set_position(lane)
 
 	speed = _get_speed()
 
@@ -143,7 +135,6 @@ func visual_effects():
 	$CPUParticles2D.emitting = true
 
 	$NoteSprite.visible = false
-	$NoteGlowSprite.visible = false
 
 func update_feedback_label(score):	
 	if score != Global.Judgements.SCORE_MISS:
