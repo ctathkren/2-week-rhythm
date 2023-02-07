@@ -8,10 +8,6 @@ export var highway_type := "growth"
 # SCORING & FEEDBACK
 var score_stats = {
 	"growth": {	
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Global.Judgements.SCORE_PERFECT : 0,
@@ -20,10 +16,6 @@ var score_stats = {
 		}
 	},
 	"decay": {		
-		# Combos
-		"combo": 0,
-		"max_combo": 0,
-		
 		# Note Hit Feedback
 		score_feedback_to_button_hit_feedback = {
 			Global.Judgements.SCORE_PERFECT : 0,
@@ -33,7 +25,18 @@ var score_stats = {
 	},
 	"combined": {
 		# Scoring
-		"score": 0
+		"score": 0,
+		
+		# Combos
+		"combo": 0,
+		"max_combo": 0,
+		
+		# Note Hit Feedback
+		score_feedback_to_button_hit_feedback = {
+			Global.Judgements.SCORE_PERFECT : 0,
+			Global.Judgements.SCORE_GOOD : 0,
+			Global.Judgements.SCORE_MISS : 0
+		}
 	}
 }
 
@@ -300,33 +303,31 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 	for l in chosen_lanes:
 		instantiate_note(lane)
 
+
 # On Button Hit OK (Increment Score)
-
-
-func update_combo(input_type, score_to_add):
-	# current combo
-	if score_to_add != 0:
-		score_stats[input_type].combo += 1
+func update_combo(score_to_add):
+	if score_to_add != Global.Judgements.SCORE_MISS:
+		# current combo
+		score_stats.combined.combo += 1
 		
 		# max combo
-		if score_stats[input_type].combo > score_stats[input_type].max_combo:
-			score_stats[input_type].max_combo = score_stats[input_type].combo
+		if score_stats.combined.combo > score_stats.combined.max_combo:
+			score_stats.combined.max_combo = score_stats.combined.combo
 	else:
-		score_stats[input_type].combo = 0
+		# if miss received, reset current combo
+		score_stats.combined.combo = 0
 
-func update_score(input_type, score_to_add):
-	score_stats.combined.score += score_to_add * score_stats[input_type].combo
+func update_score(score_to_add):
+	score_stats.combined.score += score_to_add * score_stats.combined.combo
 
 func count_hit_feedback(input_type, score_to_add):
 	score_stats[input_type].score_feedback_to_button_hit_feedback[score_to_add] += 1
+	score_stats.combined.score_feedback_to_button_hit_feedback[score_to_add] += 1
 
 func update_score_label():
 	$ScoreLabel.text = str(score_stats.combined.score)
 
 func update_combo_label():
-	if score_stats.growth.combo > 0:
-		$ComboLabel.text = str(score_stats.growth.combo) + " COMBO!"
-
 	# Color
 	if note_type == "growth":
 		combo_label_theme.set("Label/colors/font_color", Color(COLOR_GROWTH))
@@ -385,8 +386,8 @@ func increment_score(score_to_add):
 	# 1 big function because called outside
 
 	# Tracking
-	update_combo(highway_type, score_to_add)
-	update_score(highway_type, score_to_add)
+	update_combo(score_to_add)
+	update_score(score_to_add)
 	count_hit_feedback(highway_type, score_to_add)
 	
 	# Labels
