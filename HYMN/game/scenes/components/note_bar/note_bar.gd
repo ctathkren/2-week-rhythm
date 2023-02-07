@@ -75,25 +75,25 @@ func miss_delete():
 func _set_note_type(lane_left):
 	if lane_left > 0:
 		note_type = "growth"
-		$NoteSprite.animation = "growth"
-		$NoteGlowSprite.animation = "growth"
+		$NoteBarSprite.animation = "growth"
+		$NoteBarGlowSprite.animation = "growth"
 	elif lane_left < 0:
 		note_type = "decay"
-		$NoteSprite.animation = "decay"
-		$NoteGlowSprite.animation = "decay"
+		$NoteBarSprite.animation = "decay"
+		$NoteBarGlowSprite.animation = "decay"
 
 func _set_frame_and_position(lane_left, lane_right):
 	if abs(lane_left) == 1 and abs(lane_right) == 2:
-		$NoteSprite.frame = "adjacent"
-		$NoteGlowSprite.animation = "adjacent"
+		$NoteBarSprite.frame = 0
+		$NoteBarGlowSprite.frame = 0
 		position = LEFT_CENTER_LANES_SPAWN
 	elif abs(lane_left) == 2 and abs(lane_right) == 3:
-		$NoteSprite.frame = "adjacent"
-		$NoteGlowSprite.animation = "adjacent"
+		$NoteBarSprite.frame = 0
+		$NoteBarGlowSprite.frame = 0
 		position = CENTER_RIGHT_LANES_SPAWN
 	elif abs(lane_left) == 1 and abs(lane_right) == 3:
-		$NoteSprite.frame = "adjacent"
-		$NoteGlowSprite.animation = "adjacent"
+		$NoteBarSprite.frame = 1
+		$NoteBarGlowSprite.frame = 1
 		position = LEFT_RIGHT_LANES_SPAWN
 	else:
 		printerr('Invalid lanes set for note bar: ' + str(lane_left) + ' and ' + str(lane_right))

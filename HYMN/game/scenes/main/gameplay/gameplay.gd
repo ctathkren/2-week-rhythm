@@ -2,7 +2,7 @@ extends Node2D
 
 # VARIABLES
 
-# SCORING & FEEDBACK
+# Scoring & Feedback
 var score_stats = {
 	"growth": {	
 		# Note Hit Feedback
@@ -57,41 +57,9 @@ const TEXT_PERFECT = "PERFECT!"
 #const COLOR_GROWTH = "eb8f54"
 #const COLOR_DECAY  = "393ea2"
 
-# SONG TRACKING
-var bpm = 180
-	# seems only used for seconds_per_beat
-	# which seems unused
 
-var song_position_in_seconds = 0.0
-	# doesn't seem used atm
-var song_position_in_beats = 0
 
-var last_spawned_beat = 0
-	# doesn't seem used
-var seconds_per_beat = 60.0 / bpm
-	# doesn't seem used atm
 
-export var beats_before_start := 8
-
-# NOTE SPAWNING
-# Spawn Note on Measure
-	# want to rename these with "measure" in them
-var spawn_notes_measure_1 = 0
-var spawn_notes_measure_2 = 0
-var spawn_notes_measure_3 = 1
-	# why is this 1?
-var spawn_notes_measure_4 = 0
-
-# for optimization
-var measure_to_spawn_notes = {
-	1 : spawn_notes_measure_1,
-	2 : spawn_notes_measure_2,
-	3 : spawn_notes_measure_3,
-	4 : spawn_notes_measure_4,
-}
-
-# Spawning
-var note = load("res://game/scenes/components/lawrence/note/note.tscn")
 
 # FUNCTIONS
 
@@ -118,28 +86,13 @@ func _ready():
 
 	# reference uses random lanes for note spawning
 	#randomize()
-	pass
-	#choose_level_start()
 	
 func load_level(level_file):
 	pass
+	
+# ---
 
-func choose_level_start():
-	"""
-	Ways to Start the Level
-		- from beat 0
-			- uncomment $Conductor.play_beats_before_start(beats)
-		- from certain time or beat
-			- uncomment $Conductor.play_from_beat(seconds, beat)
-			- pass the arguments
-		- DON'T FORGET TO COMMENT THE OTHER
-	"""
-
-	$GameplayPerspectivized/Gameplay3DViewport/Gameplay3D.gameplay_nodegameplay_node.play_beats_before_start(beats_before_start)
-
-	# $Conductor.play_from_beat(30, 4)
-
-
+# Set Score Stats after finishing level
 func update_global_score_stats():
 	Global.set_score_stats(score_stats)
 
