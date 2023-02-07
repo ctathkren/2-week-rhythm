@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/scenes/components/button/button.gd" type="Script" id=1]
-[ext_resource path="res://game/assets/art/general/notes/Red L3 Regular.png" type="Texture" id=2]
+[ext_resource path="res://game/assets/art/general/notes/Flat Note 1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 33, 50 )
+extents = Vector2( 33, 60 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33, 16 )
@@ -23,7 +23,7 @@ texture = ExtResource( 2 )
 scale = Vector2( 2, 2 )
 
 [node name="EarlyMissAreaHitbox" type="CollisionShape2D" parent="EarlyMissArea"]
-position = Vector2( 0, -65.7534 )
+position = Vector2( 0, -76 )
 shape = SubResource( 3 )
 
 [node name="GoodArea" type="Area2D" parent="."]
