@@ -1,17 +1,51 @@
 extends Node2D
 
-var NOTE_TYPE = "hold"
-var column_number = 1
+# VARIABLES
+var note_type
+var NOTE_OBJECT_TYPE = "hold"
 
-var scroll_speed = 500		# pixels per second
-var hold_duration_in_beats
+# Vertical Positions (y)
+const SPAWN_Y = -1000
+const TARGET_Y = 800 # ~button Y
+const DIST_TO_TARGET = TARGET_Y - SPAWN_Y
 
-# not sure if we'll use these variables if our timing is Area2D-based
-var correct_hit_time
-var actual_hit_time
-var judgement = "do_nothing"
+const HIGHWAY_BOTTOM_Y = 900
 
+# Lane Positions (x, y)
+const LEFT_LANE_SPAWN   = Vector2(-200, SPAWN_Y)
+const CENTER_LANE_SPAWN = Vector2(0, SPAWN_Y)
+const RIGHT_LANE_SPAWN  = Vector2(200, SPAWN_Y)
 
+# Speed
+var speed = 0
+
+"""
+Note Movement Speed
+	# doesn't seem like bpm is involved?
+		# lawrence wanted this
+	# if so, is hardcoded?
+	# found a formula under initialize()
+		# speed = DIST_TO_TARGET / 2.0
+		# the 2.0 is for time it takes to reach target
+"""
+
+var time_to_target = 2.0 
+	
+# Movement Tracking
+var button_hit_ok = false
+
+# Sprite Handling
+var sprite_frames_to_lane_positions = {
+	0 : LEFT_LANE_SPAWN,
+	1 : CENTER_LANE_SPAWN,
+	2 : RIGHT_LANE_SPAWN,
+}
+
+# Hit Feedback to Label Text and Label Color
+var feedback_score_to_text_and_color = {
+  Global.Judgements.SCORE_PERFECT : ["PERFECT", "f6d6b6"],
+  Global.Judgements.SCORE_GOOD : ["GOOD", "c3a38a"],
+}
 
 # ---
 
@@ -21,7 +55,6 @@ func _ready():
 func _physics_process(delta):	
 	# move down by scroll_speed * delta * whatever mess is caused by the highway parallax
 	# also move to the left/right based on the parallax
-	position.y += scroll_speed * delta	
 	pass
 
 # ---
@@ -49,7 +82,7 @@ func update_note_sprite():
 	$NoteGlowSprite.play(animation_name)
 
 func get_note_type():
-	return NOTE_TYPE
+	return NOTE_INPUT_TYPE
 	
 func get_column_number():
 	return column_number
