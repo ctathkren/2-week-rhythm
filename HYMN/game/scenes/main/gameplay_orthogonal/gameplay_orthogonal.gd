@@ -39,8 +39,8 @@ signal score_incremented(input_type, score_to_add)
 signal level_ended
 
 # Spawning
-var note = load("res://game/scenes/components/lawrence/note/note.tscn")
-var note_bar = load("res://game/scenes/components/lawrence/note_bar/note_bar.tscn")
+var note = load("res://game/scenes/components/note/note.tscn")
+var note_bar = load("res://game/scenes/components/note_bar/note_bar.tscn")
 
 # FUNCTIONS
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://game/scenes/components/aljo/conductor/conductor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/scenes/components/conductor/conductor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/sound/music/level_2/decay_ost.ogg" type="AudioStream" id=2]
-[ext_resource path="res://game/scenes/main/lawrence/2d/gameplay_orthogonal.gd" type="Script" id=4]
-[ext_resource path="res://game/scenes/components/lawrence/button/button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/scenes/main/gameplay_orthogonal/gameplay_orthogonal.gd" type="Script" id=4]
+[ext_resource path="res://game/scenes/components/button/button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/assets/art/general/highway_sample.png" type="Texture" id=6]
 
 [node name="GameplayOrthogonal" type="Node2D"]

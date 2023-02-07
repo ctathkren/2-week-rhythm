@@ -127,7 +127,7 @@ func choose_level_start():
 		- DON'T FORGET TO COMMENT THE OTHER
 	"""
 
-	$GameplayPerspectivized/Gameplay3DViewport/Gameplay3D.gameplay_node.play_beats_before_start(beats_before_start)
+	$GameplayPerspectivized/Gameplay3DViewport/Gameplay3D.gameplay_nodegameplay_node.play_beats_before_start(beats_before_start)
 
 	# $Conductor.play_from_beat(30, 4)
 
@@ -231,7 +231,6 @@ func increment_score(input_type, score_to_add):
 # SIGNALS
 
 func _on_Gameplay3D_score_incremented(input_type, score_to_add):
-	print('input type: ' + str(input_type) + ', score_to_add: ' + str(score_to_add))
 	increment_score(input_type, score_to_add)
 
 func _on_Gameplay3D_level_ended():
