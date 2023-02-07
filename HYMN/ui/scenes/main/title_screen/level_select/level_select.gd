@@ -1,9 +1,10 @@
 extends Control
 
+# VARIABLES
 export var decay_unlocked := false
 
-const GROWTH_LEVEL_PATH = "res://game/scenes/main/aljo/2d/level.tscn"
-const DECAY_LEVEL_PATH = "res://game/scenes/main/aljo/2d/level.tscn"
+const GROWTH_LEVEL_PATH = "res://game/scenes/main/lawrence/2d/gameplay.tscn"
+const DECAY_LEVEL_PATH = GROWTH_LEVEL_PATH # to change later if decide on separate scene
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 
