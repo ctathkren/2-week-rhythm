@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red L3 Regular.png-ba7a7c6db8f3d7c654820d47d04903d7.stex"
+path="res://.import/Red L3 Regular.png-7e0cf222a10c7f048c87336c7ada2f19.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/notes/Red L3 Regular.png"
-dest_files=[ "res://.import/Red L3 Regular.png-ba7a7c6db8f3d7c654820d47d04903d7.stex" ]
+source_file="res://game/assets/art/general/Notes/Red L3 Regular.png"
+dest_files=[ "res://.import/Red L3 Regular.png-7e0cf222a10c7f048c87336c7ada2f19.stex" ]
 
 [params]
 
