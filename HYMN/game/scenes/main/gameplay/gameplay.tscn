@@ -141,7 +141,7 @@ custom_constants/separation = 50
 
 [node name="Pause" type="MarginContainer" parent="UI/Buttons"]
 margin_right = 485.0
-margin_bottom = 68.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -151,7 +151,7 @@ custom_constants/margin_left = 100
 pause_mode = 2
 margin_left = 100.0
 margin_right = 385.0
-margin_bottom = 68.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 10 )
@@ -161,9 +161,9 @@ custom_styles/normal = SubResource( 5 )
 text = "Pause"
 
 [node name="Restart" type="MarginContainer" parent="UI/Buttons"]
-margin_top = 118.0
+margin_top = 133.0
 margin_right = 485.0
-margin_bottom = 186.0
+margin_bottom = 193.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -173,8 +173,8 @@ custom_constants/margin_left = 100
 pause_mode = 2
 visible = false
 margin_left = 100.0
-margin_right = 385.0
-margin_bottom = 68.0
+margin_right = 436.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 10 )
@@ -184,7 +184,7 @@ custom_styles/normal = SubResource( 5 )
 text = "Restart"
 
 [node name="Quit" type="MarginContainer" parent="UI/Buttons"]
-margin_top = 236.0
+margin_top = 243.0
 margin_right = 485.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
@@ -197,7 +197,7 @@ pause_mode = 2
 visible = false
 margin_left = 100.0
 margin_right = 385.0
-margin_bottom = 68.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 10 )

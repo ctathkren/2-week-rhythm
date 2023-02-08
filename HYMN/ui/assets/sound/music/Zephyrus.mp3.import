@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Zephyrus.mp3-214fb60ca45ce0ff33e8d4b1150db355.mp3str"
+
+[deps]
+
+source_file="res://ui/assets/sound/music/Zephyrus.mp3"
+dest_files=[ "res://.import/Zephyrus.mp3-214fb60ca45ce0ff33e8d4b1150db355.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

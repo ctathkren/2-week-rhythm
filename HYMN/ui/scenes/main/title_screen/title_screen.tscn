@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
 [ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
+[ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=8]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 0.27451 )
@@ -38,6 +42,47 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="DynamicFont" id=1]
+size = 75
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0.27451 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 0.431373 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 0.117647 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 2 )
 
@@ -46,7 +91,11 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 texture = ExtResource( 4 )
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Content" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Logo" type="TextureRect" parent="Content"]
 margin_left = 253.0
 margin_top = -24.0
 margin_right = 1747.0
@@ -57,14 +106,14 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="Buttons" type="Control" parent="."]
+[node name="Buttons" type="Control" parent="Content"]
 margin_left = 758.0
 margin_top = 550.0
 margin_right = 758.0
 margin_bottom = 550.0
 rect_scale = Vector2( 0.8, 0.8 )
 
-[node name="LevelSelectButton" type="Button" parent="Buttons"]
+[node name="LevelSelectButton" type="Button" parent="Content/Buttons"]
 margin_right = 500.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
@@ -75,7 +124,7 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Start"
 
-[node name="CreditsButton" type="Button" parent="Buttons"]
+[node name="CreditsButton" type="Button" parent="Content/Buttons"]
 margin_top = 200.0
 margin_right = 500.0
 margin_bottom = 350.0
@@ -87,7 +136,7 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Credits"
 
-[node name="ExitButton" type="Button" parent="Buttons"]
+[node name="ExitButton" type="Button" parent="Content/Buttons"]
 margin_top = 400.0
 margin_right = 500.0
 margin_bottom = 550.0
@@ -99,6 +148,85 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Exit"
 
-[connection signal="pressed" from="Buttons/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
-[connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+[node name="Credits" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Text" type="Control" parent="Credits"]
+margin_left = 88.0
+margin_top = 52.0
+margin_right = 88.0
+margin_bottom = 52.0
+rect_scale = Vector2( 0.9, 0.9 )
+
+[node name="Panel" type="ColorRect" parent="Credits/Text"]
+margin_left = 225.556
+margin_top = -18.8889
+margin_right = 1713.56
+margin_bottom = 879.111
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="LevelSelectLabel" type="Label" parent="Credits/Text"]
+margin_left = 582.0
+margin_right = 1339.0
+margin_bottom = 180.0
+custom_colors/font_color = Color( 0.921569, 0.654902, 0.180392, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Credits"
+align = 1
+
+[node name="TeamLabel" type="Label" parent="Credits/Text"]
+margin_left = 559.0
+margin_top = 181.0
+margin_right = 1357.0
+margin_bottom = 270.0
+custom_colors/font_color = Color( 0.772549, 0.301961, 0.690196, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Team Beats Friday"
+align = 1
+
+[node name="PeopleLabel" type="Label" parent="Credits/Text"]
+margin_left = 126.0
+margin_top = 306.0
+margin_right = 1818.0
+margin_bottom = 823.0
+custom_fonts/font = SubResource( 2 )
+text = "ctath Arroyo - Manager, Lead Game Designer, Programmer
+
+Aljo San Pedro - Lead Programmer, Game Designer
+
+Raco Ramos - Lead Music Producer, Game Designer
+
+Zach Romualdez - Lead Artist, Music Producer
+
+Annika Hernandez - 2D Artist
+
+Dani Padilla - Background Artist
+
+Lawrence Bermudez - Programmer"
+align = 1
+
+[node name="CreditsBackButton" type="Button" parent="Credits"]
+margin_left = 740.0
+margin_top = 968.0
+margin_right = 1240.0
+margin_bottom = 1118.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 88, -488 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Back"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[connection signal="pressed" from="Content/Buttons/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
+[connection signal="pressed" from="Content/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Content/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="Credits/CreditsBackButton" to="." method="_on_CreditsBackButton_pressed"]
