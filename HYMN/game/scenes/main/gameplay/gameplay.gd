@@ -84,12 +84,10 @@ var current_score_stats = {
 
 # fill later with mouse controls for UI
 # can consider buttons also
-"""
-func _input(event):
-	if event.is_action("escape"):
-		if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
-			print ("Error changing scene to Menu")
-"""
+
+func _unhandled_input(event):
+	if event.is_action_pressed("button_pause"):
+		pause()
 
 # ON READY
 func _ready():
@@ -102,6 +100,9 @@ func load_level(level_folder_path):
 	
 	var level_info_file_path = level_folder_path + LEVEL_INFO_FILENAME
 	
+
+func load_level(level_file):
+
 	# ---
 	
 	Global.reset_level_info()
@@ -372,17 +373,32 @@ func _on_Scale_scale_overtipped():
 	# add game over screen here
 
 func _on_PauseButton_pressed():
+	pause()
+
+func _on_RestartButton_pressed():
+	get_tree().paused = false
+	var _restart = get_tree().reload_current_scene()
+
+func _on_QuitButton_pressed():
+	get_tree().paused = false
+	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")
+
+
+# HELPER FUNCTIONS
+func pause():
 	paused = get_tree().is_paused()
 
 	# SET PAUSE
 	# don't bother optimizing with a function xD the logic escapes me
 	if paused: # turning play
+		$UI/PauseLayer.set_frame_color(Color(0,0,0,0))
 		$UI/Buttons/Restart/RestartButton.disabled = true
 		$UI/Buttons/Quit/QuitButton.disabled = true
 		$UI/Buttons/Pause/PauseButton.text = "Pause"
 		$UI/Buttons/Restart/RestartButton.visible = false
 		$UI/Buttons/Quit/QuitButton.visible = false
 	else: 
+		$UI/PauseLayer.set_frame_color(Color(0,0,0,0.5))
 		$UI/Buttons/Restart/RestartButton.disabled = false
 		$UI/Buttons/Quit/QuitButton.disabled = false
 		$UI/Buttons/Pause/PauseButton.text = "Play"
@@ -392,13 +408,3 @@ func _on_PauseButton_pressed():
 	paused = not paused
 
 	get_tree().set_pause(paused)
-
-
-func _on_RestartButton_pressed():
-	get_tree().paused = false
-	var _restart = get_tree().reload_current_scene()
-
-
-func _on_QuitButton_pressed():
-	get_tree().paused = false
-	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")

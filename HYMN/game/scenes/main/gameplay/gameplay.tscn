@@ -134,9 +134,16 @@ theme = ExtResource( 8 )
 text = "SCORE: 0"
 align = 1
 
+
+[node name="PauseLayer" type="ColorRect" parent="UI"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 0 )
+
 [node name="Scale" parent="UI" instance=ExtResource( 11 )]
 position = Vector2( 960, 937 )
 scale = Vector2( 0.5, 0.5 )
+
 
 [node name="Buttons" type="VBoxContainer" parent="UI"]
 margin_left = -45.0

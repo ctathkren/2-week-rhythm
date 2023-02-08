@@ -1,38 +1,52 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://game/assets/fonts/veteran typewriter.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/credits/credits.gd" type="Script" id=2]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
-
-[sub_resource type="DynamicFont" id=5]
-size = 100
-font_data = ExtResource( 1 )
+[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 75
-font_data = ExtResource( 1 )
+font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+bg_color = Color( 1, 1, 1, 0.27451 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 0.392157 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+bg_color = Color( 1, 1, 1, 0.431373 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 0.117647 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Credits" type="Control"]
 anchor_right = 1.0
@@ -44,6 +58,68 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 texture = ExtResource( 4 )
 
+[node name="Text" type="Control" parent="."]
+margin_left = 88.0
+margin_top = 52.0
+margin_right = 88.0
+margin_bottom = 52.0
+rect_scale = Vector2( 0.9, 0.9 )
+
+[node name="Panel" type="ColorRect" parent="Text"]
+margin_left = 225.556
+margin_top = -18.8889
+margin_right = 1713.56
+margin_bottom = 879.111
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="LevelSelectLabel" type="Label" parent="Text"]
+margin_left = 582.0
+margin_right = 1339.0
+margin_bottom = 180.0
+custom_colors/font_color = Color( 0.921569, 0.654902, 0.180392, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Credits"
+align = 1
+
+[node name="TeamLabel" type="Label" parent="Text"]
+margin_left = 559.0
+margin_top = 181.0
+margin_right = 1357.0
+margin_bottom = 270.0
+custom_colors/font_color = Color( 0.772549, 0.301961, 0.690196, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Team Beats Friday"
+align = 1
+
+[node name="PeopleLabel" type="Label" parent="Text"]
+margin_left = 126.0
+margin_top = 306.0
+margin_right = 1818.0
+margin_bottom = 823.0
+custom_fonts/font = SubResource( 2 )
+text = "ctath Arroyo - Manager, Lead Game Designer, Programmer
+
+Aljo San Pedro - Lead Programmer, Game Designer
+
+Raco Ramos - Lead Music Producer, Game Designer
+
+Zach Romualdez - Lead Artist, Music Producer
+
+Annika Hernandez - 2D Artist
+
+Dani Padilla - Background Artist
+
+Lawrence Bermudez - Programmer"
+align = 1
+
+[node name="BackButton" type="Button" parent="."]
+margin_left = 740.0
+margin_top = 968.0
+margin_right = 1240.0
+margin_bottom = 1118.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 88, -488 )
+=======
 [node name="Content" type="MarginContainer" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -137,12 +213,13 @@ custom_constants/margin_left = 350
 margin_left = 350.0
 margin_right = 1070.0
 margin_bottom = 84.0
+
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 text = "Back"
 
-[connection signal="pressed" from="Content/VBoxContainer/Back/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
