@@ -12,5 +12,4 @@ background_file_path = "HYMN BG 1 Final.png"
 
 notes = [
 	;[beat,[],0],
-	[5,[1,3],0],
 ]

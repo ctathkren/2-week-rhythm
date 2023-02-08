@@ -10,24 +10,12 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 0.392157 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )

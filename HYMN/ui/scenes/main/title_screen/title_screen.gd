@@ -13,7 +13,7 @@ func _on_CreditsButton_pressed():
 	change_scene(CREDITS_PATH)
 
 func _on_ExitButton_pressed():
-    get_tree().quit()
+	get_tree().quit()
 
 
 # HELPER FUNCTIONS

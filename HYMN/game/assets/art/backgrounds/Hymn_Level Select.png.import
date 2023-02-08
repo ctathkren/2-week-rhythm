@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Hymn_Level Select.png-4ca625f873b148f5689c805d21f5a2ad.image"
+
+[deps]
+
+source_file="res://game/assets/art/backgrounds/Hymn_Level Select.png"
+dest_files=[ "res://.import/Hymn_Level Select.png-4ca625f873b148f5689c805d21f5a2ad.image" ]
+
+[params]
+
