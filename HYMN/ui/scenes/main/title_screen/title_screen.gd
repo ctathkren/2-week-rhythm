@@ -18,7 +18,7 @@ func _on_CreditsBackButton_pressed():
 	
 
 func _on_ExitButton_pressed():
-    get_tree().quit()
+	get_tree().quit()
 
 
 # HELPER FUNCTIONS

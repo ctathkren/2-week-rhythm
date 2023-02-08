@@ -135,6 +135,17 @@ shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
+[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.392157 )
+
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
 growth_passed = true
