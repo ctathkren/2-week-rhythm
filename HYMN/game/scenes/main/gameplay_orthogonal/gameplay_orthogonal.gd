@@ -42,6 +42,8 @@ signal level_ended
 var note = load("res://game/scenes/components/note/note.tscn")
 var note_bar = load("res://game/scenes/components/note_bar/note_bar.tscn")
 
+var notes_to_spawn = []
+
 # FUNCTIONS
 
 # LOOPS
@@ -57,11 +59,15 @@ func _input(event):
 
 # ON READY
 func _ready():
+	#fetch_level_notes()
+	
 	# reference uses random lanes for note spawning
 	randomize()
-
 	choose_level_start()
 	
+func fetch_level_notes():
+	notes_to_spawn = Global.level_info.notes
+	print(notes_to_spawn)
 
 func choose_level_start():
 	"""
@@ -74,15 +80,15 @@ func choose_level_start():
 		- DON'T FORGET TO COMMENT THE OTHER
 	"""
 
-	#$Conductor.play_beats_before_start(beats_before_start)
+	$Conductor.play_beats_before_start(beats_before_start)
 
-	$Conductor.play_from_beat(30, 4)
+	#$Conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
 func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
-	
+	"""
 	if current_measure == 1:
 		spawn_notes_randomly(spawn_notes_measure_1)
 	elif current_measure == 2:
@@ -91,6 +97,7 @@ func _on_Conductor_send_measure(current_measure):
 		spawn_notes_randomly(spawn_notes_measure_3)
 	elif current_measure == 4:
 		spawn_notes_randomly(spawn_notes_measure_4)
+	"""
 	
 	"""
 	# proposed optimization for the above if-statement:
@@ -110,7 +117,8 @@ func _on_Conductor_send_measure(current_measure):
 # currently has the note mapping system from reference
 func _on_Conductor_send_beat(current_beat):
 	song_position_in_beats = current_beat
-
+	print(song_position_in_beats)
+	
 	"""
 	to-do:
 		- think of optimization 
@@ -144,7 +152,8 @@ func _on_Conductor_send_beat(current_beat):
 			notes_to_spawn = measure 
 
 	"""
-
+	
+	"""
 	if song_position_in_beats > 36:
 		spawn_notes_measure_1 = 1
 		spawn_notes_measure_2 = 1
@@ -204,7 +213,14 @@ func _on_Conductor_send_beat(current_beat):
 	# end of song!
 	if song_position_in_beats > 404:
 		emit_signal("level_ended")
-
+	"""
+	
+	for n in range(notes_to_spawn.size()):
+		if notes_to_spawn[n][0] == song_position_in_beats:
+			for lane in notes_to_spawn[n][1]:
+				instantiate_note(lane)
+		else:
+			break
 # ---
 
 # Spawn Notes
@@ -268,8 +284,6 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 			lane = lane_numbers[randi() % lane_numbers.size()]
 		
 		chosen_lanes.append(lane)
-	
-	print(chosen_lanes.size())
 
 	for l in chosen_lanes:
 		instantiate_note(lane)
@@ -301,7 +315,6 @@ func _on_ButtonDecayRight_score_incremented(input_type, score_to_add):
 	emit_signal("score_incremented", input_type, score_to_add)
 	
 func _on_Note_note_missed(input_type):
-	print("deadge")
 	# pass it from gameplay_orthogonal.tscn to gameplay.tscn
 	emit_signal("score_incremented", input_type, 0)
 

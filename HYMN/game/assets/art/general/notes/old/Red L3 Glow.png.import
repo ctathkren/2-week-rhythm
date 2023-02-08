@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Flat Note 2.png-b6015b893047c57ec0861367187c8d21.stex"
+path="res://.import/Red L3 Glow.png-a3cb5523586906eb65237ba5be410908.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/assets/art/general/Notes/new/Flat Note 2.png"
-dest_files=[ "res://.import/Flat Note 2.png-b6015b893047c57ec0861367187c8d21.stex" ]
+source_file="res://game/assets/art/general/notes/old/Red L3 Glow.png"
+dest_files=[ "res://.import/Red L3 Glow.png-a3cb5523586906eb65237ba5be410908.stex" ]
 
 [params]
 

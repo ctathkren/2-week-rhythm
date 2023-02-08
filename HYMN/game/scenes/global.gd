@@ -1,19 +1,29 @@
 extends Node2D
 
 # VARIABLES
+var enable_hidden_mod = false
 
 # Level Unlocks
 var growth_passed := false
 var decay_passed := false
 
-# Global Values
+# Judgement Values
 enum Judgements {
 	SCORE_MISS,
 	SCORE_GOOD,
 	SCORE_PERFECT
 }
 
-# ---
+
+var level_info = {
+	"title": "",
+	"bpm": 180, #  placeholder default BPM
+	"audio_file_path": "",
+	"background_file_path": "",
+	"notes": [
+		
+	]
+}
 
 # In-Game Scoring
 var score_stats = {
