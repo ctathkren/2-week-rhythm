@@ -11,6 +11,9 @@ const GROWTH_ROTATE_SPEED = 60
 const DECAY_ROTATE_SPEED = 90
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 
+const LEVEL_1_PATH = "res://levels/Level1"
+const LEVEL_2_PATH = "res://levels/Level2"
+
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
@@ -41,6 +44,7 @@ func _on_GrowthButton_mouse_exited():
 	default_on()
 
 func _on_GrowthButton_pressed():
+	Global.path_to_level_to_load = LEVEL_1_PATH
 	change_scene(LEVEL_PATH)
 
 
@@ -65,6 +69,7 @@ func _on_DecayButton_mouse_exited():
 
 func _on_DecayButton_pressed():
 	if Global.growth_passed:
+		Global.path_to_level_to_load = LEVEL_2_PATH
 		change_scene(LEVEL_PATH)
 
 

@@ -7,6 +7,9 @@ var enable_hidden_mod = false
 var growth_passed := false
 var decay_passed := false
 
+# Level loading
+var path_to_level_to_load = "" # path to Level folder
+
 # Judgement Values
 enum Judgements {
 	SCORE_MISS,
