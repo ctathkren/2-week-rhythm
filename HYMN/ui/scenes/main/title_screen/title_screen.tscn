@@ -5,128 +5,100 @@
 [ext_resource path="res://ui/assets/art/general/logo/hymn logo for dark bg.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 0.27451 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 0.431373 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0, 0, 0, 0.392157 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 0.117647 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 2 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 1916.0
-margin_bottom = 1076.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 texture = ExtResource( 4 )
 
-[node name="Content" type="MarginContainer" parent="."]
-margin_right = 1916.0
-margin_bottom = 1076.0
-custom_constants/margin_right = 250
-custom_constants/margin_top = 25
-custom_constants/margin_left = 250
-custom_constants/margin_bottom = 150
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
-margin_left = 250.0
-margin_top = 25.0
-margin_right = 1666.0
-margin_bottom = 926.0
-
-[node name="TitleImage" type="TextureRect" parent="Content/VBoxContainer"]
-margin_right = 1416.0
-margin_bottom = 448.0
+[node name="Logo" type="TextureRect" parent="."]
+margin_left = 253.0
+margin_top = -24.0
+margin_right = 1747.0
+margin_bottom = 549.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="Buttons" type="VBoxContainer" parent="Content/VBoxContainer"]
-margin_top = 452.0
-margin_right = 1416.0
-margin_bottom = 901.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 50
+[node name="Buttons" type="Control" parent="."]
+margin_left = 758.0
+margin_top = 550.0
+margin_right = 758.0
+margin_bottom = 550.0
+rect_scale = Vector2( 0.8, 0.8 )
 
-[node name="LevelSelect" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_right = 1416.0
-margin_bottom = 116.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
-
-[node name="LevelSelectButton" type="Button" parent="Content/VBoxContainer/Buttons/LevelSelect"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 116.0
+[node name="LevelSelectButton" type="Button" parent="Buttons"]
+margin_right = 500.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Start"
 
-[node name="Credits" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 166.0
-margin_right = 1416.0
-margin_bottom = 282.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
-
-[node name="CreditsButton" type="Button" parent="Content/VBoxContainer/Buttons/Credits"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 116.0
+[node name="CreditsButton" type="Button" parent="Buttons"]
+margin_top = 200.0
+margin_right = 500.0
+margin_bottom = 350.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Credits"
 
-[node name="Exit" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 332.0
-margin_right = 1416.0
-margin_bottom = 449.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
-
-[node name="ExitButton" type="Button" parent="Content/VBoxContainer/Buttons/Exit"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 117.0
+[node name="ExitButton" type="Button" parent="Buttons"]
+margin_top = 400.0
+margin_right = 500.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Exit"
 
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/LevelSelect/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/Credits/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/Exit/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="Buttons/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
+[connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
