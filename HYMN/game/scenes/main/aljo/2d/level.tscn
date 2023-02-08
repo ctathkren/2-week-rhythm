@@ -3,10 +3,10 @@
 [ext_resource path="res://game/assets/art/general/fonts/font_exbrat.tres" type="DynamicFont" id=1]
 [ext_resource path="res://game/scenes/components/aljo/button/button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/scenes/components/aljo/conductor/conductor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=4]
 [ext_resource path="res://game/scenes/main/aljo/2d/level.gd" type="Script" id=5]
 [ext_resource path="res://game/assets/sound/music/level_2/decay_ost.ogg" type="AudioStream" id=6]
 [ext_resource path="res://game/assets/art/general/3d/playarea_sample.png" type="Texture" id=7]
-[ext_resource path="res://game/assets/art/backgrounds/Hymn_BG 1.png" type="Texture" id=9]
 
 [sub_resource type="Theme" id=3]
 default_font = ExtResource( 1 )
@@ -41,7 +41,7 @@ bpm = 180
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
-texture = ExtResource( 9 )
+texture = ExtResource( 4 )
 stretch_mode = 1
 
 [node name="Highway" type="TextureRect" parent="."]

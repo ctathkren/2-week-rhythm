@@ -58,7 +58,7 @@ func _physics_process(_delta):
 	# _physics_process for most consistent call-time intervals
 
 	if playing: # AudioStreamPlayer.playing
-		get_position_values()
+		update_position_values()
 		report_beat_to_game()
 
 
@@ -74,7 +74,6 @@ func get_position_in_seconds():
 
 	return position_in_seconds
 
-
 func get_position_in_beats(seconds):
 	position_in_beats = seconds / seconds_per_beat
 	position_in_beats = floor(position_in_beats) # gets last beat passed to game via signal
@@ -83,11 +82,9 @@ func get_position_in_beats(seconds):
 
 	return position_in_beats
 
-
-func get_position_values():
-	position_in_seconds= get_position_in_seconds()
+func update_position_values():
+	position_in_seconds = get_position_in_seconds()
 	position_in_beats = get_position_in_beats(position_in_seconds)
-
 
 # Report Beat to Game
 func reset_overshot_measures():
@@ -173,7 +170,7 @@ func _on_StartTimer_timeout():
 	# on the beat right before song starts
 	elif position_in_beats == beats_before_start - 1:
 		# accounts for delay before AudioStreamPlayer.play() works
-		
+
 		var wait_time_adjustments = get_wait_time_adjustments()
 		$StartTimer.wait_time = $StartTimer.wait_time - wait_time_adjustments
 
