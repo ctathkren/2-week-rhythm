@@ -92,16 +92,16 @@ func _unhandled_input(event):
 # ON READY
 func _ready():
 	get_tree().paused = false # for restart 
-	load_level("res://levels/Level2")
+	
+	# load level via path to level folder
+	# path_to_level_to_load variable is received via level_select.tscn
+	load_level(Global.path_to_level_to_load)
 	
 func load_level(level_folder_path):
 	if level_folder_path[-1] != '/':
 		level_folder_path += "/"
 	
 	var level_info_file_path = level_folder_path + LEVEL_INFO_FILENAME
-	
-
-func load_level(level_file):
 
 	# ---
 	
