@@ -14,34 +14,55 @@ enum Judgements {
 	SCORE_PERFECT
 }
 
+var ACCURACY_WEIGHTS = {
+	Judgements.SCORE_PERFECT: 1.0,
+	Judgements.SCORE_GOOD: 0.5,
+	Judgements.SCORE_MISS: 0.0
+}
 
 var level_info = {
+	# preset via level file
 	"title": "",
 	"bpm": 180, #  placeholder default BPM
 	"audio_file_path": "",
 	"background_file_path": "",
 	"notes": [
 		
-	]
+	],
+	
+	# computed from preset level info
+	"number_of_notes": {
+		"growth": 0,
+		"decay": 0,
+		"combined": 0
+	}
 }
 
 # In-Game Scoring
 var score_stats = {
 	"growth": {	
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	},
 	"decay": {		
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	},
 	"combined": {
 		# Scoring
@@ -52,11 +73,15 @@ var score_stats = {
 		"max_combo": 0,
 		
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	}
 }
 
@@ -88,3 +113,22 @@ func set_score_stats(stats):
 		if score_stats.combined.score >= highest_score:
 			grade = highest_score_to_grade[highest_score]
 			break
+
+func reset_level_info():
+	level_info = {
+		# preset via level file
+		"title": "",
+		"bpm": 180, #  placeholder default BPM
+		"audio_file_path": "",
+		"background_file_path": "",
+		"notes": [
+			
+		],
+		
+		# computed from preset level info
+		"number_of_notes": {
+			"growth": 0,
+			"decay": 0,
+			"combined": 0
+		}
+	}

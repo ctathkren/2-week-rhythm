@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://game/assets/art/general/fonts/gameplay_decay.tres" type="Theme" id=7]
 [ext_resource path="res://game/assets/art/general/fonts/gameplay_plain.tres" type="Theme" id=8]
 [ext_resource path="res://game/assets/art/general/fonts/gameplay_growth.tres" type="Theme" id=9]
+[ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
+[ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
 
 [sub_resource type="World" id=2]
 
@@ -21,14 +23,21 @@ script = ExtResource( 5 )
 [node name="Backgrounds" type="Control" parent="."]
 
 [node name="Decay" type="TextureRect" parent="Backgrounds"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 3 )
 
 [node name="Growth" type="TextureRect" parent="Backgrounds"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 6 )
+
+[node name="Background" type="TextureRect" parent="Backgrounds"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 10 )
 
 [node name="GrowthHighway" type="TextureRect" parent="Backgrounds"]
 margin_left = 285.0
@@ -103,7 +112,12 @@ theme = ExtResource( 8 )
 text = "SCORE: 0"
 align = 1
 
+[node name="Scale" parent="UI" instance=ExtResource( 11 )]
+position = Vector2( 960, 937 )
+scale = Vector2( 0.5, 0.5 )
+
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]
 [connection signal="score_incremented" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_score_incremented"]
 [connection signal="timeout" from="UI/FeedbackGrowthLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
 [connection signal="timeout" from="UI/FeedbackDecayLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
+[connection signal="scale_overtipped" from="UI/Scale" to="." method="_on_Scale_scale_overtipped"]

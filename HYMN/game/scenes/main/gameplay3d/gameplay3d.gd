@@ -5,8 +5,8 @@ onready var gameplay_node = $GameplayViewportSprite3D/GameplayViewport/GameplayO
 signal score_incremented(input_type, score_to_add)
 signal level_ended
 
-func fetch_level_notes():
-	gameplay_node.fetch_level_notes()
+func fetch_level_info():
+	gameplay_node.fetch_level_info()
 
 func _on_GameplayOrthogonal_score_incremented(input_type, score_to_add):
 	emit_signal("score_incremented", input_type, score_to_add)
