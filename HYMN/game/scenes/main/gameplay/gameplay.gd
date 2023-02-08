@@ -166,6 +166,7 @@ func load_level(level_folder_path):
 	
 	gameplay_3d_node.load_level_info(
 		level_folder_path + Global.level_info.audio_file_path,
+		Global.level_info.bpm,
 		Global.level_info.notes
 	)
 
