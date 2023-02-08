@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/credits/credits.gd" type="Script" id=2]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=4]
 [ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=6]
 
@@ -52,11 +51,6 @@ corner_radius_bottom_left = 5
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-
-[node name="Background" type="TextureRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-texture = ExtResource( 4 )
 
 [node name="Text" type="Control" parent="."]
 margin_left = 88.0

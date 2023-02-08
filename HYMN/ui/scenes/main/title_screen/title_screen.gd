@@ -2,15 +2,20 @@ extends Control
 
 # VARIABLES
 const LEVEL_SELECT_PATH = "res://ui/scenes/main/title_screen/level_select/level_select.tscn"
-const CREDITS_PATH = "res://ui/scenes/main/title_screen/credits/credits.tscn"
-
+var credits_showing := false
 
 # SIGNALS
 func _on_LevelSelectButton_pressed():
 	change_scene(LEVEL_SELECT_PATH)
 
 func _on_CreditsButton_pressed():
-	change_scene(CREDITS_PATH)
+	$Content.visible = false
+	$Credits.visible = true
+
+func _on_CreditsBackButton_pressed():
+	$Credits.visible = false
+	$Content.visible = true
+	
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
@@ -19,3 +24,6 @@ func _on_ExitButton_pressed():
 # HELPER FUNCTIONS
 func change_scene(scene):
 	var _change_scene = get_tree().change_scene(scene)
+
+
+
