@@ -6,7 +6,7 @@ signal scale_overtipped
 
 var TIP1_ACCURACY_THRESHOLD = 5.0
 var TIP2_ACCURACY_THRESHOLD = 10.0
-var OVERTIP_ACCRACY_THRESHOLD = 15.0
+var OVERTIP_ACCURACY_THRESHOLD = 15.0
 
 # pixel locations wrt Sprites
 var SPRITE_SIZE = Vector2(800,573)
@@ -52,33 +52,36 @@ func set_scale_angle(angle_degrees):
 func set_accuracies(rampup_accuracy_growth, rampup_accuracy_decay):
 	var accuracy_difference = rampup_accuracy_growth - rampup_accuracy_decay
 	
+	# dynamic scale angle based on accuracy difference
+	var scale_angle = accuracy_difference * -50/OVERTIP_ACCURACY_THRESHOLD
+	if scale_angle > 50:
+		scale_angle = 50
+	elif scale_angle < -50:
+		scale_angle = -50
+		
+	set_scale_angle(scale_angle)
+	
 	# growth-favored
 	if accuracy_difference >= TIP1_ACCURACY_THRESHOLD:
 		bunny_decay_sprite.frame = 0
 		
-		if accuracy_difference >= OVERTIP_ACCRACY_THRESHOLD:
+		if accuracy_difference >= OVERTIP_ACCURACY_THRESHOLD:
 			bunny_growth_sprite.frame = 2
-			set_scale_angle(-30)
 			emit_signal("scale_overtipped")
 		elif accuracy_difference >= TIP2_ACCURACY_THRESHOLD:
 			bunny_growth_sprite.frame = 2
-			set_scale_angle(-20)
 		else:
 			bunny_growth_sprite.frame = 1
-			set_scale_angle(-10)
 	elif accuracy_difference <= -TIP1_ACCURACY_THRESHOLD:
 		bunny_growth_sprite.frame = 0
 		
-		if accuracy_difference <= -OVERTIP_ACCRACY_THRESHOLD:
+		if accuracy_difference <= -OVERTIP_ACCURACY_THRESHOLD:
 			bunny_decay_sprite.frame = 2
-			set_scale_angle(30)
 			emit_signal("scale_overtipped")
 		elif accuracy_difference <= -TIP2_ACCURACY_THRESHOLD:
 			bunny_decay_sprite.frame = 2
-			set_scale_angle(20)
 		else:
 			bunny_decay_sprite.frame = 1
-			set_scale_angle(10)
 	else:
 		bunny_growth_sprite.frame = 0
 		bunny_decay_sprite.frame = 0
