@@ -1,6 +1,6 @@
 extends Node2D
 
-### VARIABLES
+# VARIABLES
 
 # Level Info from File
 const LEVEL_INFO_FILENAME = "level.hymn"
@@ -30,6 +30,8 @@ const TEXT_PERFECT = "PERFECT!"
 #const COLOR_DECAY  = "393ea2"
 
 onready var scale_node = $UI/Scale
+
+var paused := false
 
 # Scoring & Feedback
 var current_score_stats = {
@@ -78,10 +80,6 @@ var current_score_stats = {
 	}
 }
 
-# --- -----
-
-### FUNCTIONS
-
 # LOOPS
 
 # fill later with mouse controls for UI
@@ -95,9 +93,9 @@ func _input(event):
 
 # ON READY
 func _ready():
-	pass
+	get_tree().paused = false # for restart 
 	load_level("res://levels/Level2")
-
+	
 func load_level(level_folder_path):
 	if level_folder_path[-1] != '/':
 		level_folder_path += "/"
@@ -122,9 +120,53 @@ func load_level(level_folder_path):
 	
 	# ---
 	
+	# Notes preprocessing
+	
+	"""
+	; beat_number
+	; lanes: [-1, -2, -3, 1, 2, 3]
+	; note_type: 0 (note), 1  (hold)
+	; (if hold) beat_duration
+
+	notes = [
+		[beat_number,[],0],
+	]
+	"""
+	
+	for n in range(Global.level_info.notes.size()):
+		# Standardize notes format
+		# if lane parameter is a single lane integer, then store it inside an array
+		if typeof(Global.level_info.notes[n][1]) != TYPE_ARRAY:
+			Global.level_info.notes[n][1] = [Global.level_info.notes[n][1]]
+		
+		# Count the total number of notes to hit
+		if Global.level_info.notes[n][2] == 0:		# note
+			# check every lane specified
+			for lane in Global.level_info.notes[n][1]:
+				Global.level_info.number_of_notes.combined += 1
+				
+				if lane > 0:
+					Global.level_info.number_of_notes.growth += 1
+				elif lane < 0:
+					Global.level_info.number_of_notes.decay += 1
+		elif Global.level_info.notes[n][2] == 1:		# hold, currently unused
+			# check every lane specified
+			for lane in Global.level_info.notes[n][1]:
+				Global.level_info.number_of_notes.combined += 2
+				
+				if lane > 0:
+					Global.level_info.number_of_notes.growth += 2	# hold_head + hold_tail
+				elif lane < 0:
+					Global.level_info.number_of_notes.decay += 2	# hold_head + hold_tail
+
+	# ---
+
 	background_texture.texture = load(level_folder_path + Global.level_info.background_file_path)
 	
-	gameplay_3d_node.fetch_level_info()
+	gameplay_3d_node.load_level_info(
+		level_folder_path + Global.level_info.audio_file_path,
+		Global.level_info.notes
+	)
 
 # ---
 
@@ -312,9 +354,8 @@ func increment_score(input_type, score_to_add):
 	update_feedback_label(input_type, score_to_add)
 	update_accuracy_scale()
 
-# --- -----
 
-### SIGNALS
+# SIGNALS
 
 func _on_Gameplay3D_score_incremented(input_type, score_to_add):
 	increment_score(input_type, score_to_add)
@@ -329,3 +370,35 @@ func _on_Scale_scale_overtipped():
 	print("deadge")
 	
 	# add game over screen here
+
+func _on_PauseButton_pressed():
+	paused = get_tree().is_paused()
+
+	# SET PAUSE
+	# don't bother optimizing with a function xD the logic escapes me
+	if paused: # turning play
+		$UI/Buttons/Restart/RestartButton.disabled = true
+		$UI/Buttons/Quit/QuitButton.disabled = true
+		$UI/Buttons/Pause/PauseButton.text = "Pause"
+		$UI/Buttons/Restart/RestartButton.visible = false
+		$UI/Buttons/Quit/QuitButton.visible = false
+	else: 
+		$UI/Buttons/Restart/RestartButton.disabled = false
+		$UI/Buttons/Quit/QuitButton.disabled = false
+		$UI/Buttons/Pause/PauseButton.text = "Play"
+		$UI/Buttons/Restart/RestartButton.visible = true
+		$UI/Buttons/Quit/QuitButton.visible = true
+
+	paused = not paused
+
+	get_tree().set_pause(paused)
+
+
+func _on_RestartButton_pressed():
+	get_tree().paused = false
+	var _restart = get_tree().reload_current_scene()
+
+
+func _on_QuitButton_pressed():
+	get_tree().paused = false
+	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")

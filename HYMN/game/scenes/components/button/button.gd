@@ -16,13 +16,13 @@ var hittable_notes = []
 var hit_feedbacks = {
 	"hit_perfect": false,
 	"hit_good": false,
-	"hit_miss": false
+	"hit_miss": false,
 }
 
-var hit_feedback_areas = {
+onready var hit_feedback_areas = {
 	"hit_perfect": $PerfectArea,
 	"hit_good": $GoodArea,
-	"hit_miss": $EarlyMissArea
+	"hit_miss": $EarlyMissArea,
 }
 
 signal score_incremented(input_type, score_to_add)
@@ -47,10 +47,9 @@ notes on 2nd argument of:
 
 		#hit_feedback()
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed(input):
-		hit_feedback()
-	
+		hit_feedback()	
 
 # ON KEY PRESS
 func hit_score_and_destroy(score):

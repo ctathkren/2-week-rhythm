@@ -30,6 +30,9 @@ var level_info = {
 		
 	],
 	
+	# set upon loading a level
+	"level_folder_path": "",
+	
 	# computed from preset level info
 	"number_of_notes": {
 		"growth": 0,

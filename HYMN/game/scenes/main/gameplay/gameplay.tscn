@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
@@ -11,11 +11,33 @@
 [ext_resource path="res://game/assets/art/general/fonts/gameplay_growth.tres" type="Theme" id=9]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
 [ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=12]
 
 [sub_resource type="World" id=2]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("GameplayPerspectivized/Gameplay3DViewport")
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 5 )
@@ -116,8 +138,87 @@ align = 1
 position = Vector2( 960, 937 )
 scale = Vector2( 0.5, 0.5 )
 
+[node name="Buttons" type="VBoxContainer" parent="UI"]
+margin_left = -45.0
+margin_top = 50.0
+margin_right = 440.0
+margin_bottom = 354.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+
+[node name="Pause" type="MarginContainer" parent="UI/Buttons"]
+margin_right = 485.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="PauseButton" type="Button" parent="UI/Buttons/Pause"]
+pause_mode = 2
+margin_left = 100.0
+margin_right = 385.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Pause"
+
+[node name="Restart" type="MarginContainer" parent="UI/Buttons"]
+margin_top = 118.0
+margin_right = 485.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="RestartButton" type="Button" parent="UI/Buttons/Restart"]
+pause_mode = 2
+visible = false
+margin_left = 100.0
+margin_right = 385.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Restart"
+
+[node name="Quit" type="MarginContainer" parent="UI/Buttons"]
+margin_top = 236.0
+margin_right = 485.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="QuitButton" type="Button" parent="UI/Buttons/Quit"]
+pause_mode = 2
+visible = false
+margin_left = 100.0
+margin_right = 385.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Quit"
+
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]
 [connection signal="score_incremented" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_score_incremented"]
 [connection signal="timeout" from="UI/FeedbackGrowthLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
 [connection signal="timeout" from="UI/FeedbackDecayLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
 [connection signal="scale_overtipped" from="UI/Scale" to="." method="_on_Scale_scale_overtipped"]
+[connection signal="pressed" from="UI/Buttons/Pause/PauseButton" to="." method="_on_PauseButton_pressed"]
+[connection signal="pressed" from="UI/Buttons/Restart/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="UI/Buttons/Quit/QuitButton" to="." method="_on_QuitButton_pressed"]
