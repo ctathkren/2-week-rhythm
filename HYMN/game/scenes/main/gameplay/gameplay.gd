@@ -198,12 +198,14 @@ func _on_PauseButton_pressed():
 	# SET PAUSE
 	# don't bother optimizing with a function xD the logic escapes me
 	if paused: # turning play
+		$UI/PauseLayer.set_frame_color(Color(0,0,0,0))
 		$UI/Buttons/Restart/RestartButton.disabled = true
 		$UI/Buttons/Quit/QuitButton.disabled = true
 		$UI/Buttons/Pause/PauseButton.text = "Pause"
 		$UI/Buttons/Restart/RestartButton.visible = false
 		$UI/Buttons/Quit/QuitButton.visible = false
 	else: 
+		$UI/PauseLayer.set_frame_color(Color(0,0,0,0.5))
 		$UI/Buttons/Restart/RestartButton.disabled = false
 		$UI/Buttons/Quit/QuitButton.disabled = false
 		$UI/Buttons/Pause/PauseButton.text = "Play"
