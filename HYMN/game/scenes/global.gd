@@ -1,7 +1,10 @@
 extends Node2D
 
 # VARIABLES
+
+# Settings
 var enable_hidden_mod = false
+var time_to_hit_target = 2.0
 
 # Level Unlocks
 var growth_passed := false
@@ -26,7 +29,7 @@ var ACCURACY_WEIGHTS = {
 var level_info = {
 	# preset via level file
 	"title": "",
-	"bpm": 180, #  placeholder default BPM
+	"bpm": 0, #  placeholder default BPM
 	"audio_file_path": "",
 	"background_file_path": "",
 	"notes": [
@@ -124,12 +127,15 @@ func reset_level_info():
 	level_info = {
 		# preset via level file
 		"title": "",
-		"bpm": 180, #  placeholder default BPM
+		"bpm": 0, #  placeholder default BPM
 		"audio_file_path": "",
 		"background_file_path": "",
 		"notes": [
 			
 		],
+		
+		# set upon loading a level
+		"level_folder_path": "",
 		
 		# computed from preset level info
 		"number_of_notes": {

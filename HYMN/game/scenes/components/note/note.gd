@@ -118,7 +118,7 @@ func _set_position(lane):
 		return
 
 func _get_speed():
-	return DIST_TO_TARGET / time_to_target
+	return DIST_TO_TARGET / Global.time_to_hit_target
 
 func initialize(lane): 
 	# called by level.gd under _spawn_notes(to_spawn)
