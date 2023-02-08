@@ -65,12 +65,10 @@ var paused := false
 
 # fill later with mouse controls for UI
 # can consider buttons also
-"""
-func _input(event):
-	if event.is_action("escape"):
-		if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
-			print ("Error changing scene to Menu")
-"""
+
+func _unhandled_input(event):
+	if event.is_action_pressed("button_pause"):
+		pause()
 
 # ON READY
 func _ready():
@@ -78,7 +76,7 @@ func _ready():
 	
 func load_level(level_file):
 	pass
-	
+
 # ---
 
 # Set Score Stats after finishing level
@@ -193,6 +191,19 @@ func _on_FeedbackVisibleTimer_timeout():
 
 
 func _on_PauseButton_pressed():
+	pause()
+
+func _on_RestartButton_pressed():
+	get_tree().paused = false
+	var _restart = get_tree().reload_current_scene()
+
+func _on_QuitButton_pressed():
+	get_tree().paused = false
+	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")
+
+
+# HELPER FUNCTIONS
+func pause():
 	paused = get_tree().is_paused()
 
 	# SET PAUSE
@@ -215,13 +226,3 @@ func _on_PauseButton_pressed():
 	paused = not paused
 
 	get_tree().set_pause(paused)
-
-
-func _on_RestartButton_pressed():
-	get_tree().paused = false
-	var _restart = get_tree().reload_current_scene()
-
-
-func _on_QuitButton_pressed():
-	get_tree().paused = false
-	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")
