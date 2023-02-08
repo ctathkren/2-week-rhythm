@@ -99,9 +99,6 @@ func load_level(level_folder_path):
 		level_folder_path += "/"
 	
 	var level_info_file_path = level_folder_path + LEVEL_INFO_FILENAME
-	
-
-func load_level(level_file):
 
 	# ---
 	

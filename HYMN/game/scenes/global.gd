@@ -7,6 +7,11 @@ var enable_hidden_mod = false
 var growth_passed := false
 var decay_passed := false
 
+# End Game Scene
+var level_name := ""
+var score_end = 0
+var laurels_earned := 0
+
 # Judgement Values
 enum Judgements {
 	SCORE_MISS,

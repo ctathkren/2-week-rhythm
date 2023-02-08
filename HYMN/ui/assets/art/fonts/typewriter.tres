@@ -3,5 +3,5 @@
 [ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 70
+size = 50
 font_data = ExtResource( 1 )

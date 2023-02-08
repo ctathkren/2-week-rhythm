@@ -18,26 +18,38 @@
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("GameplayPerspectivized/Gameplay3DViewport")
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 0.588235 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
-
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 0.392157 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 5 )
@@ -134,7 +146,6 @@ theme = ExtResource( 8 )
 text = "SCORE: 0"
 align = 1
 
-
 [node name="PauseLayer" type="ColorRect" parent="UI"]
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -144,19 +155,19 @@ color = Color( 0, 0, 0, 0 )
 position = Vector2( 960, 937 )
 scale = Vector2( 0.5, 0.5 )
 
-
 [node name="Buttons" type="VBoxContainer" parent="UI"]
 margin_left = -45.0
-margin_top = 50.0
+margin_top = 46.0
 margin_right = 440.0
-margin_bottom = 354.0
+margin_bottom = 350.0
+rect_scale = Vector2( 0.8, 0.8 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 50
 
 [node name="Pause" type="MarginContainer" parent="UI/Buttons"]
 margin_right = 485.0
-margin_bottom = 83.0
+margin_bottom = 69.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -166,19 +177,19 @@ custom_constants/margin_left = 100
 pause_mode = 2
 margin_left = 100.0
 margin_right = 385.0
-margin_bottom = 83.0
+margin_bottom = 69.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Pause"
 
 [node name="Restart" type="MarginContainer" parent="UI/Buttons"]
-margin_top = 133.0
+margin_top = 119.0
 margin_right = 485.0
-margin_bottom = 193.0
+margin_bottom = 186.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 100
@@ -188,18 +199,18 @@ custom_constants/margin_left = 100
 pause_mode = 2
 visible = false
 margin_left = 100.0
-margin_right = 436.0
-margin_bottom = 83.0
+margin_right = 385.0
+margin_bottom = 67.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Restart"
 
 [node name="Quit" type="MarginContainer" parent="UI/Buttons"]
-margin_top = 243.0
+margin_top = 236.0
 margin_right = 485.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
@@ -212,13 +223,13 @@ pause_mode = 2
 visible = false
 margin_left = 100.0
 margin_right = 385.0
-margin_bottom = 83.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 12 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Quit"
 
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]

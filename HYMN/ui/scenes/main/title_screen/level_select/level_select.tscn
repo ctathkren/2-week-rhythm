@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ui/scenes/main/title_screen/level_select/level_select.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L4.png" type="Texture" id=12]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L5.png" type="Texture" id=13]
 [ext_resource path="res://ui/assets/sound/music/sleepless.ogg" type="AudioStream" id=14]
+[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=15]
 
 [sub_resource type="DynamicFont" id=4]
 size = 75
@@ -60,8 +61,8 @@ size = 80
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 50
-font_data = ExtResource( 9 )
+size = 45
+font_data = ExtResource( 15 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 1, 1, 1, 0.784314 )
@@ -134,17 +135,6 @@ shadow_color = Color( 0.372549, 0.356863, 0.356863, 1 )
 shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
-
-[ext_resource path="res://ui/assets/art/backgrounds/Hymn_BG 3 Dark.png" type="Texture" id=7]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 0.392157 )
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
@@ -297,6 +287,16 @@ custom_styles/hover = SubResource( 15 )
 custom_styles/pressed = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
 text = "Back"
+
+[node name="MusicLabel" type="Label" parent="."]
+margin_top = 980.0
+margin_right = 539.0
+margin_bottom = 1077.0
+custom_colors/font_color = Color( 1, 1, 1, 0.784314 )
+custom_fonts/font = SubResource( 6 )
+text = "Sleepless by Raco"
+align = 1
+valign = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 

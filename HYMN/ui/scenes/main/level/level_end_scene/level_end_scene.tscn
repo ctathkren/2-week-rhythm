@@ -1,14 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/scenes/main/level/level_end_scene/level_end_scene.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 2.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 1.png" type="Texture" id=4]
-[ext_resource path="res://game/assets/fonts/veteran typewriter.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=8]
+[ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=9]
+[ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=5]
 size = 100
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -18,161 +23,152 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.207843, 0.682353, 0.152941, 0.588235 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 0.27451 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.517647, 0.0980392, 0.0980392, 0.686275 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 0.431373 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 0.392157 )
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.498039 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="LevelEndScene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 677, 170 )
 script = ExtResource( 1 )
-score = 1000000
-laurels = 3
+level_name = "growth"
+score_end = 100
+laurels_earned = 2
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 1916.0
-margin_bottom = 1076.0
-color = Color( 0.196078, 0.109804, 0.411765, 1 )
+[node name="Backgrounds" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="Content" type="MarginContainer" parent="."]
-margin_right = 1916.0
-margin_bottom = 1076.0
-custom_constants/margin_right = 250
-custom_constants/margin_top = 25
-custom_constants/margin_left = 250
-custom_constants/margin_bottom = 150
+[node name="Default" type="TextureRect" parent="Backgrounds"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 7 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
-margin_left = 250.0
-margin_top = 25.0
-margin_right = 1666.0
-margin_bottom = 926.0
+[node name="Growth" type="TextureRect" parent="Backgrounds"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 9 )
 
-[node name="Buttons" type="VBoxContainer" parent="Content/VBoxContainer"]
-margin_right = 1416.0
-margin_bottom = 901.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 50
+[node name="Decay" type="TextureRect" parent="Backgrounds"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 8 )
 
-[node name="Score" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_right = 1416.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
+[node name="Content" type="Control" parent="."]
+margin_left = -3.0
+margin_top = 73.0
+margin_right = -3.0
+margin_bottom = 73.0
 
-[node name="ScoreLabel" type="Label" parent="Content/VBoxContainer/Buttons/Score"]
-margin_left = 100.0
-margin_top = 14.0
-margin_right = 1316.0
-margin_bottom = 126.0
-custom_fonts/font = SubResource( 5 )
-text = "Score: 0"
+[node name="Panel" type="ColorRect" parent="Content"]
+margin_left = 480.0
+margin_top = 21.0
+margin_right = 1458.0
+margin_bottom = 531.0
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="Labels" type="Control" parent="Content"]
+
+[node name="SongLabel" type="Label" parent="Content/Labels"]
+margin_left = 367.0
+margin_top = 21.0
+margin_right = 1554.0
+margin_bottom = 248.0
+custom_fonts/font = ExtResource( 5 )
+text = "Song Title"
 align = 1
 
-[node name="Laurels" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 190.0
-margin_right = 1416.0
-margin_bottom = 330.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
+[node name="ScoreLabel" type="Label" parent="Content/Labels"]
+margin_left = 320.0
+margin_top = 208.0
+margin_right = 1600.0
+margin_bottom = 326.0
+custom_fonts/font = SubResource( 5 )
+text = "Score: "
+align = 1
+valign = 1
 
-[node name="Laurel1" type="AnimatedSprite" parent="Content/VBoxContainer/Buttons/Laurels"]
+[node name="Laurels" type="Node2D" parent="Content"]
+position = Vector2( 258, 355 )
+
+[node name="Laurel1" type="AnimatedSprite" parent="Content/Laurels"]
 position = Vector2( 508, 70 )
 frames = SubResource( 4 )
 
-[node name="Laurel2" type="AnimatedSprite" parent="Content/VBoxContainer/Buttons/Laurels"]
+[node name="Laurel2" type="AnimatedSprite" parent="Content/Laurels"]
 position = Vector2( 700, 70 )
 frames = SubResource( 4 )
 
-[node name="Laurel3" type="AnimatedSprite" parent="Content/VBoxContainer/Buttons/Laurels"]
+[node name="Laurel3" type="AnimatedSprite" parent="Content/Laurels"]
 position = Vector2( 892, 70 )
 frames = SubResource( 4 )
 
-[node name="Retry" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 380.0
-margin_right = 1416.0
-margin_bottom = 520.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
+[node name="Buttons" type="Control" parent="."]
+margin_left = 758.0
+margin_top = 550.0
+margin_right = 758.0
+margin_bottom = 550.0
+rect_scale = Vector2( 0.8, 0.8 )
 
-[node name="RetryButton" type="Button" parent="Content/VBoxContainer/Buttons/Retry"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 140.0
+[node name="RetryButton" type="Button" parent="Buttons"]
+margin_top = 197.5
+margin_right = 500.0
+margin_bottom = 347.5
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Retry"
 
-[node name="LevelSelect" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 570.0
-margin_right = 1416.0
-margin_bottom = 710.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
-
-[node name="LevelSelectButton" type="Button" parent="Content/VBoxContainer/Buttons/LevelSelect"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 140.0
+[node name="LevelSelectButton" type="Button" parent="Buttons"]
+margin_top = 400.0
+margin_right = 500.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-text = "Level Select"
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Exit"
 
-[node name="TitleScreen" type="MarginContainer" parent="Content/VBoxContainer/Buttons"]
-margin_top = 760.0
-margin_right = 1416.0
-margin_bottom = 901.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/margin_right = 100
-custom_constants/margin_left = 100
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
 
-[node name="TitleScreenButton" type="Button" parent="Content/VBoxContainer/Buttons/TitleScreen"]
-margin_left = 100.0
-margin_right = 1316.0
-margin_bottom = 141.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-text = "Title Screen"
-
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/Retry/RetryButton" to="." method="_on_RetryButton_pressed"]
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/LevelSelect/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
-[connection signal="pressed" from="Content/VBoxContainer/Buttons/TitleScreen/TitleScreenButton" to="." method="_on_TitleScreenButton_pressed"]
+[connection signal="pressed" from="Buttons/RetryButton" to="." method="_on_RetryButton_pressed"]
+[connection signal="pressed" from="Buttons/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
