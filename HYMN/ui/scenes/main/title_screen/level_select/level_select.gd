@@ -14,6 +14,10 @@ var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 const LEVEL_1_PATH = "res://levels/Level1"
 const LEVEL_2_PATH = "res://levels/Level2"
 
+const DEFAULT_MUSIC_PATH = "res://ui/assets/sound/music/sleepless.ogg"
+const GROWTH_MUSIC_PATH = "res://game/assets/sound/music/level_1/growth_draft.ogg"
+const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
+
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
@@ -24,6 +28,7 @@ func _ready():
 	else:
 		decay_text_locked()
 
+	$Music.play()
 
 func _process(delta):
 	$Bunnies.rect_rotation -= bunnies_rotate_speed * delta
@@ -81,30 +86,34 @@ func _on_BackButton_pressed():
 # HELPER FUNCTIONS
 func default_on():
 	$Backgrounds/Default.visible = true
-	$Music/Default.play()
+	$Music.stream = load(DEFAULT_MUSIC_PATH)
+	$Music.play()
 
 	bunnies_rotate_speed = DEFAULT_ROTATE_SPEED
 func default_off():
 	$Backgrounds/Default.visible = false
-	$Music/Default.stop()
+	$Music.stop()
 
 func growth_on():
 	$Backgrounds/Growth.visible = true
-	$Music/Growth.play()
+	$Music.stream = load(GROWTH_MUSIC_PATH)
+	$Music.play()
 
 	bunnies_rotate_speed = GROWTH_ROTATE_SPEED
 func growth_off():
 	$Backgrounds/Growth.visible = false
-	$Music/Growth.stop()
+	$Music.stop()
 
 func decay_on():
 	$Backgrounds/Decay.visible = true
-	$Music/Decay.play()
+	$Music.stream = load(DECAY_MUSIC_PATH)
+	$Music.play()
 
 	bunnies_rotate_speed = DECAY_ROTATE_SPEED
 func decay_off():
 	$Backgrounds/Decay.visible = false
-	$Music/Decay.stop()
+	$Music.stop()
+	
 func decay_text_unlocked():
 	# hide
 	$Buttons/DecayButton.text = ""

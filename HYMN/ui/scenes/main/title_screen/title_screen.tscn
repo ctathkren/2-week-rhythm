@@ -222,7 +222,7 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Back"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
 
