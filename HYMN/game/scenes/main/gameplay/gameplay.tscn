@@ -4,12 +4,12 @@
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
 [ext_resource path="res://game/assets/art/general/highways/Purple Highway.png" type="Texture" id=4]
 [ext_resource path="res://game/scenes/main/gameplay/gameplay.gd" type="Script" id=5]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_decay.tres" type="Theme" id=7]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_plain.tres" type="Theme" id=8]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_growth.tres" type="Theme" id=9]
+[ext_resource path="res://game/assets/fonts/gameplay_decay.tres" type="Theme" id=7]
+[ext_resource path="res://game/assets/fonts/gameplay_plain.tres" type="Theme" id=8]
+[ext_resource path="res://game/assets/fonts/gameplay_growth.tres" type="Theme" id=9]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
 [ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=12]
+[ext_resource path="res://ui/assets/fonts/typewriter.tres" type="DynamicFont" id=12]
 
 [sub_resource type="World" id=2]
 
