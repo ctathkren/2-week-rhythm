@@ -2,6 +2,10 @@ extends Node2D
 
 # VARIABLES
 
+onready var conductor = $Conductor
+onready var highway_growth = $HighwayGrowth
+onready var highway_decay = $HighwayDecay
+
 # SONG TRACKING
 var bpm = 180
 	# seems only used for seconds_per_beat
@@ -16,7 +20,7 @@ var last_spawned_beat = 0
 var seconds_per_beat = 60.0 / bpm
 	# doesn't seem used atm
 
-export var beats_before_start := 8
+export var beats_before_start := 4
 
 # NOTE SPAWNING
 # Spawn Note on Measure
@@ -48,45 +52,37 @@ var notes_to_spawn = []
 
 # LOOPS
 
-# fill later with mouse controls for UI
-# can consider buttons also
-"""
-func _input(event):
-	if event.is_action("escape"):
-		if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
-			print ("Error changing scene to Menu")
-"""
-
 # ON READY
 func _ready():
-	#fetch_level_notes()
+	#fetch_level_info()
 	
 	# reference uses random lanes for note spawning
-	randomize()
+	#randomize()
 	choose_level_start()
 	
-func fetch_level_notes():
-	notes_to_spawn = Global.level_info.notes
-	print(notes_to_spawn)
+func load_level_info(full_audio_file_path, notes):
+	#conductor.stream = load(full_audio_file_path)
+
+	notes_to_spawn = notes
 
 func choose_level_start():
 	"""
 	Ways to Start the Level
 		- from beat 0
-			- uncomment $Conductor.play_beats_before_start(beats)
+			- uncomment conductor.play_beats_before_start(beats)
 		- from certain time or beat
-			- uncomment $Conductor.play_from_beat(seconds, beat)
+			- uncomment conductor.play_from_beat(seconds, beat)
 			- pass the arguments
 		- DON'T FORGET TO COMMENT THE OTHER
 	"""
 
-	$Conductor.play_beats_before_start(beats_before_start)
+	conductor.play_beats_before_start(beats_before_start)
 
-	#$Conductor.play_from_beat(30, 4)
+	#conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
-func _on_Conductor_send_measure(current_measure):
+#func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
 	"""
 	if current_measure == 1:
@@ -215,11 +211,19 @@ func _on_Conductor_send_beat(current_beat):
 		emit_signal("level_ended")
 	"""
 	
+	print(notes_to_spawn)
+	
 	for n in range(notes_to_spawn.size()):
 		if notes_to_spawn[n][0] == song_position_in_beats:
+			print("spawn: " + str(notes_to_spawn[n]))
 			for lane in notes_to_spawn[n][1]:
 				instantiate_note(lane)
 		else:
+			# remove all notes from notes_to_spawn[0] to notes_to_spawn[n-1]
+			print("remove " + str(n))
+			for _n_past in range(n):
+				notes_to_spawn.pop_front()
+				
 			break
 # ---
 
@@ -250,16 +254,15 @@ func instantiate_multiple_notes(lane1, lane2):
 	note2_instance.partner_bar = note_bar_instance
 	
 	if lane1 > 0:
-		$HighwayGrowth.add_child(note1_instance)
-		$HighwayGrowth.add_child(note2_instance)
-		$HighwayGrowth.add_child(note_bar_instance)
+		highway_growth.add_child(note1_instance)
+		highway_growth.add_child(note2_instance)
+		highway_growth.add_child(note_bar_instance)
 	elif lane1 < 0:
-		$HighwayDecay.add_child(note1_instance)
-		$HighwayDecay.add_child(note2_instance)
-		$HighwayDecay.add_child(note_bar_instance)
+		highway_decay.add_child(note1_instance)
+		highway_decay.add_child(note2_instance)
+		highway_decay.add_child(note_bar_instance)
 
-func instantiate_hold(lane, duration_in_beats, BPM):
-	pass
+#func instantiate_hold(lane, length):
 	#var instance = hold.instance()
 	#instance.initialize(lane, length)
 	
@@ -277,7 +280,7 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 	var chosen_lanes = []
 	var lane
 
-	for i in range(number_of_notes_to_spawn):
+	for _i in range(number_of_notes_to_spawn):
 		lane = lane_numbers[randi() % lane_numbers.size()]
 		while lane in chosen_lanes:
 			# loop  until it generates a random late that hasn't been chosen yet
@@ -285,7 +288,7 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 		
 		chosen_lanes.append(lane)
 
-	for l in chosen_lanes:
+	for _lane in chosen_lanes:
 		instantiate_note(lane)
 
 # SIGNALS
