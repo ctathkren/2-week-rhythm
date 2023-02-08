@@ -57,6 +57,7 @@ const TEXT_PERFECT = "PERFECT!"
 #const COLOR_GROWTH = "eb8f54"
 #const COLOR_DECAY  = "393ea2"
 
+var paused := false
 
 # FUNCTIONS
 
@@ -73,7 +74,7 @@ func _input(event):
 
 # ON READY
 func _ready():
-	pass
+	get_tree().paused = false # for restart 
 	
 func load_level(level_file):
 	pass
@@ -192,28 +193,33 @@ func _on_FeedbackVisibleTimer_timeout():
 
 
 func _on_PauseButton_pressed():
-	var paused = get_tree().is_paused()
+	paused = get_tree().is_paused()
 
 	# SET PAUSE
-	if paused:
-		set_pause_buttons(paused)
+	# don't bother optimizing with a function xD the logic escapes me
+	if paused: # turning play
+		$UI/Buttons/Restart/RestartButton.disabled = true
+		$UI/Buttons/Quit/QuitButton.disabled = true
+		$UI/Buttons/Pause/PauseButton.text = "Pause"
+		$UI/Buttons/Restart/RestartButton.visible = false
+		$UI/Buttons/Quit/QuitButton.visible = false
 	else: 
-		set_pause_buttons(not paused)
+		$UI/Buttons/Restart/RestartButton.disabled = false
+		$UI/Buttons/Quit/QuitButton.disabled = false
+		$UI/Buttons/Pause/PauseButton.text = "Play"
+		$UI/Buttons/Restart/RestartButton.visible = true
+		$UI/Buttons/Quit/QuitButton.visible = true
+
+	paused = not paused
 
 	get_tree().set_pause(paused)
-	
-
-func set_pause_buttons(pause):
-	$UI/Buttons/Restart/RestartButton.disabled = not pause
-	$UI/Buttons/Quit/QuitButton.disabled = not pause
-
-	$UI/Buttons/Restart/RestartButton.visible = pause
-	$UI/Buttons/Quit/QuitButton.visible = pause
 
 
 func _on_RestartButton_pressed():
+	get_tree().paused = false
 	var _restart = get_tree().reload_current_scene()
 
 
 func _on_QuitButton_pressed():
+	get_tree().paused = false
 	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")
