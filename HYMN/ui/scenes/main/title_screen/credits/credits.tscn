@@ -106,10 +106,26 @@ Dani Padilla - Background Artist
 Lawrence Bermudez - Programmer"
 align = 1
 
-[node name="BackButton" type="Button" parent="."]
+[node name="Content@VBoxContainer@Back" type="MarginContainer" parent="."]
+margin_top = 850.0
+margin_right = 1420.0
+margin_bottom = 934.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 350
+custom_constants/margin_left = 350
+
+[node name="Content@VBoxContainer@Back@BackButton" type="Button" parent="."]
 margin_left = 740.0
 margin_top = 968.0
 margin_right = 1240.0
 margin_bottom = 1118.0
 rect_scale = Vector2( 0.8, 0.8 )
 rect_pivot_offset = Vector2( 88, -488 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Back"
