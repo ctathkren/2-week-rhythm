@@ -61,7 +61,7 @@ func _ready():
 	choose_level_start()
 	
 func load_level_info(full_audio_file_path, notes):
-	#conductor.stream = load(full_audio_file_path)
+	conductor.stream = load(full_audio_file_path)
 
 	notes_to_spawn = notes
 

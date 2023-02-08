@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/assets/fonts/header1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/credits/credits.gd" type="Script" id=2]
-[ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=3]
-[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://ui/assets/fonts/typewriter.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 75
