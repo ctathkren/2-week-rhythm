@@ -20,7 +20,7 @@ var last_spawned_beat = 0
 var seconds_per_beat = 60.0 / bpm
 	# doesn't seem used atm
 
-export var beats_before_start := 4
+export var beats_before_start := 7
 
 # NOTE SPAWNING
 # Spawn Note on Measure
@@ -211,16 +211,12 @@ func _on_Conductor_send_beat(current_beat):
 		emit_signal("level_ended")
 	"""
 	
-	print(notes_to_spawn)
-	
 	for n in range(notes_to_spawn.size()):
 		if notes_to_spawn[n][0] == song_position_in_beats:
-			print("spawn: " + str(notes_to_spawn[n]))
 			for lane in notes_to_spawn[n][1]:
 				instantiate_note(lane)
 		else:
 			# remove all notes from notes_to_spawn[0] to notes_to_spawn[n-1]
-			print("remove " + str(n))
 			for _n_past in range(n):
 				notes_to_spawn.pop_front()
 				
