@@ -196,9 +196,9 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="GrowthButton" type="Button" parent="Buttons"]
-margin_left = 1127.0
+margin_left = 1143.0
 margin_top = 345.0
-margin_right = 1925.0
+margin_right = 1941.0
 margin_bottom = 539.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -233,9 +233,9 @@ rotation = -2.35619
 texture = ExtResource( 11 )
 
 [node name="DecayButton" type="Button" parent="Buttons"]
-margin_left = 1127.0
+margin_left = 1143.0
 margin_top = 601.0
-margin_right = 1925.0
+margin_right = 1941.0
 margin_bottom = 795.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -281,9 +281,9 @@ scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 12 )
 
 [node name="BackButton" type="Button" parent="Buttons"]
-margin_left = 1600.0
+margin_left = 1608.0
 margin_top = 893.0
-margin_right = 1922.0
+margin_right = 1930.0
 margin_bottom = 1003.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
