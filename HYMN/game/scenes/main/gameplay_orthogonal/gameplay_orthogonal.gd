@@ -48,7 +48,7 @@ var note_bar = load("res://game/scenes/components/note_bar/note_bar.tscn")
 
 var notes_to_spawn = []
 
-var have_all_notes_spawned = false
+var has_level_started_ending = false
 
 # FUNCTIONS
 
@@ -232,12 +232,13 @@ func _on_Conductor_send_beat(current_beat):
 				
 			break
 	
-	if notes_to_spawn.size() == 0 and not have_all_notes_spawned:
-		have_all_notes_spawned = true
-		
+	if notes_to_spawn.size() == 0 and not has_level_started_ending:
 		# wait until the last note is hit/missed, + 1 second, before ending level
 		$EndTimer.wait_time = (Global.time_to_target+0.5) + 1
 		$EndTimer.start()
+		
+		# only run this if statement once
+		has_level_started_ending = true
 # ---
 
 # Spawn Notes
