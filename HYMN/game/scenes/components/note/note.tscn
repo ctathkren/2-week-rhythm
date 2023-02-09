@@ -25,7 +25,7 @@ z_index = 2
 script = ExtResource( 2 )
 
 [node name="NoteSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.85, 0.85 )
+scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 4 )
 animation = "growth"
 

@@ -62,12 +62,10 @@ anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 677, 170 )
 script = ExtResource( 1 )
 level_name = "growth"
-score_end = 100
+score_end = 1215
 laurels_earned = 2
 
 [node name="Backgrounds" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="Default" type="TextureRect" parent="Backgrounds"]
 margin_right = 1920.0
@@ -93,10 +91,10 @@ margin_right = -3.0
 margin_bottom = 73.0
 
 [node name="Panel" type="ColorRect" parent="Content"]
-margin_left = 480.0
-margin_top = 21.0
-margin_right = 1458.0
-margin_bottom = 531.0
+margin_left = 451.0
+margin_top = -9.0
+margin_right = 1475.0
+margin_bottom = 559.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="Labels" type="Control" parent="Content"]
@@ -106,15 +104,17 @@ margin_left = 367.0
 margin_top = 21.0
 margin_right = 1554.0
 margin_bottom = 248.0
+custom_colors/font_color = Color( 0.921569, 0.654902, 0.180392, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Song Title"
 align = 1
 
 [node name="ScoreLabel" type="Label" parent="Content/Labels"]
 margin_left = 320.0
-margin_top = 208.0
+margin_top = 203.0
 margin_right = 1600.0
-margin_bottom = 326.0
+margin_bottom = 321.0
+custom_colors/font_color = Color( 0.772549, 0.301961, 0.690196, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "Score: "
 align = 1
