@@ -4,7 +4,7 @@ extends Node2D
 
 # Settings
 var enable_hidden_mod = false
-var time_to_hit_target = 2.0
+var time_to_hit_target = 1.5
 
 # Level Unlocks
 var growth_passed := false

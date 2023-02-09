@@ -21,9 +21,6 @@ const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
-	# for testing in-editor
-	Global.growth_passed = growth_passed
-
 	if Global.growth_passed:
 		decay_text_unlocked()
 	else:

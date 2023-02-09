@@ -28,31 +28,30 @@ func _on_RetryButton_pressed():
 	change_scene(LEVEL_PATH)
 
 func _on_LevelSelectButton_pressed():
-	# unlock decay if 2 laurels in growth
-	if Global.level_name == "growth" and Global.laurels_earned >= 2:
-		Global.growth_passed = true
-
 	change_scene(LEVEL_SELECT_PATH)
-
 
 # HELPER FUNCTIONS
 func get_globals():
 	level_name = Global.level_info.title
 	score_end = Global.score_stats.combined.score
 	laurels_earned = Global.laurels_earned
+	
+	# unlock decay if 2 laurels in growth
+	if Global.level_info.title == "growth" and Global.laurels_earned >= 2:
+		Global.growth_passed = true
 
 func set_locals():
-	song_label.text = Global.level_name
+	song_label.text = level_name
 	
-	if Global.level_name == "growth":
+	if level_name == "growth":
 		$Backgrounds/Growth.visible = true
-	elif Global.level_name == "decay":
+	elif level_name == "decay":
 		$Backgrounds/Decay.visible = true
 	else:
 		$Backgrounds/Default.visible = true
 	
-	score_label.text = "Score: " + str(Global.score_end)
-	show_laurels(Global.laurels_earned)
+	score_label.text = "Score: " + str(score_end)
+	show_laurels(laurels_earned)
 
 func show_laurels(laurels):
 	if laurels >= 1:
