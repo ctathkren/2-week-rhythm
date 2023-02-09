@@ -31,7 +31,7 @@ Note Movement Speed
 		# the 2.0 is for time it takes to reach target
 """
 
-var time_to_target = 2.0 
+var time_to_target = 1.5 
 	
 # Movement Tracking
 var button_hit_ok = false
