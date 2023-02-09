@@ -4,6 +4,12 @@ extends Control
 const LEVEL_SELECT_PATH = "res://ui/scenes/main/title_screen/level_select/level_select.tscn"
 var credits_showing := false
 
+# LOOPS
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		if !($Content.visible) and $Credits.visible:
+			_on_CreditsBackButton_pressed()
+
 # SIGNALS
 func _on_LevelSelectButton_pressed():
 	change_scene(LEVEL_SELECT_PATH)

@@ -30,7 +30,10 @@ func _ready():
 
 func _process(delta):
 	$Bunnies.rect_rotation -= bunnies_rotate_speed * delta
-
+	
+	# go back with Escape button
+	if Input.is_action_just_pressed("ui_cancel"):
+		_on_BackButton_pressed()
 
 # SIGNALS
 # Growth Button
