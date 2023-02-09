@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-export var growth_passed := false
+export var growth_passed := true
 
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
@@ -21,6 +21,7 @@ const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
+	Global.growth_passed = growth_passed
 	if Global.growth_passed:
 		decay_text_unlocked()
 	else:
