@@ -11,8 +11,8 @@ var growth_passed := false
 var decay_passed := false
 
 # End Game Scene
-var level_name := ""
-var score_end = 0
+#var level_name := ""
+#var score_end = 0
 var laurels_earned := 0
 
 # Level loading
@@ -123,10 +123,21 @@ var grade = "NA"
 func set_score_stats(stats):
 	score_stats = stats
 	
+	if score_stats.combined.active_accuracy >= 80:
+		laurels_earned = 3
+	elif score_stats.combined.active_accuracy >= 50:
+		laurels_earned = 2
+	elif score_stats.combined.active_accuracy >= 20:
+		laurels_earned = 1
+	else:
+		laurels_earned = 0
+	
+	"""
 	for highest_score in highest_score_to_grade:
 		if score_stats.combined.score >= highest_score:
 			grade = highest_score_to_grade[highest_score]
 			break
+	"""
 
 func reset_level_info():
 	level_info = {
