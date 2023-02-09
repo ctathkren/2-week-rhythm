@@ -19,7 +19,7 @@ const TITLE_SCREEN_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 # MAIN FUNCTIONS
 func _ready():
-	#get_globals()
+	set_globals() # for testing
 	set_locals()
 
 
@@ -28,28 +28,32 @@ func _on_RetryButton_pressed():
 	change_scene(LEVEL_PATH)
 
 func _on_LevelSelectButton_pressed():
+	# unlock decay if 2 laurels in growth
+	if Global.level_name == "growth" and Global.laurels_earned >= 2:
+		Global.growth_passed = true
+
 	change_scene(LEVEL_SELECT_PATH)
 
 
 # HELPER FUNCTIONS
-func get_globals():
-	# switch all of these during final
-	level_name = Global.level_name
-	score_end = Global.score_end
-	laurels_earned = Global.laurels_earned
+# for testing only
+func set_globals():
+	Global.level_name = level_name
+	Global.score_end = score_end
+	Global.laurels_earned = laurels_earned
 
 func set_locals():
-	song_label.text =  level_name
+	song_label.text = Global.level_name
 	
-	if level_name == "growth":
+	if Global.level_name == "growth":
 		$Backgrounds/Growth.visible = true
-	elif level_name == "decay":
+	elif Global.level_name == "decay":
 		$Backgrounds/Decay.visible = true
 	else:
 		$Backgrounds/Default.visible = true
 	
-	score_label.text = "Score: " + str(score_end)
-	show_laurels(laurels_earned)
+	score_label.text = "Score: " + str(Global.score_end)
+	show_laurels(Global.laurels_earned)
 
 func show_laurels(laurels):
 	if laurels >= 1:

@@ -50,7 +50,7 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0, 0, 0, 0.588235 )
+bg_color = Color( 0, 0, 0, 0.392157 )
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
@@ -61,7 +61,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0, 0, 0, 0.392157 )
+bg_color = Color( 0, 0, 0, 0.0784314 )
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
@@ -173,8 +173,6 @@ margin_bottom = 198.0
 theme = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0.733333, 0.270588, 1 )
 custom_fonts/font = SubResource( 10 )
-text = "combo
-11x"
 align = 1
 valign = 1
 

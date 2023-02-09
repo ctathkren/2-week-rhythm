@@ -184,7 +184,7 @@ margin_left = 225.556
 margin_top = -18.8889
 margin_right = 1713.56
 margin_bottom = 879.111
-color = Color( 0, 0, 0, 0.392157 )
+color = Color( 0, 0, 0, 0.470588 )
 
 [node name="Vines" type="Control" parent="Credits/Text"]
 margin_right = 40.0
@@ -210,7 +210,7 @@ position = Vector2( 1591.11, 747.778 )
 rotation = -2.35619
 texture = ExtResource( 10 )
 
-[node name="LevelSelectLabel" type="Label" parent="Credits/Text"]
+[node name="CreditsLabel" type="Label" parent="Credits/Text"]
 margin_left = 582.0
 margin_right = 1339.0
 margin_bottom = 180.0
