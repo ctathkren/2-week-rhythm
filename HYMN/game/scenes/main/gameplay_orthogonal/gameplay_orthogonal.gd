@@ -340,5 +340,4 @@ func _on_Conductor_song_info_loaded():
 	choose_level_start()
 
 func _on_EndTimer_timeout():
-	print("gg")
 	emit_signal("level_ended")
