@@ -306,7 +306,7 @@ func update_score_label():
 
 func update_combo_label():
 	if current_score_stats.combined.combo > 0:
-		combo_label.text = "COMBO\n" + str(current_score_stats.combined.combo) + "x"
+		combo_label.text = "combo\n" + str(current_score_stats.combined.combo) + "x"
 	else:
 		combo_label.text = ""
 
