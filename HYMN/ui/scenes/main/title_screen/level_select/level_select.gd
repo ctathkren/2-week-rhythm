@@ -7,8 +7,8 @@ const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 const DEFAULT_ROTATE_SPEED = 10
-const GROWTH_ROTATE_SPEED = 50
-const DECAY_ROTATE_SPEED = 90
+const GROWTH_ROTATE_SPEED = 60
+const DECAY_ROTATE_SPEED = 100
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 
 const LEVEL_1_PATH = "res://levels/Level1"
@@ -21,6 +21,7 @@ const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
+	# for testing in-editor
 	Global.growth_passed = growth_passed
 
 	if Global.growth_passed:
@@ -42,14 +43,16 @@ func _on_GrowthButton_mouse_entered():
 
 	growth_on()
 	
-
 func _on_GrowthButton_mouse_exited():
 	growth_off()
 
 	default_on()
 
 func _on_GrowthButton_pressed():
+	Global.level_name = "growth"
+  
 	Global.path_to_level_to_load = LEVEL_1_PATH
+
 	change_scene(LEVEL_PATH)
 
 
@@ -74,7 +77,11 @@ func _on_DecayButton_mouse_exited():
 
 func _on_DecayButton_pressed():
 	if Global.growth_passed:
+  
+		Global.level_name = "decay"
+    
 		Global.path_to_level_to_load = LEVEL_2_PATH
+    
 		change_scene(LEVEL_PATH)
 
 
