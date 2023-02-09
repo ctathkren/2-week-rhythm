@@ -1,7 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 70
+size = 65
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 1 )

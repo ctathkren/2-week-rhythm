@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://ui/scenes/main/title_screen/level_select/level_select.gd" type="Script" id=1]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=4]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
@@ -11,7 +12,6 @@
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L4.png" type="Texture" id=12]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L5.png" type="Texture" id=13]
 [ext_resource path="res://ui/assets/sound/music/sleepless.ogg" type="AudioStream" id=14]
-[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=15]
 
 [sub_resource type="DynamicFont" id=4]
 size = 75
@@ -63,7 +63,7 @@ font_data = ExtResource( 9 )
 size = 45
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 15 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 1, 1, 1, 0.784314 )
