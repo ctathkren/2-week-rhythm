@@ -49,8 +49,6 @@ func _on_GrowthButton_mouse_exited():
 	default_on()
 
 func _on_GrowthButton_pressed():
-	Global.level_name = "growth"
-  
 	Global.path_to_level_to_load = LEVEL_1_PATH
 
 	change_scene(LEVEL_PATH)
@@ -77,11 +75,8 @@ func _on_DecayButton_mouse_exited():
 
 func _on_DecayButton_pressed():
 	if Global.growth_passed:
-  
-		Global.level_name = "decay"
-    
 		Global.path_to_level_to_load = LEVEL_2_PATH
-    
+	
 		change_scene(LEVEL_PATH)
 
 
