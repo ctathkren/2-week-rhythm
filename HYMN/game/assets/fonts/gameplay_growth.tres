@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=2]
 
-[ext_resource path="res://game/assets/art/general/fonts/font_exbrat.tres" type="DynamicFont" id=1]
+[ext_resource path="res://game/assets/fonts/font_exbrat.tres" type="DynamicFont" id=1]
 
 [resource]
 default_font = ExtResource( 1 )

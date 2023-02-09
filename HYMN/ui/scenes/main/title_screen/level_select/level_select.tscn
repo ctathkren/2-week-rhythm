@@ -1,19 +1,17 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://ui/scenes/main/title_screen/level_select/level_select.gd" type="Script" id=1]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=4]
-[ext_resource path="res://game/assets/sound/music/level_1/growth_draft.ogg" type="AudioStream" id=5]
-[ext_resource path="res://game/assets/sound/music/level_2/decay_ost.ogg" type="AudioStream" id=6]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
-[ext_resource path="res://ui/assets/art/fonts/header1.tres" type="DynamicFont" id=8]
-[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://ui/assets/fonts/header1.tres" type="DynamicFont" id=8]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://ui/assets/art/backgrounds/main_menu/Hymn_Main Menu_Bunnies.png" type="Texture" id=10]
 [ext_resource path="res://game/assets/art/general/vines/Red Vine L2.png" type="Texture" id=11]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L4.png" type="Texture" id=12]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L5.png" type="Texture" id=13]
 [ext_resource path="res://ui/assets/sound/music/sleepless.ogg" type="AudioStream" id=14]
-[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=15]
 
 [sub_resource type="DynamicFont" id=4]
 size = 75
@@ -65,7 +63,7 @@ font_data = ExtResource( 9 )
 size = 45
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 15 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 1, 1, 1, 0.784314 )
@@ -308,20 +306,7 @@ align = 1
 valign = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-
-[node name="Default" type="AudioStreamPlayer2D" parent="Music"]
-visible = false
 stream = ExtResource( 14 )
-volume_db = -3.0
-autoplay = true
-
-[node name="Growth" type="AudioStreamPlayer2D" parent="Music"]
-visible = false
-stream = ExtResource( 5 )
-
-[node name="Decay" type="AudioStreamPlayer2D" parent="Music"]
-visible = false
-stream = ExtResource( 6 )
 
 [connection signal="mouse_entered" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_exited"]

@@ -92,7 +92,10 @@ func _unhandled_input(event):
 # ON READY
 func _ready():
 	get_tree().paused = false # for restart 
-	load_level("res://levels/Level2")
+	
+	# load level via path to level folder
+	# path_to_level_to_load variable is received via level_select.tscn
+	load_level(Global.path_to_level_to_load)
 	
 func load_level(level_folder_path):
 	if level_folder_path[-1] != '/':
@@ -163,6 +166,7 @@ func load_level(level_folder_path):
 	
 	gameplay_3d_node.load_level_info(
 		level_folder_path + Global.level_info.audio_file_path,
+		Global.level_info.bpm,
 		Global.level_info.notes
 	)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/scenes/components/scale.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/scale_and_bunny/Scale L.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://game/assets/art/general/scale_and_bunny/Purple Bunny XL.png" type="Texture" id=9]
 [ext_resource path="res://game/assets/art/general/scale_and_bunny/Red Bunny XL.png" type="Texture" id=10]
 [ext_resource path="res://game/assets/art/general/scale_and_bunny/Purple Bunny S.png" type="Texture" id=11]
+[ext_resource path="res://icon.png" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -48,3 +49,7 @@ frames = SubResource( 1 )
 
 [node name="BunnyDecay" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 12 )
