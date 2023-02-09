@@ -15,6 +15,7 @@ use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="GameplayOrthogonal" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 4 )
 beats_before_start = 8
 
@@ -164,7 +165,6 @@ autostart = true
 process_mode = 0
 
 [connection signal="send_beat" from="Conductor" to="." method="_on_Conductor_send_beat"]
-[connection signal="send_measure" from="Conductor" to="." method="_on_Conductor_send_measure"]
 [connection signal="song_info_loaded" from="Conductor" to="." method="_on_Conductor_song_info_loaded"]
 [connection signal="score_incremented" from="HighwayGrowth/ButtonGrowthLeft" to="." method="_on_ButtonGrowthLeft_score_incremented"]
 [connection signal="score_incremented" from="HighwayGrowth/ButtonGrowthCenter" to="." method="_on_ButtonGrowthCenter_score_incremented"]

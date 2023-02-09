@@ -15,6 +15,7 @@ viewport_path = NodePath("temp_BackgroundViewportSprite3D/temp_BackgroundViewpor
 viewport_path = NodePath("GameplayViewportSprite3D/GameplayViewport")
 
 [node name="Gameplay3D" type="Spatial"]
+pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
