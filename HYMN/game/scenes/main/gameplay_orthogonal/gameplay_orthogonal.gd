@@ -321,3 +321,6 @@ func _on_Note_note_missed(input_type):
 	# pass it from gameplay_orthogonal.tscn to gameplay.tscn
 	emit_signal("score_incremented", input_type, 0)
 
+
+func _on_KeyGuidesTimer_timeout():
+	$KeyGuides.visible = false
