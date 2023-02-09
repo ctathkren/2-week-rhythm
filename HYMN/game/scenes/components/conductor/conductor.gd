@@ -97,6 +97,7 @@ func update_position_values():
 func send_beat():
 	# received by "game/play.gd" as "_on_Conductor_send_beat(beat)"
 	emit_signal("send_beat", position_in_beats)
+	emit_signal("send_measure", measure)
 
 func update_last_reported_beat():
 	last_reported_beat = position_in_beats
