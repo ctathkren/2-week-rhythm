@@ -1,5 +1,5 @@
 [LevelInfo]
-title = "Level2"
+title = "decay"
 bpm = 180
 audio_file_path = "decay_ost.ogg"
 time_to_first_beat = 0
