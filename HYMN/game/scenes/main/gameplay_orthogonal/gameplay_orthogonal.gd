@@ -63,9 +63,10 @@ func _ready():
 	#choose_level_start()
 	pass
 	
-func load_level_info(full_audio_file_path, bpm, notes):
-	conductor.load_song_info(full_audio_file_path, bpm)
-	seconds_per_beat = 60.0 / bpm
+func load_level_info(full_audio_file_path, bpm_level, notes):
+	conductor.load_song_info(full_audio_file_path, bpm_level)
+	bpm = bpm_level
+	seconds_per_beat = 60.0 / bpm_level
 
 	notes_to_spawn = notes
 
