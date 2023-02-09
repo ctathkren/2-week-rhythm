@@ -236,7 +236,7 @@ func _on_Conductor_send_beat(current_beat):
 		have_all_notes_spawned = true
 		
 		# wait until the last note is hit/missed, + 1 second, before ending level
-		$EndTimer.wait_time = (Global.time_to_hit_target+0.5) + 1
+		$EndTimer.wait_time = (Global.time_to_target+0.5) + 1
 		$EndTimer.start()
 # ---
 
