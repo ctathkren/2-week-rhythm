@@ -31,7 +31,8 @@ Note Movement Speed
 		# the 2.0 is for time it takes to reach target
 """
 
-var time_to_target = 1.5 
+var time_to_target = Global.time_to_target
+	# moved this to global variable settings
 	
 # Movement Tracking
 var button_hit_ok = false
@@ -118,7 +119,7 @@ func _set_position(lane):
 		return
 
 func _get_speed():
-	return DIST_TO_TARGET / Global.time_to_hit_target
+	return DIST_TO_TARGET / time_to_target
 
 func initialize(lane): 
 	# called by level.gd under _spawn_notes(to_spawn)

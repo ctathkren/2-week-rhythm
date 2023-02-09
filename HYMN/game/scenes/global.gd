@@ -4,7 +4,7 @@ extends Node2D
 
 ### Settings
 var enable_nofail = false
-var time_to_hit_target = 1.5
+var time_to_target = 1.5
 
 ### Global Constants
 # Judgement Values
