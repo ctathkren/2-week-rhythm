@@ -177,7 +177,6 @@ func update_global_score_stats():
 	Global.set_score_stats(current_score_stats)
 
 func switch_scene_level_end():
-	print("end")
 	if get_tree().change_scene("res://ui/scenes/main/level/level_end_scene/level_end_scene.tscn") != OK:
 		print("Error changing scene to End")
 
@@ -370,9 +369,8 @@ func _on_FeedbackVisibleTimer_timeout():
 	feedback_label.visible = false
 
 func _on_Scale_scale_overtipped():
-	print("deadge")
-	
-	# add game over screen here
+	if not Global.enable_nofail:
+		level_end()
 
 func _on_PauseButton_pressed():
 	pause()
