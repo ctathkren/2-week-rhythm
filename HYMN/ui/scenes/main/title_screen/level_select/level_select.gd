@@ -6,8 +6,8 @@ export var growth_passed := false
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
-const DEFAULT_ROTATE_SPEED = 15
-const GROWTH_ROTATE_SPEED = 60
+const DEFAULT_ROTATE_SPEED = 10
+const GROWTH_ROTATE_SPEED = 50
 const DECAY_ROTATE_SPEED = 90
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 
@@ -86,10 +86,13 @@ func _on_BackButton_pressed():
 # HELPER FUNCTIONS
 func default_on():
 	$Backgrounds/Default.visible = true
-	$Music.stream = load(DEFAULT_MUSIC_PATH)
-	$Music.play()
+	# prevents music repeating if exit decay button & decay locked
+	if not $Music.playing:
+		$Music.stream = load(DEFAULT_MUSIC_PATH)
+		$Music.play()
 
 	bunnies_rotate_speed = DEFAULT_ROTATE_SPEED
+	$MusicLabel.visible = true
 func default_off():
 	$Backgrounds/Default.visible = false
 	$Music.stop()
@@ -100,6 +103,7 @@ func growth_on():
 	$Music.play()
 
 	bunnies_rotate_speed = GROWTH_ROTATE_SPEED
+	$MusicLabel.visible = false
 func growth_off():
 	$Backgrounds/Growth.visible = false
 	$Music.stop()
@@ -110,6 +114,7 @@ func decay_on():
 	$Music.play()
 
 	bunnies_rotate_speed = DECAY_ROTATE_SPEED
+	$MusicLabel.visible = false
 func decay_off():
 	$Backgrounds/Decay.visible = false
 	$Music.stop()

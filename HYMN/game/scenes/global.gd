@@ -10,6 +10,11 @@ var time_to_hit_target = 2.0
 var growth_passed := false
 var decay_passed := false
 
+# End Game Scene
+var level_name := ""
+var score_end = 0
+var laurels_earned := 0
+
 # Level loading
 var path_to_level_to_load = "" # path to Level folder
 
