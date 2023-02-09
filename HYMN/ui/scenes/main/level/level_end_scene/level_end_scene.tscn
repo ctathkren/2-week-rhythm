@@ -11,7 +11,6 @@
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=9]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=10]
 
-
 [sub_resource type="DynamicFont" id=5]
 size = 100
 font_data = ExtResource( 6 )

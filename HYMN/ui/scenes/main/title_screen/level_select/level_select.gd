@@ -50,6 +50,7 @@ func _on_GrowthButton_mouse_exited():
 	growth_off()
 
 	default_on()
+	play_track(DEFAULT_MUSIC_PATH)
 
 func _on_GrowthButton_pressed():
 	Global.level_name = "growth"
@@ -80,6 +81,9 @@ func _on_DecayButton_mouse_exited():
 
 	default_on()
 
+	if Global.growth_passed:
+		play_track(DEFAULT_MUSIC_PATH)
+
 func _on_DecayButton_pressed():
 	if Global.growth_passed:
   
@@ -105,16 +109,6 @@ func default_on():
 	$Backgrounds/Default.visible = true
 	bunnies_rotate_speed = DEFAULT_ROTATE_SPEED
 	$MusicLabel.visible = true
-
-	# prevents music repeating if exit decay button & decay locked
-	
-	# if exit decay -> default on
-		# if decay locked (not growth passed)
-			# don't play music (return)
-	if not Global.growth_passed:
-		pass
-	else:
-		play_track(DEFAULT_MUSIC_PATH)
 func default_off():
 	$Backgrounds/Default.visible = false
 	$Music.stop()

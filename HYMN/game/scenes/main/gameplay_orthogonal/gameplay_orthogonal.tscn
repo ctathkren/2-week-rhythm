@@ -19,7 +19,6 @@ script = ExtResource( 4 )
 
 [node name="Conductor" parent="." instance=ExtResource( 1 )]
 stream = ExtResource( 2 )
-bpm = 180
 
 [node name="HighwayGrowth" type="Node2D" parent="."]
 position = Vector2( 460, 900 )
