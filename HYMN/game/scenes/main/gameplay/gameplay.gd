@@ -177,7 +177,8 @@ func update_global_score_stats():
 	Global.set_score_stats(current_score_stats)
 
 func switch_scene_level_end():
-	if get_tree().change_scene("res://Scenes/End.tscn") != OK:
+	print("end")
+	if get_tree().change_scene("res://ui/scenes/main/level/level_end_scene/level_end_scene.tscn") != OK:
 		print("Error changing scene to End")
 
 func level_end():
