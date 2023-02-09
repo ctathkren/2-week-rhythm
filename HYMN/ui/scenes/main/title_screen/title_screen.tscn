@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/assets/art/fonts/typewriter.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/scenes/main/title_screen/title_screen.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=8]
+[ext_resource path="res://game/assets/art/general/vines/Red Vine L2.png" type="Texture" id=9]
+[ext_resource path="res://game/assets/art/general/vines/Purple Vine L4.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 0.27451 )
@@ -183,6 +185,30 @@ margin_top = -18.8889
 margin_right = 1713.56
 margin_bottom = 879.111
 color = Color( 0, 0, 0, 0.392157 )
+
+[node name="Vines" type="Control" parent="Credits/Text"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Credits/Text/Vines"]
+position = Vector2( 352.222, 98.8889 )
+rotation = 0.785397
+texture = ExtResource( 9 )
+
+[node name="Sprite2" type="Sprite" parent="Credits/Text/Vines"]
+position = Vector2( 335.556, 747.778 )
+rotation = -0.785398
+texture = ExtResource( 10 )
+
+[node name="Sprite3" type="Sprite" parent="Credits/Text/Vines"]
+position = Vector2( 1585.56, 110 )
+rotation = 2.35619
+texture = ExtResource( 9 )
+
+[node name="Sprite4" type="Sprite" parent="Credits/Text/Vines"]
+position = Vector2( 1591.11, 747.778 )
+rotation = -2.35619
+texture = ExtResource( 10 )
 
 [node name="LevelSelectLabel" type="Label" parent="Credits/Text"]
 margin_left = 582.0
