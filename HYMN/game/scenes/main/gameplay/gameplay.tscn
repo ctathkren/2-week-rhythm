@@ -260,7 +260,7 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Quit"
 
-[node name="PauseMusic" type="AudioStreamPlayer2D" parent="UI"]
+[node name="PauseMusic" type="AudioStreamPlayer" parent="UI"]
 pause_mode = 2
 stream = ExtResource( 13 )
 
