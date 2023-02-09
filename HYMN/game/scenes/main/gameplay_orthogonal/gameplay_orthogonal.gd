@@ -7,7 +7,7 @@ onready var highway_growth = $HighwayGrowth
 onready var highway_decay = $HighwayDecay
 
 # SONG TRACKING
-var bpm = 180
+var bpm
 	# seems only used for seconds_per_beat
 	# which seems unused
 
@@ -17,7 +17,7 @@ var song_position_in_beats = 0
 
 var last_spawned_beat = 0
 	# doesn't seem used
-var seconds_per_beat = 60.0 / bpm
+var seconds_per_beat
 	# doesn't seem used atm
 
 export var beats_before_start := 7
@@ -48,6 +48,8 @@ var note_bar = load("res://game/scenes/components/note_bar/note_bar.tscn")
 
 var notes_to_spawn = []
 
+var have_all_notes_spawned = false
+
 # FUNCTIONS
 
 # LOOPS
@@ -58,10 +60,12 @@ func _ready():
 	
 	# reference uses random lanes for note spawning
 	#randomize()
-	choose_level_start()
+	#choose_level_start()
+	pass
 	
-func load_level_info(full_audio_file_path, notes):
-	conductor.stream = load(full_audio_file_path)
+func load_level_info(full_audio_file_path, bpm, notes):
+	conductor.load_song_info(full_audio_file_path, bpm)
+	seconds_per_beat = 60.0 / bpm
 
 	notes_to_spawn = notes
 
@@ -215,12 +219,24 @@ func _on_Conductor_send_beat(current_beat):
 		if notes_to_spawn[n][0] == song_position_in_beats:
 			for lane in notes_to_spawn[n][1]:
 				instantiate_note(lane)
+			
+			# check if the note spawned is the last note
+			if n == notes_to_spawn.size()-1:
+				for _n_past in range(notes_to_spawn.size()):
+					notes_to_spawn.pop_front()
 		else:
 			# remove all notes from notes_to_spawn[0] to notes_to_spawn[n-1]
 			for _n_past in range(n):
 				notes_to_spawn.pop_front()
 				
 			break
+	
+	if notes_to_spawn.size() == 0 and not have_all_notes_spawned:
+		have_all_notes_spawned = true
+		
+		# wait until the last note is hit/missed, + 1 second, before ending level
+		$EndTimer.wait_time = (Global.time_to_hit_target+0.5) + 1
+		$EndTimer.start()
 # ---
 
 # Spawn Notes
@@ -317,6 +333,12 @@ func _on_Note_note_missed(input_type):
 	# pass it from gameplay_orthogonal.tscn to gameplay.tscn
 	emit_signal("score_incremented", input_type, 0)
 
-
 func _on_KeyGuidesTimer_timeout():
 	$KeyGuides.visible = false
+
+func _on_Conductor_song_info_loaded():
+	choose_level_start()
+
+func _on_EndTimer_timeout():
+	print("gg")
+	emit_signal("level_ended")

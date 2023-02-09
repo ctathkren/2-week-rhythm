@@ -12,13 +12,14 @@ Conductor
 		- gives us control and accuracy
 """
 
+signal song_info_loaded
 
 # VARIABLES
 # Exports
 	# depends PER SONG
 	# set via editor view of conductor node
 	# walrus case (:=) for explicit type declaration in editor
-export var bpm := 100
+var bpm = 180
 export var measures := 4
 
 # Tracking the beat and song position
@@ -31,9 +32,8 @@ var measure = 1
 	# can use to repeat notes on certain measures
 		# ex. growth1 note every 3rd measure
 
-onready var seconds_per_beat = 60.0 / bpm 
+var seconds_per_beat = 60.0/bpm
 	# for conversion from seconds to beats
-	# onready var because bpm set as export var in editor
 
 var last_reported_beat = 0
 var beats_before_start = 0
@@ -61,6 +61,12 @@ func _physics_process(_delta):
 		update_position_values()
 		report_beat_to_game()
 
+func load_song_info(full_audio_file_path, bpm_to_load):
+	stream = load(full_audio_file_path)
+	bpm = bpm_to_load
+	seconds_per_beat = 60.0 / bpm
+	
+	emit_signal("song_info_loaded")
 
 # Get Position Values (seconds, beats)
 func get_position_in_seconds():

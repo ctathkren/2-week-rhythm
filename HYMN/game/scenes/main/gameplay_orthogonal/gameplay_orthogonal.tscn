@@ -16,10 +16,10 @@ font_data = ExtResource( 3 )
 
 [node name="GameplayOrthogonal" type="Node2D"]
 script = ExtResource( 4 )
+beats_before_start = 8
 
 [node name="Conductor" parent="." instance=ExtResource( 1 )]
 stream = ExtResource( 2 )
-bpm = 180
 
 [node name="HighwayGrowth" type="Node2D" parent="."]
 position = Vector2( 460, 900 )
@@ -160,8 +160,12 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
+[node name="EndTimer" type="Timer" parent="."]
+process_mode = 0
+
 [connection signal="send_beat" from="Conductor" to="." method="_on_Conductor_send_beat"]
 [connection signal="send_measure" from="Conductor" to="." method="_on_Conductor_send_measure"]
+[connection signal="song_info_loaded" from="Conductor" to="." method="_on_Conductor_song_info_loaded"]
 [connection signal="score_incremented" from="HighwayGrowth/ButtonGrowthLeft" to="." method="_on_ButtonGrowthLeft_score_incremented"]
 [connection signal="score_incremented" from="HighwayGrowth/ButtonGrowthCenter" to="." method="_on_ButtonGrowthCenter_score_incremented"]
 [connection signal="score_incremented" from="HighwayGrowth/ButtonGrowthRight" to="." method="_on_ButtonGrowthRight_score_incremented"]
@@ -169,3 +173,4 @@ autostart = true
 [connection signal="score_incremented" from="HighwayDecay/ButtonDecayCenter" to="." method="_on_ButtonDecayCenter_score_incremented"]
 [connection signal="score_incremented" from="HighwayDecay/ButtonDecayRight" to="." method="_on_ButtonDecayRight_score_incremented"]
 [connection signal="timeout" from="KeyGuides/KeyGuidesTimer" to="." method="_on_KeyGuidesTimer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
