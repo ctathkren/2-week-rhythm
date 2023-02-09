@@ -123,6 +123,11 @@ custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Start"
+__meta__ = {
+"_editor_description_": "
+
+"
+}
 
 [node name="CreditsButton" type="Button" parent="Content/Buttons"]
 margin_top = 200.0

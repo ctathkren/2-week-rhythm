@@ -394,6 +394,7 @@ func pause():
 		$UI/Buttons/Pause/PauseButton.text = "Pause"
 		$UI/Buttons/Restart/RestartButton.visible = false
 		$UI/Buttons/Quit/QuitButton.visible = false
+		$UI/PauseMusic.stop()
 	else: 
 		$UI/PauseLayer.set_frame_color(Color(0,0,0,0.5))
 		$UI/Buttons/Restart/RestartButton.disabled = false
@@ -401,6 +402,7 @@ func pause():
 		$UI/Buttons/Pause/PauseButton.text = "Play"
 		$UI/Buttons/Restart/RestartButton.visible = true
 		$UI/Buttons/Quit/QuitButton.visible = true
+		$UI/PauseMusic.play()
 
 	paused = not paused
 

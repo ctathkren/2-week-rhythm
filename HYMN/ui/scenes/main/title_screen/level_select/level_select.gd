@@ -6,7 +6,7 @@ export var growth_passed := false
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
-const DEFAULT_ROTATE_SPEED = 15
+const DEFAULT_ROTATE_SPEED = 10
 const GROWTH_ROTATE_SPEED = 50
 const DECAY_ROTATE_SPEED = 90
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
