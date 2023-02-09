@@ -2,23 +2,11 @@ extends Node2D
 
 # VARIABLES
 
-# Settings
-var enable_hidden_mod = false
+### Settings
 var enable_nofail = false
 var time_to_hit_target = 1.5
 
-# Level Unlocks
-var growth_passed := false
-var decay_passed := false
-
-# End Game Scene
-#var level_name := ""
-#var score_end = 0
-var laurels_earned := 0
-
-# Level loading
-var path_to_level_to_load = "" # path to Level folder
-
+### Global Constants
 # Judgement Values
 enum Judgements {
 	SCORE_MISS,
@@ -27,10 +15,18 @@ enum Judgements {
 }
 
 var ACCURACY_WEIGHTS = {
-	Judgements.SCORE_PERFECT: 1.0,
-	Judgements.SCORE_GOOD: 0.5,
-	Judgements.SCORE_MISS: 0.0
+	Judgements.SCORE_PERFECT : 1.0,
+	Judgements.SCORE_GOOD : 0.5,
+	Judgements.SCORE_MISS : 0.0
 }
+
+# Level Unlocks
+var growth_passed := false
+var decay_passed := false
+
+### Level Start
+# Level loading
+var path_to_level_to_load = "" # path to Level folder
 
 var level_info = {
 	# preset via level file
@@ -53,6 +49,7 @@ var level_info = {
 	}
 }
 
+### Level End
 # In-Game Scoring
 var score_stats = {
 	"growth": {	
@@ -100,51 +97,24 @@ var score_stats = {
 	}
 }
 
+# End Game Scene
+var laurels_earned := 0
+
 # Post-Game Scoring
-var highest_score_to_grade = {
-	250_000 : 'A+',
-	200_000 : 'A' ,
-	150_000 : 'A-',
-	130_000 : 'B+',
-	115_000 : 'B' ,
-	100_000 : 'B-',
-	85_000  : 'C+',
-	70_000  : 'C' ,
-	55_000  : 'C-',
-	40_000  : 'D+',
-	30_000  : 'D' ,
-	20_000  : 'D-',
-	10_000  : 'F' ,
+var laurel_accuracy_thresholds = {
+	90 : 3,
+	50 : 2,
+	20 : 1,
+	0 : 0
 }
-var grade = "NA"
 
 
 # FUNCTIONS
-
-func set_score_stats(stats):
-	score_stats = stats
-	
-	if score_stats.combined.active_accuracy >= 80:
-		laurels_earned = 3
-	elif score_stats.combined.active_accuracy >= 50:
-		laurels_earned = 2
-	elif score_stats.combined.active_accuracy >= 20:
-		laurels_earned = 1
-	else:
-		laurels_earned = 0
-	
-	"""
-	for highest_score in highest_score_to_grade:
-		if score_stats.combined.score >= highest_score:
-			grade = highest_score_to_grade[highest_score]
-			break
-	"""
-
 func reset_level_info():
 	level_info = {
 		# preset via level file
 		"title": "",
-		"bpm": 0, #  placeholder default BPM
+		"bpm": 0,
 		"audio_file_path": "",
 		"background_file_path": "",
 		"notes": [
@@ -161,3 +131,16 @@ func reset_level_info():
 			"combined": 0
 		}
 	}
+
+
+func set_score_stats(stats):
+	score_stats = stats
+	
+	# change accuracy to score once we decide on score thresholds
+		# note that we might need to add a way to score multiple score thresholds per map
+		# that, or we calculate it manually from the number of notes
+		# however, with our scoring system, getting laurels would be very combo-oriented
+	for minimum_accuracy in laurel_accuracy_thresholds:
+		if score_stats.combined.active_accuracy >= minimum_accuracy:
+			laurels_earned = laurel_accuracy_thresholds[minimum_accuracy]
+			break
