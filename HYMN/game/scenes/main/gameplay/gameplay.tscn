@@ -9,9 +9,9 @@
 [ext_resource path="res://game/assets/fonts/gameplay_growth.tres" type="Theme" id=9]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
 [ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/assets/art/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=13]
-[ext_resource path="res://ui/assets/art/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=14]
 
 [sub_resource type="World" id=2]
 
@@ -159,8 +159,6 @@ margin_bottom = 198.0
 theme = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0.733333, 0.270588, 1 )
 custom_fonts/font = SubResource( 10 )
-text = "combo
-11x"
 align = 1
 valign = 1
 
