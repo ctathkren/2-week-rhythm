@@ -298,7 +298,7 @@ func update_accuracies():
 	
 # Update Labels
 func update_score_label():
-	score_label.text = "SCORE: " + str(current_score_stats.combined.score)
+	score_label.text = str(current_score_stats.combined.score)
 
 func update_combo_label():
 	if current_score_stats.combined.combo > 0:
