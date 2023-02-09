@@ -19,7 +19,7 @@ const TITLE_SCREEN_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 # MAIN FUNCTIONS
 func _ready():
-	#get_globals()
+	get_globals()
 	set_locals()
 
 
@@ -34,8 +34,8 @@ func _on_LevelSelectButton_pressed():
 # HELPER FUNCTIONS
 func get_globals():
 	# switch all of these during final
-	level_name = Global.level_name
-	score_end = Global.score_end
+	level_name = Global.level_info.title
+	score_end = Global.score_stats.combined.score
 	laurels_earned = Global.laurels_earned
 
 func set_locals():
