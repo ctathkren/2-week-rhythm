@@ -19,7 +19,6 @@ const GROWTH_MUSIC_PATH = "res://game/assets/sound/music/level_1/growth_draft.og
 const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 var current_track = DEFAULT_MUSIC_PATH
 
-var decay_exited := true
 
 # MAIN FUNCTIONS
 # Testing Decay Unlock
@@ -62,6 +61,7 @@ func _on_GrowthButton_pressed():
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
+	# nothing happens if decay locked
 	if not Global.growth_passed:
 		return
 
@@ -71,13 +71,11 @@ func _on_DecayButton_mouse_entered():
 	# Decay On
 	decay_on()
 	decay_text_unlocked()
-	decay_exited = false
 		
 func _on_DecayButton_mouse_exited():
 	decay_off()
 	if not Global.growth_passed:
 		decay_text_locked()
-	decay_exited = true
 
 	default_on()
 
