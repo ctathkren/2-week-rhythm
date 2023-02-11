@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var gameplay_node = $GameplayViewport/GameplayOrthogonal
+onready var gameplay_node = $GameplayViewportSprite3D/GameplayViewport/GameplayOrthogonal
 
 signal score_incremented(input_type, score_to_add)
 signal level_ended
