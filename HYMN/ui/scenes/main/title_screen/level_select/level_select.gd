@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-export var growth_passed := true
+export var growth_passed := false
 
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
@@ -14,24 +14,23 @@ var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 const LEVEL_1_PATH = "res://levels/Level1"
 const LEVEL_2_PATH = "res://levels/Level2"
 
-const DEFAULT_MUSIC_PATH = "res://ui/assets/sound/music/sleepless.ogg"
-const GROWTH_MUSIC_PATH = "res://game/assets/sound/music/level_1/growth_draft.ogg"
-const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
+	# for testing in-editor
 	Global.growth_passed = growth_passed
+
 	if Global.growth_passed:
 		decay_text_unlocked()
 	else:
 		decay_text_locked()
 
-	$Music.play()
+	default_on()
 
 func _process(delta):
 	$Bunnies.rect_rotation -= bunnies_rotate_speed * delta
-	
+
 	# go back with Escape button
 	if Input.is_action_just_pressed("ui_cancel"):
 		_on_BackButton_pressed()
@@ -57,6 +56,7 @@ func _on_GrowthButton_pressed():
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
+	# nothing happens if decay locked
 	if not Global.growth_passed:
 		return
 
@@ -75,7 +75,7 @@ func _on_DecayButton_mouse_exited():
 	default_on()
 
 func _on_DecayButton_pressed():
-	if Global.growth_passed:
+	if Global.growth_passed:	
 		Global.path_to_level_to_load = LEVEL_2_PATH
 	
 		change_scene(LEVEL_PATH)
@@ -87,40 +87,39 @@ func _on_BackButton_pressed():
 
 
 # HELPER FUNCTIONS
+
 func default_on():
 	$Backgrounds/Default.visible = true
+
 	# prevents music repeating if exit decay button & decay locked
-	if not $Music.playing:
-		$Music.stream = load(DEFAULT_MUSIC_PATH)
-		$Music.play()
+	if not $Music/Default.playing: 
+		$Music/Default.play()
 
 	bunnies_rotate_speed = DEFAULT_ROTATE_SPEED
 	$MusicLabel.visible = true
 func default_off():
 	$Backgrounds/Default.visible = false
-	$Music.stop()
+	$Music/Default.stop()
 
 func growth_on():
 	$Backgrounds/Growth.visible = true
-	$Music.stream = load(GROWTH_MUSIC_PATH)
-	$Music.play()
+	$Music/Growth.play()
 
 	bunnies_rotate_speed = GROWTH_ROTATE_SPEED
 	$MusicLabel.visible = false
 func growth_off():
 	$Backgrounds/Growth.visible = false
-	$Music.stop()
+	$Music/Growth.stop()
 
 func decay_on():
 	$Backgrounds/Decay.visible = true
-	$Music.stream = load(DECAY_MUSIC_PATH)
-	$Music.play()
+	$Music/Decay.play()
 
 	bunnies_rotate_speed = DECAY_ROTATE_SPEED
 	$MusicLabel.visible = false
 func decay_off():
 	$Backgrounds/Decay.visible = false
-	$Music.stop()
+	$Music/Decay.stop()
 	
 func decay_text_unlocked():
 	# hide
