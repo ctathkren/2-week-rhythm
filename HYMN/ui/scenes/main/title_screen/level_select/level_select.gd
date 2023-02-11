@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-export var growth_passed := true
+export var growth_passed := false
 
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
