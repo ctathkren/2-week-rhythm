@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ui/scenes/main/title_screen/level_select/level_select.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=4]
+[ext_resource path="res://levels/Level1/song_11_v10.ogg" type="AudioStream" id=5]
+[ext_resource path="res://levels/Level2/decay_ost.ogg" type="AudioStream" id=6]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
 [ext_resource path="res://ui/assets/fonts/header1.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=9]
@@ -145,6 +147,7 @@ anti_aliasing_size = 0.01
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
+growth_passed = true
 
 [node name="Backgrounds" type="Control" parent="."]
 margin_right = 40.0
@@ -308,6 +311,15 @@ valign = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
+
+[node name="Default" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 14 )
+
+[node name="Growth" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 5 )
+
+[node name="Decay" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource( 6 )
 
 [connection signal="mouse_entered" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_exited"]
