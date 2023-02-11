@@ -145,6 +145,7 @@ anti_aliasing_size = 0.01
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
+growth_passed = false
 
 [node name="Backgrounds" type="Control" parent="."]
 margin_right = 40.0
