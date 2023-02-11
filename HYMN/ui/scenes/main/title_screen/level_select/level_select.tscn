@@ -223,6 +223,7 @@ custom_fonts/font = SubResource( 6 )
 text = "by Zach"
 align = 1
 valign = 1
+percent_visible = -0.166667
 
 [node name="VineSprite" type="Sprite" parent="Buttons/GrowthButton"]
 position = Vector2( 111, 75.9999 )
