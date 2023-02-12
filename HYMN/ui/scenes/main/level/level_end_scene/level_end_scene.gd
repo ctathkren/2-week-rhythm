@@ -37,7 +37,7 @@ func get_globals():
 	laurels_earned = Global.laurels_earned
 	
 	# unlock decay if 2 laurels in growth
-	if Global.level_info.title == "growth" and Global.laurels_earned >= 2:
+	if level_name == "growth" and laurels_earned >= 2:
 		Global.growth_passed = true
 
 func set_locals():
