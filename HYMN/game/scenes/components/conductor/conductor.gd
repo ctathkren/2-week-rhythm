@@ -12,18 +12,19 @@ Conductor
 		- gives us control and accuracy
 """
 
+signal song_info_loaded
 
 # VARIABLES
 # Exports
 	# depends PER SONG
 	# set via editor view of conductor node
 	# walrus case (:=) for explicit type declaration in editor
-export var bpm := 100
+var bpm = 180
 export var measures := 4
 
 # Tracking the beat and song position
 var position_in_seconds = 0.0 # prev.: song_position
-var position_in_beats = 1
+var position_in_beats = 0
 	# prev.: song_position_in_beats
 	# does not repeat (1, 2, 3, 4, *5*, ...)
 var measure = 1
@@ -31,9 +32,8 @@ var measure = 1
 	# can use to repeat notes on certain measures
 		# ex. growth1 note every 3rd measure
 
-onready var seconds_per_beat = 60.0 / bpm 
+var seconds_per_beat = 60.0/bpm
 	# for conversion from seconds to beats
-	# onready var because bpm set as export var in editor
 
 var last_reported_beat = 0
 var beats_before_start = 0
@@ -58,22 +58,27 @@ func _physics_process(_delta):
 	# _physics_process for most consistent call-time intervals
 
 	if playing: # AudioStreamPlayer.playing
-		get_position_values()
+		update_position_values()
 		report_beat_to_game()
 
+func load_song_info(full_audio_file_path, bpm_to_load):
+	stream = load(full_audio_file_path)
+	bpm = bpm_to_load
+	seconds_per_beat = 60.0 / bpm
+	
+	emit_signal("song_info_loaded")
 
 # Get Position Values (seconds, beats)
 func get_position_in_seconds():
-	position_in_seconds  = get_playback_position()
+	position_in_seconds = get_playback_position()
 		# AudioStreamPlayer.get_playback_position()
 		# gives "rounded" position
 	position_in_seconds += AudioServer.get_time_since_last_mix()
 		# "smooths" the position with slight additions for accuracy
 	position_in_seconds -= AudioServer.get_output_latency()
 		# accounts for time from computer playing sound and human hearing it
-
+	
 	return position_in_seconds
-
 
 func get_position_in_beats(seconds):
 	position_in_beats = seconds / seconds_per_beat
@@ -83,53 +88,37 @@ func get_position_in_beats(seconds):
 
 	return position_in_beats
 
-
-func get_position_values():
-	position_in_seconds= get_position_in_seconds()
+func update_position_values():
+	position_in_seconds = get_position_in_seconds()
 	position_in_beats = get_position_in_beats(position_in_seconds)
 
+# ---
 
-# Report Beat to Game
-func reset_overshot_measures():
-	# ex. if measure > 4 -> measure = 1
-	if measure > measures:
-		measure = 1
-
-
-func send_beat_and_measure():
-	# received by "game/play.gd" as "_on_Conductor_send_beat/measure(beat/measure)"
-
+func send_beat():
+	# received by "game/play.gd" as "_on_Conductor_send_beat(beat)"
 	emit_signal("send_beat", position_in_beats)
 	emit_signal("send_measure", measure)
 
-
-func update_last_reported_beat_and_measure():
+func update_last_reported_beat():
 	last_reported_beat = position_in_beats
 		# for checking in report_beat_to_game() if statement
 		# every beat reported only once
-
-	measure += 1
-
 
 func report_beat_to_game():
 	# separate function because called in different places
 	# "_physics_process(delta)" and "_on_StartTimer_timeout()"
 
-	if last_reported_beat < position_in_beats: 
+	if position_in_beats > last_reported_beat: 
 		# ensures a beat is only reported once
 		# recall: called in _physics_process (looped)
-
-		reset_overshot_measures()
-		send_beat_and_measure()
-		update_last_reported_beat_and_measure()
-
+		send_beat()
+		update_last_reported_beat()
 
 # ONREADY (once, called in level.gd)
 
 # Play needed notes before start of song
-func set_beats_before_start(beats):
+func get_beats_before_start(beats):
 	return beats
-
 
 func set_start_timer():
 	$StartTimer.wait_time = seconds_per_beat
@@ -140,7 +129,7 @@ func set_start_timer():
 
 func get_wait_time_adjustments():
 	var seconds
-	seconds  = AudioServer.get_time_to_next_mix()
+	seconds = AudioServer.get_time_to_next_mix()
 	seconds += AudioServer.get_output_latency()
 
 	return seconds
@@ -173,7 +162,7 @@ func _on_StartTimer_timeout():
 	# on the beat right before song starts
 	elif position_in_beats == beats_before_start - 1:
 		# accounts for delay before AudioStreamPlayer.play() works
-		
+
 		var wait_time_adjustments = get_wait_time_adjustments()
 		$StartTimer.wait_time = $StartTimer.wait_time - wait_time_adjustments
 
@@ -200,7 +189,7 @@ func play_beats_before_start(beats):
 		- might want to move it here as export along with bpm and measures
 	"""
 	
-	beats_before_start = set_beats_before_start(beats)
+	beats_before_start = get_beats_before_start(beats)
 	set_start_timer()
 
 	

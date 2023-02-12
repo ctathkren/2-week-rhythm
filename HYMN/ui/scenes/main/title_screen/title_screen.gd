@@ -1,24 +1,35 @@
 extends Control
 
-# from ctath old code:
-# export var MainGameScene : PackedScene
+# VARIABLES
+const LEVEL_SELECT_PATH = "res://ui/scenes/main/title_screen/level_select/level_select.tscn"
+var credits_showing := false
 
-const START_PATH = "res://ui/scenes/main/title_screen/start/start.tscn"
-const OPTIONS_PATH = "res://ui/scenes/main/title_screen/options/options.tscn"
-const CREDITS_PATH = "res://ui/scenes/main/title_screen/credits/credits.tscn"
+# LOOPS
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		if !($Content.visible) and $Credits.visible:
+			_on_CreditsBackButton_pressed()
 
-
-func _on_StartButton_pressed():
-	var _start = get_tree().change_scene(START_PATH)
-
-
-func _on_OptionsButton_pressed():
-	var _options = get_tree().change_scene(OPTIONS_PATH)
-
+# SIGNALS
+func _on_LevelSelectButton_pressed():
+	change_scene(LEVEL_SELECT_PATH)
 
 func _on_CreditsButton_pressed():
-	var _credits = get_tree().change_scene(CREDITS_PATH)
+	$Content.visible = false
+	$Credits.visible = true
 
+func _on_CreditsBackButton_pressed():
+	$Credits.visible = false
+	$Content.visible = true
+	
 
 func _on_ExitButton_pressed():
-    get_tree().quit()
+	get_tree().quit()
+
+
+# HELPER FUNCTIONS
+func change_scene(scene):
+	var _change_scene = get_tree().change_scene(scene)
+
+
+

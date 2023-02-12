@@ -2,8 +2,12 @@ extends Node2D
 
 # VARIABLES
 
+onready var conductor = $Conductor
+onready var highway_growth = $HighwayGrowth
+onready var highway_decay = $HighwayDecay
+
 # SONG TRACKING
-var bpm = 180
+var bpm
 	# seems only used for seconds_per_beat
 	# which seems unused
 
@@ -13,10 +17,10 @@ var song_position_in_beats = 0
 
 var last_spawned_beat = 0
 	# doesn't seem used
-var seconds_per_beat = 60.0 / bpm
+var seconds_per_beat
 	# doesn't seem used atm
 
-export var beats_before_start := 8
+export var beats_before_start := 7
 
 # NOTE SPAWNING
 # Spawn Note on Measure
@@ -42,47 +46,50 @@ signal level_ended
 var note = load("res://game/scenes/components/note/note.tscn")
 var note_bar = load("res://game/scenes/components/note_bar/note_bar.tscn")
 
+var notes_to_spawn = []
+
+var has_level_started_ending = false
+
 # FUNCTIONS
 
 # LOOPS
 
-# fill later with mouse controls for UI
-# can consider buttons also
-"""
-func _input(event):
-	if event.is_action("escape"):
-		if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
-			print ("Error changing scene to Menu")
-"""
-
 # ON READY
 func _ready():
-	# reference uses random lanes for note spawning
-	randomize()
-
-	choose_level_start()
+	#fetch_level_info()
 	
+	# reference uses random lanes for note spawning
+	#randomize()
+	#choose_level_start()
+	pass
+	
+func load_level_info(full_audio_file_path, bpm_level, notes):
+	conductor.load_song_info(full_audio_file_path, bpm_level)
+	bpm = bpm_level
+	seconds_per_beat = 60.0 / bpm_level
+
+	notes_to_spawn = notes
 
 func choose_level_start():
 	"""
 	Ways to Start the Level
 		- from beat 0
-			- uncomment $Conductor.play_beats_before_start(beats)
+			- uncomment conductor.play_beats_before_start(beats)
 		- from certain time or beat
-			- uncomment $Conductor.play_from_beat(seconds, beat)
+			- uncomment conductor.play_from_beat(seconds, beat)
 			- pass the arguments
 		- DON'T FORGET TO COMMENT THE OTHER
 	"""
 
-	$Conductor.play_beats_before_start(beats_before_start)
+	conductor.play_beats_before_start(beats_before_start)
 
-	# $Conductor.play_from_beat(30, 4)
+	#conductor.play_from_beat(30, 4)
 	
 
 # ON CONDUCTOR SIGNALS (from Conductor.gd)
-func _on_Conductor_send_measure(current_measure):
+#func _on_Conductor_send_measure(current_measure):
 	# sets how many notes to spawn depending on what measure it is
-	
+	"""
 	if current_measure == 1:
 		spawn_notes_randomly(spawn_notes_measure_1)
 	elif current_measure == 2:
@@ -91,6 +98,7 @@ func _on_Conductor_send_measure(current_measure):
 		spawn_notes_randomly(spawn_notes_measure_3)
 	elif current_measure == 4:
 		spawn_notes_randomly(spawn_notes_measure_4)
+	"""
 	
 	"""
 	# proposed optimization for the above if-statement:
@@ -110,7 +118,8 @@ func _on_Conductor_send_measure(current_measure):
 # currently has the note mapping system from reference
 func _on_Conductor_send_beat(current_beat):
 	song_position_in_beats = current_beat
-
+	print(song_position_in_beats)
+	
 	"""
 	to-do:
 		- think of optimization 
@@ -144,7 +153,8 @@ func _on_Conductor_send_beat(current_beat):
 			notes_to_spawn = measure 
 
 	"""
-
+	
+	"""
 	if song_position_in_beats > 36:
 		spawn_notes_measure_1 = 1
 		spawn_notes_measure_2 = 1
@@ -203,31 +213,53 @@ func _on_Conductor_send_beat(current_beat):
 	
 	# end of song!
 	if song_position_in_beats > 404:
-		level_end()
-
-func level_end():
-	emit_signal("level_ended")
-
+		emit_signal("level_ended")
+	"""
+	
+	for n in range(notes_to_spawn.size()):
+		if notes_to_spawn[n][0] == song_position_in_beats:
+			for lane in notes_to_spawn[n][1]:
+				instantiate_note(lane)
+			
+			# check if the note spawned is the last note
+			if n == notes_to_spawn.size()-1:
+				for _n_past in range(notes_to_spawn.size()):
+					notes_to_spawn.pop_front()
+		else:
+			# remove all notes from notes_to_spawn[0] to notes_to_spawn[n-1]
+			for _n_past in range(n):
+				notes_to_spawn.pop_front()
+				
+			break
+	
+	if notes_to_spawn.size() == 0 and not has_level_started_ending:
+		# wait until the last note is hit/missed, + 1 second, before ending level
+		$EndTimer.wait_time = (Global.time_to_target+0.5) + 1
+		$EndTimer.start()
+		
+		# only run this if statement once
+		has_level_started_ending = true
+# ---
 
 # Spawn Notes
 func instantiate_note(lane):
 	var instance = note.instance()
 	instance.initialize(lane)
-	connect("note_missed", self, "_on_Note_note_missed")
+	instance.connect("note_missed", self, "_on_Note_note_missed")
 	
 	if lane > 0:
 		$HighwayGrowth.add_child(instance)
 	elif lane < 0:
 		$HighwayDecay.add_child(instance)
 
-func instantiate_multiple_notes(lane1, lane2):
+func instantiate_multiple_notes(lane1, lane2):	
 	var note1_instance = note.instance()
 	note1_instance.initialize(lane1)
-	connect("note_missed", self, "_on_Note_note_missed")
+	note1_instance.connect("note_missed", self, "_on_Note_note_missed")
 
 	var note2_instance = note.instance()
 	note2_instance.initialize(lane2)
-	connect("note_missed", self, "_on_Note_note_missed")
+	note2_instance.connect("note_missed", self, "_on_Note_note_missed")
 		
 	var note_bar_instance = note_bar.instance()
 	note_bar_instance.initialize(lane1, lane2)
@@ -236,16 +268,15 @@ func instantiate_multiple_notes(lane1, lane2):
 	note2_instance.partner_bar = note_bar_instance
 	
 	if lane1 > 0:
-		$HighwayGrowth.add_child(note1_instance)
-		$HighwayGrowth.add_child(note2_instance)
-		$HighwayGrowth.add_child(note_bar_instance)
+		highway_growth.add_child(note1_instance)
+		highway_growth.add_child(note2_instance)
+		highway_growth.add_child(note_bar_instance)
 	elif lane1 < 0:
-		$HighwayDecay.add_child(note1_instance)
-		$HighwayDecay.add_child(note2_instance)
-		$HighwayDecay.add_child(note_bar_instance)
+		highway_decay.add_child(note1_instance)
+		highway_decay.add_child(note2_instance)
+		highway_decay.add_child(note_bar_instance)
 
-func instantiate_hold(lane, duration_in_beats, BPM):
-	pass
+#func instantiate_hold(lane, length):
 	#var instance = hold.instance()
 	#instance.initialize(lane, length)
 	
@@ -263,7 +294,7 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 	var chosen_lanes = []
 	var lane
 
-	for i in range(number_of_notes_to_spawn):
+	for _i in range(number_of_notes_to_spawn):
 		lane = lane_numbers[randi() % lane_numbers.size()]
 		while lane in chosen_lanes:
 			# loop  until it generates a random late that hasn't been chosen yet
@@ -271,9 +302,8 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 		
 		chosen_lanes.append(lane)
 
-	for l in chosen_lanes:
+	for _lane in chosen_lanes:
 		instantiate_note(lane)
-
 
 # SIGNALS
 
@@ -302,7 +332,14 @@ func _on_ButtonDecayRight_score_incremented(input_type, score_to_add):
 	emit_signal("score_incremented", input_type, score_to_add)
 	
 func _on_Note_note_missed(input_type):
-	print("deadge")
 	# pass it from gameplay_orthogonal.tscn to gameplay.tscn
 	emit_signal("score_incremented", input_type, 0)
 
+func _on_KeyGuidesTimer_timeout():
+	$KeyGuides.visible = false
+
+func _on_Conductor_song_info_loaded():
+	choose_level_start()
+
+func _on_EndTimer_timeout():
+	emit_signal("level_ended")

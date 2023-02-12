@@ -2,35 +2,79 @@ extends Node2D
 
 # VARIABLES
 
-# Level Unlocks
-var decay_unlocked = false
+### Settings
+var enable_nofail = false
+var time_to_target = 1.5
 
-# Global Values
+### Global Constants
+# Judgement Values
 enum Judgements {
 	SCORE_MISS,
 	SCORE_GOOD,
 	SCORE_PERFECT
 }
 
-# ---
+var ACCURACY_WEIGHTS = {
+	Judgements.SCORE_PERFECT : 1.0,
+	Judgements.SCORE_GOOD : 0.5,
+	Judgements.SCORE_MISS : 0.0
+}
 
+# Level Unlocks
+var growth_passed := false
+var decay_passed := false
+
+### Level Start
+# Level loading
+var path_to_level_to_load = "" # path to Level folder
+
+var level_info = {
+	# preset via level file
+	"title": "",
+	"bpm": 0, #  placeholder default BPM
+	"audio_file_path": "",
+	"background_file_path": "",
+	"notes": [
+		
+	],
+	
+	# set upon loading a level
+	"level_folder_path": "",
+	
+	# computed from preset level info
+	"number_of_notes": {
+		"growth": 0,
+		"decay": 0,
+		"combined": 0
+	}
+}
+
+### Level End
 # In-Game Scoring
 var score_stats = {
 	"growth": {	
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	},
 	"decay": {		
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	},
 	"combined": {
 		# Scoring
@@ -41,39 +85,62 @@ var score_stats = {
 		"max_combo": 0,
 		
 		# Note Hit Feedback
-		score_feedback_to_button_hit_feedback = {
+		"score_feedback_to_button_hit_feedback": {
 			Judgements.SCORE_PERFECT : 0,
 			Judgements.SCORE_GOOD : 0,
 			Judgements.SCORE_MISS : 0
-		}
+		},
+		
+		# Computed Accuracies
+		"active_accuracy": 100.0,
+		"rampup_accuracy": 0.0
 	}
 }
 
+# End Game Scene
+var laurels_earned := 0
+
 # Post-Game Scoring
-var highest_score_to_grade = {
-	250_000 : 'A+',
-	200_000 : 'A' ,
-	150_000 : 'A-',
-	130_000 : 'B+',
-	115_000 : 'B' ,
-	100_000 : 'B-',
-	85_000  : 'C+',
-	70_000  : 'C' ,
-	55_000  : 'C-',
-	40_000  : 'D+',
-	30_000  : 'D' ,
-	20_000  : 'D-',
-	10_000  : 'F' ,
+var laurel_accuracy_thresholds = {
+	90 : 3,
+	50 : 2,
+	20 : 1,
+	0 : 0
 }
-var grade = "NA"
 
 
 # FUNCTIONS
+func reset_level_info():
+	level_info = {
+		# preset via level file
+		"title": "",
+		"bpm": 0,
+		"audio_file_path": "",
+		"background_file_path": "",
+		"notes": [
+			
+		],
+		
+		# set upon loading a level
+		"level_folder_path": "",
+		
+		# computed from preset level info
+		"number_of_notes": {
+			"growth": 0,
+			"decay": 0,
+			"combined": 0
+		}
+	}
+
 
 func set_score_stats(stats):
 	score_stats = stats
 	
-	for highest_score in highest_score_to_grade:
-		if score_stats.combined.score >= highest_score:
-			grade = highest_score_to_grade[highest_score]
+	# change accuracy to score once we decide on score thresholds
+		# note that we might need to add a way to score multiple score thresholds per map
+		# that, or we calculate it manually from the number of notes
+		# however, with our scoring system, getting laurels would be very combo-oriented
+	for minimum_accuracy in laurel_accuracy_thresholds:
+		if score_stats.combined.active_accuracy >= minimum_accuracy:
+			laurels_earned = laurel_accuracy_thresholds[minimum_accuracy]
 			break

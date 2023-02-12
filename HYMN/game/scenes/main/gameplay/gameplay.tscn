@@ -1,29 +1,99 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
-[ext_resource path="res://game/assets/art/backgrounds/Hymn_BG 1.png" type="Texture" id=3]
+[ext_resource path="res://game/assets/fonts/gameplay_combo.tres" type="Theme" id=3]
 [ext_resource path="res://game/assets/art/general/highways/Purple Highway.png" type="Texture" id=4]
 [ext_resource path="res://game/scenes/main/gameplay/gameplay.gd" type="Script" id=5]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_decay.tres" type="Theme" id=7]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_plain.tres" type="Theme" id=8]
-[ext_resource path="res://game/assets/art/general/fonts/gameplay_growth.tres" type="Theme" id=9]
+[ext_resource path="res://game/assets/fonts/gameplay_score.tres" type="Theme" id=6]
+[ext_resource path="res://game/assets/fonts/gameplay_decay.tres" type="Theme" id=7]
+[ext_resource path="res://game/assets/fonts/gameplay_growth.tres" type="Theme" id=9]
+[ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
+[ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=13]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=14]
+
+[sub_resource type="World" id=2]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("GameplayPerspectivized/Gameplay3DViewport")
 
+[sub_resource type="DynamicFont" id=12]
+size = 50
+outline_size = 7
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -14
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 75
+outline_size = 7
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = -14
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 120
+outline_size = 8
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 45
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 0.392157 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 0.0784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Gameplay" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 5 )
-beats_before_start = 1
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Backgrounds" type="Control" parent="."]
+pause_mode = 2
 
-[node name="BackgroundTexture" type="TextureRect" parent="Background"]
+[node name="Background" type="TextureRect" parent="Backgrounds"]
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 3 )
+texture = ExtResource( 10 )
 
-[node name="GrowthHighwayTexture" type="TextureRect" parent="Background"]
+[node name="GrowthHighway" type="TextureRect" parent="Backgrounds"]
 margin_left = 285.0
 margin_top = 329.0
 margin_right = 1109.0
@@ -31,7 +101,7 @@ margin_bottom = 997.0
 rect_scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 
-[node name="DecayHighwayTexture" type="TextureRect" parent="Background"]
+[node name="DecayHighway" type="TextureRect" parent="Backgrounds"]
 margin_left = 1017.0
 margin_top = 329.0
 margin_right = 1841.0
@@ -40,10 +110,12 @@ rect_scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 4 )
 
 [node name="GameplayPerspectivized" type="Node2D" parent="."]
+pause_mode = 1
 position = Vector2( 960, 540 )
 
 [node name="Gameplay3DViewport" type="Viewport" parent="GameplayPerspectivized"]
 size = Vector2( 1920, 1080 )
+world = SubResource( 2 )
 transparent_bg = true
 render_target_v_flip = true
 
@@ -52,50 +124,164 @@ render_target_v_flip = true
 [node name="Gameplay3DSprite" type="Sprite" parent="GameplayPerspectivized"]
 texture = SubResource( 1 )
 
-[node name="UI" type="Node2D" parent="."]
+[node name="UI" type="Control" parent="."]
 
 [node name="FeedbackGrowthLabel" type="Label" parent="UI"]
-margin_left = 216.21
-margin_top = 743.472
-margin_right = 454.21
-margin_bottom = 835.472
+pause_mode = 1
+margin_left = 235.0
+margin_top = 761.0
+margin_right = 389.0
+margin_bottom = 827.0
 rect_rotation = -47.5
 theme = ExtResource( 9 )
+custom_colors/font_color = Color( 0.823529, 0.0392157, 0.215686, 1 )
+custom_fonts/font = SubResource( 12 )
 align = 1
+valign = 1
 
 [node name="FeedbackVisibleTimer" type="Timer" parent="UI/FeedbackGrowthLabel"]
+pause_mode = 1
 one_shot = true
 
 [node name="FeedbackDecayLabel" type="Label" parent="UI"]
-margin_left = 1543.0
-margin_top = 568.0
-margin_right = 1781.0
-margin_bottom = 660.0
+pause_mode = 1
+margin_left = 1522.0
+margin_top = 583.0
+margin_right = 1762.0
+margin_bottom = 648.0
 rect_rotation = 47.5
 theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 12 )
 align = 1
+valign = 1
 
 [node name="FeedbackVisibleTimer" type="Timer" parent="UI/FeedbackDecayLabel"]
+pause_mode = 1
 one_shot = true
 
 [node name="ComboLabel" type="Label" parent="UI"]
-margin_left = 829.5
-margin_top = 50.0
-margin_right = 1090.5
-margin_bottom = 142.0
-theme = ExtResource( 8 )
+pause_mode = 1
+margin_left = 802.0
+margin_top = 5.0
+margin_right = 1113.0
+margin_bottom = 198.0
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.733333, 0.270588, 1 )
+custom_fonts/font = SubResource( 10 )
 align = 1
+valign = 1
 
 [node name="ScoreLabel" type="Label" parent="UI"]
-margin_left = 1400.0
-margin_top = 50.0
-margin_right = 1701.0
+pause_mode = 1
+margin_left = 1524.0
+margin_right = 1920.0
 margin_bottom = 142.0
-theme = ExtResource( 8 )
-text = "SCORE: 0"
+theme = ExtResource( 6 )
+custom_colors/font_color = Color( 0.784314, 0, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "0"
 align = 1
+valign = 1
+clip_text = true
+
+[node name="Scale" parent="UI" instance=ExtResource( 11 )]
+pause_mode = 1
+position = Vector2( 960, 937 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="PauseLayer" type="ColorRect" parent="UI"]
+pause_mode = 2
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="Buttons" type="VBoxContainer" parent="UI"]
+pause_mode = 2
+margin_left = -39.0
+margin_top = 33.0
+margin_right = 462.0
+margin_bottom = 462.0
+rect_scale = Vector2( 0.8, 0.8 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+
+[node name="Pause" type="MarginContainer" parent="UI/Buttons"]
+margin_right = 501.0
+margin_bottom = 109.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="PauseButton" type="Button" parent="UI/Buttons/Pause"]
+pause_mode = 2
+margin_left = 100.0
+margin_right = 401.0
+margin_bottom = 109.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Pause"
+
+[node name="Restart" type="MarginContainer" parent="UI/Buttons"]
+margin_top = 159.0
+margin_right = 501.0
+margin_bottom = 269.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="RestartButton" type="Button" parent="UI/Buttons/Restart"]
+pause_mode = 2
+visible = false
+margin_left = 100.0
+margin_right = 401.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Restart"
+
+[node name="Quit" type="MarginContainer" parent="UI/Buttons"]
+margin_top = 319.0
+margin_right = 501.0
+margin_bottom = 429.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+
+[node name="QuitButton" type="Button" parent="UI/Buttons/Quit"]
+pause_mode = 2
+visible = false
+margin_left = 100.0
+margin_right = 401.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Quit"
+
+[node name="PauseMusic" type="AudioStreamPlayer" parent="UI"]
+pause_mode = 2
+stream = ExtResource( 13 )
 
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]
 [connection signal="score_incremented" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_score_incremented"]
 [connection signal="timeout" from="UI/FeedbackGrowthLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
 [connection signal="timeout" from="UI/FeedbackDecayLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]
+[connection signal="scale_overtipped" from="UI/Scale" to="." method="_on_Scale_scale_overtipped"]
+[connection signal="pressed" from="UI/Buttons/Pause/PauseButton" to="." method="_on_PauseButton_pressed"]
+[connection signal="pressed" from="UI/Buttons/Restart/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="UI/Buttons/Quit/QuitButton" to="." method="_on_QuitButton_pressed"]
