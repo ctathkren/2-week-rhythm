@@ -147,7 +147,6 @@ anti_aliasing_size = 0.01
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
-growth_passed = true
 
 [node name="Backgrounds" type="Control" parent="."]
 margin_right = 40.0
@@ -226,7 +225,6 @@ custom_fonts/font = SubResource( 6 )
 text = "by Zach"
 align = 1
 valign = 1
-percent_visible = -0.166667
 
 [node name="VineSprite" type="Sprite" parent="Buttons/GrowthButton"]
 position = Vector2( 111, 75.9999 )

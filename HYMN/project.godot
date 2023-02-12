@@ -13,6 +13,8 @@ config_version=4
 config/name="HYMN"
 run/main_scene="res://ui/scenes/main/title_screen/title_screen.tscn"
 config/icon="res://ui/assets/art/general/logo/hymn logo for dark bg.png"
+config/macos_native_icon="res://ui/assets/art/general/logo/hymn logo for dark bg.png"
+config/windows_native_icon="res://ui/assets/art/general/logo/hymn logo for dark bg.png"
 
 [autoload]
 
