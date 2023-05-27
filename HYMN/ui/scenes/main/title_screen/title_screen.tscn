@@ -104,7 +104,6 @@ margin_bottom = 1080.0
 texture = ExtResource( 4 )
 
 [node name="Content" type="Control" parent="."]
-visible = false
 
 [node name="Logo" type="TextureRect" parent="Content"]
 margin_left = 243.0
