@@ -1,7 +1,15 @@
 extends Node2D
 
 # VARIABLES
+# Key Guides
+onready var label_growth1 = $KeyGuides/Growth/Growth1
+onready var label_growth2 = $KeyGuides/Growth/Growth2
+onready var label_growth3 = $KeyGuides/Growth/Growth3
+onready var label_decay1 = $KeyGuides/Decay/Decay1
+onready var label_decay2 = $KeyGuides/Decay/Decay2
+onready var label_decay3 = $KeyGuides/Decay/Decay3
 
+# Gameplay
 onready var conductor = $Conductor
 onready var highway_growth = $HighwayGrowth
 onready var highway_decay = $HighwayDecay
@@ -50,12 +58,20 @@ var notes_to_spawn = []
 
 var has_level_started_ending = false
 
+
 # FUNCTIONS
 
 # LOOPS
 
 # ON READY
 func _ready():
+	label_growth1.text = Global.settings["controls"]["button_growth1"]
+	label_growth2.text = Global.settings["controls"]["button_growth2"]
+	label_growth3.text = Global.settings["controls"]["button_growth3"]
+	label_decay1.text = Global.settings["controls"]["button_decay1"]
+	label_decay2.text = Global.settings["controls"]["button_decay2"]
+	label_decay3.text = Global.settings["controls"]["button_decay3"]
+	
 	#fetch_level_info()
 	
 	# reference uses random lanes for note spawning

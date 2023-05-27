@@ -181,6 +181,7 @@ custom_styles/normal = SubResource( 8 )
 text = "Exit"
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 
 [node name="Body" type="Control" parent="Settings"]
 margin_left = 300.0
@@ -203,13 +204,12 @@ custom_fonts/font = SubResource( 9 )
 all_tabs_in_front = true
 
 [node name="Volume" type="VBoxContainer" parent="Settings/Body/SettingsTabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 44.0
 margin_right = -4.0
-margin_bottom = 24.0
+margin_bottom = -4.0
 
 [node name="VolumeSettingsLabel" type="Label" parent="Settings/Body/SettingsTabContainer/Volume"]
 margin_right = 1320.0
@@ -240,6 +240,7 @@ margin_left = 604.0
 margin_right = 1104.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 500, 60 )
+value = 50.0
 
 [node name="MusicVolumeSettingLabel" type="Label" parent="Settings/Body/SettingsTabContainer/Volume/VolumeSettings"]
 margin_top = 84.0
@@ -257,6 +258,7 @@ margin_top = 84.0
 margin_right = 1104.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 500, 60 )
+value = 50.0
 
 [node name="SfxVolumeSettingLabel" type="Label" parent="Settings/Body/SettingsTabContainer/Volume/VolumeSettings"]
 margin_top = 168.0
@@ -274,8 +276,10 @@ margin_top = 168.0
 margin_right = 1104.0
 margin_bottom = 228.0
 rect_min_size = Vector2( 500, 60 )
+value = 50.0
 
 [node name="Controls" type="VBoxContainer" parent="Settings/Body/SettingsTabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -291,6 +295,9 @@ custom_fonts/font = SubResource( 2 )
 text = "Controls"
 align = 1
 valign = 1
+
+[node name="Sprite" type="Sprite" parent="Settings/Body/SettingsTabContainer/Controls"]
+position = Vector2( -4, -44 )
 
 [node name="ControlsSettings" type="GridContainer" parent="Settings/Body/SettingsTabContainer/Controls"]
 margin_top = 84.0
@@ -312,8 +319,10 @@ margin_left = 454.0
 margin_right = 654.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "S"
 align = 1
 valign = 1
 
@@ -332,8 +341,10 @@ margin_left = 1112.0
 margin_right = 1312.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "J"
 align = 1
 valign = 1
 
@@ -353,8 +364,10 @@ margin_top = 84.0
 margin_right = 654.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "D"
 align = 1
 valign = 1
 
@@ -375,8 +388,10 @@ margin_top = 84.0
 margin_right = 1312.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "K"
 align = 1
 valign = 1
 
@@ -396,8 +411,10 @@ margin_top = 168.0
 margin_right = 654.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "F"
 align = 1
 valign = 1
 
@@ -418,8 +435,10 @@ margin_top = 168.0
 margin_right = 1312.0
 margin_bottom = 248.0
 rect_min_size = Vector2( 200, 80 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 2 )
-text = "A"
+text = "L"
 align = 1
 valign = 1
 
@@ -545,5 +564,10 @@ autoplay = true
 [connection signal="pressed" from="Content/Buttons/CreditsButton2" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="Content/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/GrowthLeftSettingValue" to="." method="_on_GrowthLeftSettingValue_gui_input"]
+[connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/DecayLeftSettingValue" to="." method="_on_DecayLeftSettingValue_gui_input"]
+[connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/GrowthCenterSettingValue" to="." method="_on_GrowthCenterSettingValue_gui_input"]
+[connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/DecayCenterSettingValue" to="." method="_on_DecayCenterSettingValue_gui_input"]
+[connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/GrowthRightSettingValue" to="." method="_on_GrowthRightSettingValue_gui_input"]
+[connection signal="gui_input" from="Settings/Body/SettingsTabContainer/Controls/ControlsSettings/DecayRightSettingValue" to="." method="_on_DecayRightSettingValue_gui_input"]
 [connection signal="pressed" from="Settings/SettingsBackButton" to="." method="_on_SettingsBackButton_pressed"]
 [connection signal="pressed" from="Credits/CreditsBackButton" to="." method="_on_CreditsBackButton_pressed"]

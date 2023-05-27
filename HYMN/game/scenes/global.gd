@@ -6,6 +6,22 @@ extends Node2D
 var enable_nofail = false
 var time_to_target = 1.5
 
+var settings = {
+	"volume": {
+		"master": 80,
+		"music": 80,
+		"sfx": 80
+	},
+	'controls': {
+		"button_growth1": 'S',
+		"button_growth2": 'D',
+		"button_growth3": 'F',
+		"button_decay1": 'J',
+		"button_decay2": 'K',
+		"button_decay3": 'L'
+	}
+}
+
 ### Global Constants
 # Judgement Values
 enum Judgements {
