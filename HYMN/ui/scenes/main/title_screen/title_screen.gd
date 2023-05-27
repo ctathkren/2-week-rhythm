@@ -21,7 +21,11 @@ func _on_SettingsButton_pressed():
 func _on_SettingsBackButton_pressed():
 	$Settings.visible = false
 	$Content.visible = true
-	
+
+func _on_GrowthLeftSettingValue_gui_input(event):
+	if event.type == InputEvent.MOUSE_BUTTON:
+		$Settings/Body/SettingsTabContainer/ControlsTabVBox/ControlsSettings/GrowthLeftSettingValue.text = 'uwu'
+
 func _on_CreditsButton_pressed():
 	$Content.visible = false
 	$Credits.visible = true
