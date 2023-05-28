@@ -8,9 +8,10 @@ var time_to_target = 1.5
 
 var settings = {
 	"volume": {
-		"master": 50,
-		"music": 50,
-		"sfx": 50
+		# 100/100
+		"master": 60,
+		"music": 60,
+		"sfx": 60
 	},
 	'controls': {
 		"button_growth1": 'S',
@@ -21,6 +22,12 @@ var settings = {
 		"button_decay3": 'L'
 	}
 }
+
+func get_music_volume_muliplier() -> float:
+	return (settings["volume"]["master"]/100.0) * (settings["volume"]["music"]/100.0)
+	
+func get_sfx_volume_muliplier() -> float:
+	return (settings["volume"]["master"]/100.0) * (settings["volume"]["sfx"]/100.0)
 
 ### Global Constants
 # Judgement Values

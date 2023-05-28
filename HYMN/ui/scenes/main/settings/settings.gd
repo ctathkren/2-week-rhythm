@@ -1,5 +1,26 @@
 extends Control
 
+
+
+onready var slider_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingSlider
+onready var slider_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingSlider
+onready var slider_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingSlider
+
+onready var value_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingValue
+onready var value_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingValue
+onready var value_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingValue
+
+onready var bus_master_index = AudioServer.get_bus_index("Master")
+onready var bus_music_index = AudioServer.get_bus_index("Music")
+onready var bus_sfx_index = AudioServer.get_bus_index("Sfx")
+
+onready var keylabel_button_growth1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthLeftSettingValue
+onready var keylabel_button_growth2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthCenterSettingValue
+onready var keylabel_button_growth3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthRightSettingValue
+onready var keylabel_button_decay1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayLeftSettingValue
+onready var keylabel_button_decay2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayCenterSettingValue
+onready var keylabel_button_decay3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayRightSettingValue
+
 enum ChangeableKeys {
 	NONE,
 	GROWTH_LEFT,
@@ -11,26 +32,18 @@ enum ChangeableKeys {
 }
 var currently_changeable_key = ChangeableKeys.NONE
 
-onready var slider_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingSlider
-onready var slider_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingSlider
-onready var slider_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingSlider
-
-onready var keylabel_button_growth1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthLeftSettingValue
-onready var keylabel_button_growth2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthCenterSettingValue
-onready var keylabel_button_growth3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthRightSettingValue
-onready var keylabel_button_decay1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayLeftSettingValue
-onready var keylabel_button_decay2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayCenterSettingValue
-onready var keylabel_button_decay3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayRightSettingValue
-
 signal settings_back_button_pressed
 
 # ---
 
 func _ready():
 	# load default settings
-	slider_volume_master = Global.settings['volume']['master']
-	slider_volume_music = Global.settings['volume']['music']
-	slider_volume_sfx = Global.settings['volume']['sfx']
+	slider_volume_master.value = Global.settings['volume']['master']
+	value_volume_master.text = str(Global.settings['volume']['master'])
+	slider_volume_music.value = Global.settings['volume']['music']
+	value_volume_music.text = str(Global.settings['volume']['music'])
+	slider_volume_sfx.value = Global.settings['volume']['sfx']
+	value_volume_sfx.text = str(Global.settings['volume']['sfx'])
 	
 	keylabel_button_growth1.text = Global.settings['controls']['button_growth1']
 	keylabel_button_growth2.text = Global.settings['controls']['button_growth2']
@@ -83,6 +96,26 @@ func _input(event: InputEvent):
 			currently_changeable_key = ChangeableKeys.NONE
 			$SettingsBackButton.visible = true
 
+# Volume
+func _on_MasterVolumeSettingSlider_value_changed(value):
+	Global.settings['volume']['master'] = value
+	value_volume_master.text = str(Global.settings['volume']['master'])
+	
+	AudioServer.set_bus_volume_db(bus_music_index, linear2db(Global.get_music_volume_muliplier()))
+	AudioServer.set_bus_volume_db(bus_sfx_index, linear2db(Global.get_sfx_volume_muliplier()))
+	
+func _on_MusicVolumeSettingSlider_value_changed(value):
+	Global.settings['volume']['music'] = value
+	value_volume_music.text = str(Global.settings['volume']['music'])
+	
+	AudioServer.set_bus_volume_db(bus_music_index, linear2db(Global.get_music_volume_muliplier()))
+	
+func _on_SfxVolumeSettingSlider_value_changed(value):
+	Global.settings['volume']['sfx'] = value
+	value_volume_sfx.text = str(Global.settings['volume']['sfx'])
+	
+	AudioServer.set_bus_volume_db(bus_sfx_index, linear2db(Global.get_sfx_volume_muliplier()))
+# Controls
 func _on_GrowthLeftSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
 		$SettingsBackButton.visible = false
@@ -113,5 +146,7 @@ func _on_DecayRightSettingValue_gui_input(event):
 		$SettingsBackButton.visible = false
 		currently_changeable_key = ChangeableKeys.DECAY_RIGHT
 
+# Back Button
 func _on_SettingsBackButton_pressed():
 	emit_signal("settings_back_button_pressed")
+

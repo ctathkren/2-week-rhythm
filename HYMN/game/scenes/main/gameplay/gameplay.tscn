@@ -276,6 +276,7 @@ text = "Quit"
 [node name="PauseMusic" type="AudioStreamPlayer" parent="UI"]
 pause_mode = 2
 stream = ExtResource( 13 )
+bus = "Music"
 
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]
 [connection signal="score_incremented" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_score_incremented"]
