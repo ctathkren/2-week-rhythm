@@ -311,15 +311,15 @@ valign = 1
 stream = ExtResource( 14 )
 bus = "Music"
 
-[node name="Default" type="AudioStreamPlayer2D" parent="Music"]
+[node name="Default" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 14 )
 bus = "Music"
 
-[node name="Growth" type="AudioStreamPlayer2D" parent="Music"]
+[node name="Growth" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 5 )
 bus = "Music"
 
-[node name="Decay" type="AudioStreamPlayer2D" parent="Music"]
+[node name="Decay" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 6 )
 bus = "Music"
 

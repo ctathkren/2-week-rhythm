@@ -40,7 +40,7 @@ scale = Vector2( 2, 2 )
 [node name="PerfectAreaHitbox" type="CollisionShape2D" parent="PerfectArea"]
 shape = SubResource( 1 )
 
-[node name="ButtonSound" type="AudioStreamPlayer2D" parent="."]
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "Sfx"
 

@@ -166,7 +166,7 @@ custom_styles/pressed = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
 text = "Exit"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
 bus = "Music"
