@@ -91,7 +91,7 @@ func _unhandled_input(event):
 
 # ON READY
 func _ready():
-	get_tree().paused = false # for restart 
+	get_tree().paused = false # for restart
 	
 	# load level via path to level folder
 	# path_to_level_to_load variable is received via level_select.tscn
@@ -288,7 +288,7 @@ func update_accuracies():
 		
 	# ---
 	
-	var print_accuracy_data = false
+	var print_accuracy_data = true
 	
 	if print_accuracy_data:
 		print("##########")
