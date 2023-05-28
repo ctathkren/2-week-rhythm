@@ -85,5 +85,3 @@ func set_accuracies(rampup_accuracy_growth, rampup_accuracy_decay):
 	else:
 		bunny_growth_sprite.frame = 0
 		bunny_decay_sprite.frame = 0
-		
-		set_scale_angle(0)
