@@ -49,7 +49,8 @@ notes on 2nd argument of:
 	
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(input):
-		hit_feedback()	
+		$ButtonSound.play()
+		hit_feedback()
 
 # ON KEY PRESS
 func hit_score_and_destroy(score):

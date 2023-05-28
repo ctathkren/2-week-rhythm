@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/scenes/components/button/button.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/notes/Flat Note 1.png" type="Texture" id=2]
+[ext_resource path="res://game/assets/sound/sfx/hitsound.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 33, 16 )
@@ -38,6 +39,10 @@ scale = Vector2( 2, 2 )
 
 [node name="PerfectAreaHitbox" type="CollisionShape2D" parent="PerfectArea"]
 shape = SubResource( 1 )
+
+[node name="ButtonSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "Sfx"
 
 [connection signal="area_entered" from="EarlyMissArea" to="." method="_on_EarlyMissArea_area_entered"]
 [connection signal="area_exited" from="EarlyMissArea" to="." method="_on_EarlyMissArea_area_exited"]
