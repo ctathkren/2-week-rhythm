@@ -356,7 +356,6 @@ func increment_score(input_type, score_to_add):
 	update_feedback_label(input_type, score_to_add)
 	update_accuracy_scale()
 
-
 # SIGNALS
 
 func _on_Gameplay3D_score_incremented(input_type, score_to_add):
