@@ -169,6 +169,7 @@ text = "Exit"
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="Buttons/RetryButton" to="." method="_on_RetryButton_pressed"]
 [connection signal="pressed" from="Buttons/LevelSelectButton" to="." method="_on_LevelSelectButton_pressed"]
