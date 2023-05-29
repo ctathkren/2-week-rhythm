@@ -153,7 +153,8 @@ func destroy(score):
 	visual_effects()
 	
 	# "_on_NoteDeleteTimer_timeout()" handles "queue_free()"
-	$NoteDeleteTimer.start()
+	# $NoteDeleteTimer.start()
+	queue_free()
 	
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
