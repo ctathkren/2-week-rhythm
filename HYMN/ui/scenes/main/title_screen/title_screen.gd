@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-const LEVEL_SELECT_PATH = "res://ui/scenes/main/title_screen/level_select/level_select.tscn"
+const LEVEL_SELECT_PATH = "res://ui/scenes/main/level_select/level_select.tscn"
 var credits_showing := false
 
 # SIGNALS

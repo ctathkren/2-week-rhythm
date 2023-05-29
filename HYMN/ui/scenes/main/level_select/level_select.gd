@@ -12,7 +12,9 @@ const DECAY_ROTATE_SPEED = 100
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 
 const LEVEL_1_PATH = "res://levels/Level1"
+const LEVEL_1B_PATH = "res://levels/Level1"
 const LEVEL_2_PATH = "res://levels/Level2"
+const LEVEL_2B_PATH = "res://levels/Level2"
 
 const DEFAULT_MUSIC_PATH = "res://ui/assets/sound/music/sleepless.ogg"
 const GROWTH_MUSIC_PATH = "res://game/assets/sound/music/level_1/growth_draft.ogg"
@@ -32,10 +34,11 @@ func _ready():
 func _process(delta):
 	$Bunnies.rect_rotation -= bunnies_rotate_speed * delta
 	
+func _input(event):
 	# go back with Escape button
-	if Input.is_action_just_pressed("ui_cancel"):
+	if InputMap.event_is_action(event, "ui_cancel"):
 		_on_BackButton_pressed()
-
+		
 # SIGNALS
 # Growth Button
 func _on_GrowthButton_mouse_entered():

@@ -380,7 +380,7 @@ func _on_RestartButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().paused = false
-	var _quit = get_tree().change_scene("res://ui/scenes/main/title_screen/level_select/level_select.tscn")
+	var _quit = get_tree().change_scene("res://ui/scenes/main/level_select/level_select.tscn")
 
 
 # HELPER FUNCTIONS

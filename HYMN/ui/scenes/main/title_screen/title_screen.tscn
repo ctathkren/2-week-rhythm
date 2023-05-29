@@ -129,6 +129,7 @@ text = "Exit"
 visible = false
 
 [node name="Credits" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
