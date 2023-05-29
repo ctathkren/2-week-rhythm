@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://game/scenes/main/gameplay3d/gameplay3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/assets/art/general/highways/Red Highway.png" type="Texture" id=2]
@@ -7,12 +7,21 @@
 [ext_resource path="res://game/scenes/main/gameplay/gameplay.gd" type="Script" id=5]
 [ext_resource path="res://game/assets/fonts/gameplay_score.tres" type="Theme" id=6]
 [ext_resource path="res://game/assets/fonts/gameplay_decay.tres" type="Theme" id=7]
+[ext_resource path="res://game/assets/art/general/highways/Purple Highway_2.png" type="Texture" id=8]
 [ext_resource path="res://game/assets/fonts/gameplay_growth.tres" type="Theme" id=9]
 [ext_resource path="res://game/assets/art/general/background_sample.png" type="Texture" id=10]
 [ext_resource path="res://game/scenes/components/scale.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=13]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://game/assets/art/general/highways/Red Highway_3.png" type="Texture" id=15]
+[ext_resource path="res://game/assets/art/general/highways/Purple Highway_1.png" type="Texture" id=16]
+[ext_resource path="res://game/assets/art/general/highways/Red Highway_2.png" type="Texture" id=17]
+[ext_resource path="res://game/assets/art/general/highways/Red Highway_1.png" type="Texture" id=18]
+[ext_resource path="res://game/assets/art/general/highways/Purple Highway_3.png" type="Texture" id=19]
+
+[sub_resource type="CanvasItemMaterial" id=13]
+blend_mode = 1
 
 [sub_resource type="World" id=2]
 
@@ -101,6 +110,36 @@ margin_bottom = 997.0
 rect_scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 
+[node name="GrowthHighwayLeft" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 285.0
+margin_top = 329.0
+margin_right = 1109.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 18 )
+
+[node name="GrowthHighwayCenter" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 285.0
+margin_top = 329.0
+margin_right = 1109.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 17 )
+
+[node name="GrowthHighwayRight" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 285.0
+margin_top = 329.0
+margin_right = 1109.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 15 )
+
 [node name="DecayHighway" type="TextureRect" parent="Backgrounds"]
 margin_left = 1017.0
 margin_top = 329.0
@@ -108,6 +147,36 @@ margin_right = 1841.0
 margin_bottom = 997.0
 rect_scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 4 )
+
+[node name="DecayHighwayLeft" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 1017.0
+margin_top = 329.0
+margin_right = 1841.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 16 )
+
+[node name="DecayHighwayCenter" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 1017.0
+margin_top = 329.0
+margin_right = 1841.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 8 )
+
+[node name="DecayHighwayRight" type="TextureRect" parent="Backgrounds"]
+visible = false
+material = SubResource( 13 )
+margin_left = 1017.0
+margin_top = 329.0
+margin_right = 1841.0
+margin_bottom = 997.0
+rect_scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 19 )
 
 [node name="GameplayPerspectivized" type="Node2D" parent="."]
 pause_mode = 1
@@ -278,6 +347,8 @@ pause_mode = 2
 stream = ExtResource( 13 )
 bus = "Music"
 
+[connection signal="button_pressed" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_button_pressed"]
+[connection signal="button_released" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_button_released"]
 [connection signal="level_ended" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_level_ended"]
 [connection signal="score_incremented" from="GameplayPerspectivized/Gameplay3DViewport/Gameplay3D" to="." method="_on_Gameplay3D_score_incremented"]
 [connection signal="timeout" from="UI/FeedbackGrowthLabel/FeedbackVisibleTimer" to="." method="_on_FeedbackVisibleTimer_timeout"]

@@ -47,6 +47,8 @@ var measure_to_spawn_notes = {
 	4 : spawn_notes_measure_4,
 }
 
+signal button_pressed(lane)
+signal button_released(lane)
 signal score_incremented(input_type, score_to_add)
 signal level_ended
 
@@ -323,6 +325,44 @@ func spawn_notes_randomly(number_of_notes_to_spawn):
 
 # SIGNALS
 
+func _on_ButtonGrowthLeft_button_pressed():
+	emit_signal("button_pressed", "button_growth_left")
+
+func _on_ButtonGrowthLeft_button_released():
+	emit_signal("button_released", "button_growth_left")
+	
+func _on_ButtonGrowthCenter_button_pressed():
+	emit_signal("button_pressed", "button_growth_center")
+
+func _on_ButtonGrowthCenter_button_released():
+	emit_signal("button_released", "button_growth_center")
+
+func _on_ButtonGrowthRight_button_pressed():
+	emit_signal("button_pressed", "button_growth_right")
+
+func _on_ButtonGrowthRight_button_released():
+	emit_signal("button_released", "button_growth_right")
+
+func _on_ButtonDecayLeft_button_pressed():
+	emit_signal("button_pressed", "button_decay_left")
+
+func _on_ButtonDecayLeft_button_released():
+	emit_signal("button_released", "button_decay_left")
+
+func _on_ButtonDecayCenter_button_pressed():
+	emit_signal("button_pressed", "button_decay_center")
+
+func _on_ButtonDecayCenter_button_released():
+	emit_signal("button_released", "button_decay_center")
+
+func _on_ButtonDecayRight_button_pressed():
+	emit_signal("button_pressed", "button_decay_right")
+	
+func _on_ButtonDecayRight_button_released():
+	emit_signal("button_released", "button_decay_right")
+
+# ---
+
 func _on_ButtonGrowthLeft_score_incremented(input_type, score_to_add):
 	# pass it from gameplay_orthogonal.tscn to gameplay.tscn
 	emit_signal("score_incremented", input_type, score_to_add)
@@ -359,3 +399,7 @@ func _on_Conductor_song_info_loaded():
 
 func _on_EndTimer_timeout():
 	emit_signal("level_ended")
+
+
+
+

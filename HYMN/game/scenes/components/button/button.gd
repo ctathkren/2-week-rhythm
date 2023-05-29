@@ -25,6 +25,8 @@ onready var hit_feedback_areas = {
 	"hit_miss": $EarlyMissArea,
 }
 
+signal button_pressed
+signal button_released
 signal score_incremented(input_type, score_to_add)
 
 
@@ -49,8 +51,11 @@ notes on 2nd argument of:
 	
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(input):
+		emit_signal("button_pressed")
 		$ButtonSound.play()
 		hit_feedback()
+	elif Input.is_action_just_released(input):
+		emit_signal("button_released")
 
 # ON KEY PRESS
 func hit_score_and_destroy(score):

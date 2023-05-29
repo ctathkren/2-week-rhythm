@@ -358,6 +358,36 @@ func increment_score(input_type, score_to_add):
 
 # SIGNALS
 
+func _on_Gameplay3D_button_pressed(lane):
+	match lane:
+		"button_growth_left":
+			$Backgrounds/GrowthHighwayLeft.visible = true
+		"button_growth_center":
+			$Backgrounds/GrowthHighwayCenter.visible = true
+		"button_growth_right":
+			$Backgrounds/GrowthHighwayRight.visible = true
+		"button_decay_left":
+			$Backgrounds/DecayHighwayLeft.visible = true
+		"button_decay_center":
+			$Backgrounds/DecayHighwayCenter.visible = true
+		"button_decay_right":
+			$Backgrounds/DecayHighwayRight.visible = true
+
+func _on_Gameplay3D_button_released(lane):
+	match lane:
+		"button_growth_left":
+			$Backgrounds/GrowthHighwayLeft.visible = false
+		"button_growth_center":
+			$Backgrounds/GrowthHighwayCenter.visible = false
+		"button_growth_right":
+			$Backgrounds/GrowthHighwayRight.visible = false
+		"button_decay_left":
+			$Backgrounds/DecayHighwayLeft.visible = false
+		"button_decay_center":
+			$Backgrounds/DecayHighwayCenter.visible = false
+		"button_decay_right":
+			$Backgrounds/DecayHighwayRight.visible = false
+
 func _on_Gameplay3D_score_incremented(input_type, score_to_add):
 	increment_score(input_type, score_to_add)
 
@@ -409,3 +439,5 @@ func pause():
 	paused = not paused
 
 	get_tree().set_pause(paused)
+
+
