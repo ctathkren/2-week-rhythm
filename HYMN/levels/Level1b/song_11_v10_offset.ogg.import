@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/song_11_v10_offset.ogg-0c987cdeaab992760b86ad4cc362904c.oggstr"
+
+[deps]
+
+source_file="res://levels/Level1b/song_11_v10_offset.ogg"
+dest_files=[ "res://.import/song_11_v10_offset.ogg-0c987cdeaab992760b86ad4cc362904c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

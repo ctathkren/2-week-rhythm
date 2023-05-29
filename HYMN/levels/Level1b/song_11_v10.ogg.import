@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/song_11_v10.ogg-056f983c2906c9dbaa5a68d8df2c24b3.oggstr"
+
+[deps]
+
+source_file="res://levels/Level1b/song_11_v10.ogg"
+dest_files=[ "res://.import/song_11_v10.ogg-056f983c2906c9dbaa5a68d8df2c24b3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
