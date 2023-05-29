@@ -44,8 +44,12 @@ var ACCURACY_WEIGHTS = {
 }
 
 # Level Unlocks
-var growth_passed := false
-var decay_passed := false
+var is_level_unlocked = {
+	"growth_easy": true,
+	"decay_easy": false,
+	"growth_hard": false,
+	"decay_hard": false
+}
 
 ### Level Start
 # Level loading

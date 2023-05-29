@@ -1,7 +1,7 @@
 extends Control
 
 # VARIABLES
-var growth_passed := Global.growth_passed
+var is_level_unlocked = Global.is_level_unlocked
 
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
 const BACK_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
@@ -11,10 +11,13 @@ const GROWTH_ROTATE_SPEED = 60
 const DECAY_ROTATE_SPEED = 100
 var bunnies_rotate_speed := DEFAULT_ROTATE_SPEED
 
-const LEVEL_1_PATH = "res://levels/Level1"
-const LEVEL_1B_PATH = "res://levels/Level1"
-const LEVEL_2_PATH = "res://levels/Level2"
-const LEVEL_2B_PATH = "res://levels/Level2"
+const LEVEL_GROWTH_EASY_PATH = "res://levels/Level1a"
+const LEVEL_GROWTH_HARD_PATH = "res://levels/Level1b"
+const LEVEL_DECAY_EASY_PATH = "res://levels/Level2a"
+const LEVEL_DECAY_HARD_PATH = "res://levels/Level2b"
+
+enum Levels {EASY, HARD}
+var current_level_mode = Levels.EASY
 
 const DEFAULT_MUSIC_PATH = "res://ui/assets/sound/music/sleepless.ogg"
 const GROWTH_MUSIC_PATH = "res://game/assets/sound/music/level_1/growth_draft.ogg"
@@ -23,8 +26,9 @@ const DECAY_MUSIC_PATH = "res://game/assets/sound/music/level_2/decay_ost.ogg"
 # MAIN FUNCTIONS
 # Testing Decay Unlock
 func _ready():
-	Global.growth_passed = growth_passed
-	if Global.growth_passed:
+	current_level_mode = Levels.EASY
+
+	if Global.is_level_unlocked["decay_easy"]:
 		decay_text_unlocked()
 	else:
 		decay_text_locked()
@@ -42,63 +46,138 @@ func _input(event):
 # SIGNALS
 # Growth Button
 func _on_GrowthButton_mouse_entered():
-	default_off()
-	decay_off()
-
-	growth_on()
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["growth_easy"]:
+				default_off()
+				growth_on()
+				decay_off()
+			else:
+				return
+		Levels.HARD:
+			if Global.is_level_unlocked["growth_hard"]:
+				default_off()
+				growth_on()
+				decay_off()
+			else:
+				return
 	
 func _on_GrowthButton_mouse_exited():
-	growth_off()
-
-	default_on()
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["growth_easy"]:
+				default_on()
+				growth_off()
+				decay_off()
+			else:
+				default_on()
+				growth_off()
+				decay_off()
+		Levels.HARD:
+			if Global.is_level_unlocked["growth_hard"]:
+				default_on()
+				growth_off()
+				decay_off()
 
 func _on_GrowthButton_pressed():
-	Global.path_to_level_to_load = LEVEL_1_PATH
-
-	change_scene(LEVEL_PATH)
-
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["growth_easy"]:
+				Global.path_to_level_to_load = LEVEL_GROWTH_EASY_PATH
+				
+				change_scene(LEVEL_PATH)
+		Levels.HARD:
+			if Global.is_level_unlocked["growth_hard"]:
+				Global.path_to_level_to_load = LEVEL_GROWTH_HARD_PATH
+	
+				change_scene(LEVEL_PATH)
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
-	if not Global.growth_passed:
-		return
-
-	default_off()
-	growth_off()
-
-	# Decay On
-	decay_on()
-	decay_text_unlocked()
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["decay_easy"]:
+				default_off()
+				growth_off()
+				decay_on()
+			else:
+				return
+		Levels.HARD:
+			if Global.is_level_unlocked["decay_hard"]:
+				default_off()
+				growth_off()
+				decay_on()
+			else:
+				return
 		
 func _on_DecayButton_mouse_exited():
-	decay_off()
-	if not Global.growth_passed:
-		decay_text_locked()
-
-	default_on()
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["decay_easy"]:
+				default_on()
+				growth_off()
+				decay_off()
+		Levels.HARD:
+			if Global.is_level_unlocked["decay_hard"]:
+				default_on()
+				growth_off()
+				decay_off()
 
 func _on_DecayButton_pressed():
-	if Global.growth_passed:
-		Global.path_to_level_to_load = LEVEL_2_PATH
+	match current_level_mode:
+		Levels.EASY:
+			if Global.is_level_unlocked["decay_easy"]:
+				Global.path_to_level_to_load = LEVEL_DECAY_EASY_PATH
+				
+				change_scene(LEVEL_PATH)
+		Levels.HARD:
+			if Global.is_level_unlocked["decay_hard"]:
+				Global.path_to_level_to_load = LEVEL_DECAY_HARD_PATH
 	
-		change_scene(LEVEL_PATH)
+				change_scene(LEVEL_PATH)
 
+func _on_HardButton_pressed():
+	match current_level_mode:
+		Levels.EASY:
+			# Switch from EASY to HARD
+			current_level_mode = Levels.HARD
+			
+			if Global.is_level_unlocked["growth_hard"]:
+				growth_text_unlocked()
+			else:
+				growth_text_locked()
+			
+			if Global.is_level_unlocked["decay_hard"]:
+				decay_text_unlocked()
+			else:
+				decay_text_locked()
+		Levels.HARD:
+			# Switch from HARD to EASY
+			current_level_mode = Levels.EASY
+			
+			if Global.is_level_unlocked["growth_easy"]:
+				growth_text_unlocked()
+			else:
+				growth_text_locked()
+			
+			if Global.is_level_unlocked["decay_easy"]:
+				decay_text_unlocked()
+			else:
+				decay_text_locked()
 
 # Back Button (Title Screen)
 func _on_BackButton_pressed():
 	change_scene(BACK_PATH)
 
-
 # HELPER FUNCTIONS
 func default_on():
 	$Backgrounds/Default.visible = true
-	# prevents music repeating if exit decay button & decay locked
-	if not $Music.playing:
-		$Music.stream = load(DEFAULT_MUSIC_PATH)
-		$Music.play()
+	$Music.stream = load(DEFAULT_MUSIC_PATH)
+	$Music.play()
+	$DefaultMusicLabel.visible = true
 
 	bunnies_rotate_speed = DEFAULT_ROTATE_SPEED
-	$MusicLabel.visible = true
+	
 func default_off():
 	$Backgrounds/Default.visible = false
 	$Music.stop()
@@ -107,9 +186,10 @@ func growth_on():
 	$Backgrounds/Growth.visible = true
 	$Music.stream = load(GROWTH_MUSIC_PATH)
 	$Music.play()
+	$DefaultMusicLabel.visible = false
 
 	bunnies_rotate_speed = GROWTH_ROTATE_SPEED
-	$MusicLabel.visible = false
+	
 func growth_off():
 	$Backgrounds/Growth.visible = false
 	$Music.stop()
@@ -118,25 +198,57 @@ func decay_on():
 	$Backgrounds/Decay.visible = true
 	$Music.stream = load(DECAY_MUSIC_PATH)
 	$Music.play()
+	$DefaultMusicLabel.visible = false
 
 	bunnies_rotate_speed = DECAY_ROTATE_SPEED
-	$MusicLabel.visible = false
+	
 func decay_off():
 	$Backgrounds/Decay.visible = false
 	$Music.stop()
+
+func growth_text_unlocked():
+	# hide
+	$Buttons/GrowthButton.text = ""
+
+	# show
+	$Buttons/GrowthButton/SongTitleLabel.visible = true
+	$Buttons/GrowthButton/ArtistLabel.visible = true
 	
+	match current_level_mode:
+		Levels.EASY:
+			$Buttons/GrowthButton/SongTitleLabel.text = "Growth"
+			$Buttons/GrowthButton/ArtistLabel.text = "by Zach"
+		Levels.HARD:
+			$Buttons/GrowthButton/SongTitleLabel.text = "Growth+"
+			$Buttons/GrowthButton/ArtistLabel.text = "by Zach"
+
+	#$Buttons/GrowthButton/VineSprite2.visible = false
+
+func growth_text_locked():
+	# hide
+	$Buttons/GrowthButton/SongTitleLabel.visible = false
+	$Buttons/GrowthButton/ArtistLabel.visible = false
+
+	# show
+	$Buttons/GrowthButton.text = "Locked"
+
 func decay_text_unlocked():
 	# hide
 	$Buttons/DecayButton.text = ""
-
+	$Buttons/DecayButton/VineSprite2.visible = false
+	
 	# show
 	$Buttons/DecayButton/SongTitleLabel.visible = true
-	$Buttons/DecayButton/SongTitleLabel.text = "Decay"
-
 	$Buttons/DecayButton/ArtistLabel.visible = true
-	$Buttons/DecayButton/ArtistLabel.text = "by Raco"
 
-	$Buttons/DecayButton/VineSprite2.visible = false
+	match current_level_mode:
+		Levels.EASY:
+			$Buttons/DecayButton/SongTitleLabel.text = "Decay"
+			$Buttons/DecayButton/ArtistLabel.text = "by Raco"
+		Levels.HARD:
+			$Buttons/DecayButton/SongTitleLabel.text = "Decay+"
+			$Buttons/DecayButton/ArtistLabel.text = "by Raco"
+	
 func decay_text_locked():
 	# hide
 	$Buttons/DecayButton/SongTitleLabel.visible = false
@@ -144,6 +256,10 @@ func decay_text_locked():
 
 	# show
 	$Buttons/DecayButton.text = "Locked"
+	$Buttons/DecayButton/VineSprite2.visible = true
 
 func change_scene(scene):
 	var _change_scene = get_tree().change_scene(scene)
+
+
+

@@ -13,7 +13,7 @@ onready var laurel2 = $Content/Laurels/Laurel2
 onready var laurel3 = $Content/Laurels/Laurel3
 
 const LEVEL_PATH = "res://game/scenes/main/gameplay/gameplay.tscn"
-const LEVEL_SELECT_PATH = "res://ui/scenes/main/title_screen/level_select/level_select.tscn"
+const LEVEL_SELECT_PATH = "res://ui/scenes/main/level_select/level_select.tscn"
 const TITLE_SCREEN_PATH = "res://ui/scenes/main/title_screen/title_screen.tscn"
 
 
@@ -36,10 +36,14 @@ func get_globals():
 	score_end = Global.score_stats.combined.score
 	laurels_earned = Global.laurels_earned
 	
-	# unlock decay if 2 laurels in growth
-	if level_name == "growth" and laurels_earned >= 2:
-		Global.growth_passed = true
-
+	# unlock levels
+	if level_name == "growth_easy" and laurels_earned >= 2:
+		Global.is_level_unlocked["decay_easy"] = true
+	elif level_name == "growth_easy" and laurels_earned == 3:
+		Global.is_level_unlocked["growth_hard"] = true
+	elif level_name == "decay_easy" and laurels_earned == 3:
+		Global.is_level_unlocked["decay_hard"] = true
+	
 func set_locals():
 	song_label.text = level_name
 	

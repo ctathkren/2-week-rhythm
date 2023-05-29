@@ -1,11 +1,9 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ui/scenes/main/level_select/level_select.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=3]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=4]
-[ext_resource path="res://levels/Level1/song_11_v10.ogg" type="AudioStream" id=5]
-[ext_resource path="res://levels/Level2/decay_ost.ogg" type="AudioStream" id=6]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
 [ext_resource path="res://ui/assets/fonts/header1.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=9]
@@ -104,7 +102,7 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="DynamicFont" id=18]
-size = 70
+size = 72
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 9 )
@@ -122,13 +120,11 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 1, 1, 1, 0.54902 )
 border_color = Color( 1, 0.654902, 0.254902, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-shadow_color = Color( 0.372549, 0.356863, 0.356863, 1 )
 shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
@@ -144,6 +140,12 @@ shadow_color = Color( 0.372549, 0.356863, 0.356863, 1 )
 shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
+
+[sub_resource type="DynamicFont" id=19]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
@@ -201,6 +203,11 @@ margin_right = 1941.0
 margin_bottom = 539.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 0.364706, 0.384314, 1 )
+custom_colors/font_color_focus = Color( 1, 0.364706, 0.384314, 1 )
+custom_colors/font_color = Color( 1, 0.364706, 0.384314, 1 )
+custom_colors/font_color_hover = Color( 1, 0.364706, 0.384314, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.364706, 0.384314, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 9 )
 custom_styles/pressed = SubResource( 10 )
@@ -297,7 +304,24 @@ custom_styles/pressed = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
 text = "Back"
 
-[node name="MusicLabel" type="Label" parent="."]
+[node name="HardButton" type="Button" parent="Buttons"]
+margin_left = 1770.0
+margin_right = 1920.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.439216, 0, 0, 1 )
+custom_fonts/font = SubResource( 19 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+text = "Hard"
+
+[node name="DefaultMusicLabel" type="Label" parent="."]
 margin_top = 980.0
 margin_right = 539.0
 margin_bottom = 1077.0
@@ -311,18 +335,6 @@ valign = 1
 stream = ExtResource( 14 )
 bus = "Music"
 
-[node name="Default" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 14 )
-bus = "Music"
-
-[node name="Growth" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 5 )
-bus = "Music"
-
-[node name="Decay" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource( 6 )
-bus = "Music"
-
 [connection signal="mouse_entered" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_exited"]
 [connection signal="pressed" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_pressed"]
@@ -330,3 +342,4 @@ bus = "Music"
 [connection signal="mouse_exited" from="Buttons/DecayButton" to="." method="_on_DecayButton_mouse_exited"]
 [connection signal="pressed" from="Buttons/DecayButton" to="." method="_on_DecayButton_pressed"]
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Buttons/HardButton" to="." method="_on_HardButton_pressed"]
