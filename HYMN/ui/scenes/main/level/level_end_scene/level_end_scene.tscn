@@ -1,15 +1,21 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/scenes/main/level/level_end_scene/level_end_scene.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/fonts/typewriter.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 2.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 1.png" type="Texture" id=4]
-[ext_resource path="res://ui/assets/fonts/header1.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=8]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=9]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=10]
+
+[sub_resource type="DynamicFont" id=9]
+size = 150
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 100
@@ -105,7 +111,7 @@ margin_top = 21.0
 margin_right = 1554.0
 margin_bottom = 248.0
 custom_colors/font_color = Color( 0.921569, 0.654902, 0.180392, 1 )
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 9 )
 text = "Song Title"
 align = 1
 
