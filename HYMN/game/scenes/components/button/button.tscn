@@ -5,13 +5,13 @@
 [ext_resource path="res://game/assets/sound/sfx/hitsound.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 66, 80 )
+extents = Vector2( 66, 40 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 66, 240 )
+extents = Vector2( 66, 120 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 66, 60 )
+extents = Vector2( 66, 40 )
 
 [node name="Button" type="Node2D"]
 z_index = 1
@@ -21,14 +21,14 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="ButtonSkeleton2" type="Sprite" parent="."]
-position = Vector2( 12, -233 )
+position = Vector2( 0, -240 )
 texture = ExtResource( 2 )
 
 [node name="EarlyMissArea" type="Area2D" parent="."]
 gravity_vec = Vector2( 0, 0 )
 
 [node name="EarlyMissAreaHitbox" type="CollisionShape2D" parent="EarlyMissArea"]
-position = Vector2( 0, -320 )
+position = Vector2( 0, -160 )
 shape = SubResource( 3 )
 
 [node name="GoodArea" type="Area2D" parent="."]

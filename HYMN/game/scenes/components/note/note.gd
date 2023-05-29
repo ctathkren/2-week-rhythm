@@ -50,11 +50,6 @@ var feedback_score_to_text_and_color = {
   Global.Judgements.SCORE_GOOD : ["GOOD", "c3a38a"],
 }
 
-# Partner Note, for making a note bar spawn
-var partner_note
-var partner_note_bar
-
-
 # FUNCTIONS
 # LOCAL
 func _ready():
@@ -153,15 +148,14 @@ func destroy(score):
 	visual_effects()
 	
 	# "_on_NoteDeleteTimer_timeout()" handles "queue_free()"
-	$NoteDeleteTimer.start()
+	# this is risky
+	#$NoteDeleteTimer.start()
+	queue_free()
 	
 	# Movement Tracking (_physics_process())
 	button_hit_ok = true
 
 	update_feedback_label(score)
-	
-	if partner_note_bar != null:
-		destroy(partner_note_bar)
 
 
 # SIGNALS
