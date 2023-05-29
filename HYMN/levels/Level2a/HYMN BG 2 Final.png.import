@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HYMN BG 1 Final.png-348a1c75e764461fe37b93e4aa28f169.stex"
+path="res://.import/HYMN BG 2 Final.png-d6085b9c96b8aab9b0e550645e2030b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Level1/HYMN BG 1 Final.png"
-dest_files=[ "res://.import/HYMN BG 1 Final.png-348a1c75e764461fe37b93e4aa28f169.stex" ]
+source_file="res://levels/Level2a/HYMN BG 2 Final.png"
+dest_files=[ "res://.import/HYMN BG 2 Final.png-d6085b9c96b8aab9b0e550645e2030b2.stex" ]
 
 [params]
 

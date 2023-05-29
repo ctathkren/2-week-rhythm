@@ -1,5 +1,5 @@
 [LevelInfo]
-title = "growth"
+title = "growth_hard"
 bpm = 360
 audio_file_path = "song_11_v10_offset.ogg"
 time_to_first_beat = 0
