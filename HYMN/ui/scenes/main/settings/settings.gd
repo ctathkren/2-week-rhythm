@@ -2,24 +2,24 @@ extends Control
 
 
 
-onready var slider_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingSlider
-onready var slider_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingSlider
-onready var slider_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingSlider
+onready var slider_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MasterVolumeSettingSlider
+onready var slider_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MusicVolumeSettingSlider
+onready var slider_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/SfxVolumeSettingSlider
 
-onready var value_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingValue
-onready var value_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingValue
-onready var value_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingValue
+onready var value_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MasterVolumeSettingValue
+onready var value_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MusicVolumeSettingValue
+onready var value_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/SfxVolumeSettingValue
 
 onready var bus_master_index = AudioServer.get_bus_index("Master")
 onready var bus_music_index = AudioServer.get_bus_index("Music")
 onready var bus_sfx_index = AudioServer.get_bus_index("Sfx")
 
-onready var keylabel_button_growth1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthLeftSettingValue
-onready var keylabel_button_growth2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthCenterSettingValue
-onready var keylabel_button_growth3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthRightSettingValue
-onready var keylabel_button_decay1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayLeftSettingValue
-onready var keylabel_button_decay2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayCenterSettingValue
-onready var keylabel_button_decay3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayRightSettingValue
+onready var keylabel_button_growth1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthLeftSettingValue
+onready var keylabel_button_growth2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthCenterSettingValue
+onready var keylabel_button_growth3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthRightSettingValue
+onready var keylabel_button_decay1 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayLeftSettingValue
+onready var keylabel_button_decay2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayCenterSettingValue
+onready var keylabel_button_decay3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayRightSettingValue
 
 enum ChangeableKeys {
 	NONE,
