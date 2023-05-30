@@ -14,7 +14,7 @@
 font_path = "res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf"
 
 [sub_resource type="DynamicFont" id=9]
-size = 120
+size = 110
 use_mipmaps = true
 use_filter = true
 font_data = SubResource( 10 )
