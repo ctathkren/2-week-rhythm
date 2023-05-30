@@ -2,7 +2,7 @@
 
 [ext_resource path="res://game/scenes/components/button/button.gd" type="Script" id=1]
 [ext_resource path="res://game/assets/art/general/notes/Flat Note 1.png" type="Texture" id=2]
-[ext_resource path="res://game/assets/sound/sfx/hitsound_louder.wav" type="AudioStream" id=3]
+[ext_resource path="res://game/assets/sound/sfx/hitsound.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 66, 40 )
@@ -39,7 +39,7 @@ shape = SubResource( 1 )
 
 [node name="ButtonSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = 2.0
+volume_db = 10.0
 bus = "Sfx"
 
 [connection signal="area_entered" from="EarlyMissArea" to="." method="_on_EarlyMissArea_area_entered"]

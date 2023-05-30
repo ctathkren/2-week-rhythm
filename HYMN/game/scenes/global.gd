@@ -9,9 +9,9 @@ var time_to_target = 1.5
 var settings = {
 	"volume": {
 		# 100/100
-		"master": 40,
-		"music": 25,
-		"sfx": 80
+		"master": 60,
+		"music": 60,
+		"sfx": 60
 	},
 	'controls': {
 		"button_growth1": 'S',

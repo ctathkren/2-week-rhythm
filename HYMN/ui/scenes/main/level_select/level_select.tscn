@@ -370,6 +370,7 @@ valign = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
+volume_db = -7.0
 bus = "Music"
 
 [connection signal="pressed" from="Buttons/HardButton" to="." method="_on_HardButton_pressed"]

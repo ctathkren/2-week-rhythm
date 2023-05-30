@@ -133,6 +133,7 @@ visible = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -7.0
 autoplay = true
 bus = "Music"
 
