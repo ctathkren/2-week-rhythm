@@ -115,6 +115,7 @@ func _on_SfxVolumeSettingSlider_value_changed(value):
 	value_volume_sfx.text = str(Global.settings['volume']['sfx'])
 	
 	AudioServer.set_bus_volume_db(bus_sfx_index, linear2db(Global.get_sfx_volume_muliplier()))
+
 # Controls
 func _on_GrowthLeftSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
