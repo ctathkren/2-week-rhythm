@@ -409,6 +409,12 @@ func _on_PauseButton_pressed():
 func _on_RestartButton_pressed():
 	restart_level()
 
+func _on_SettingsButton_pressed():
+	$UI/PauseLayer/Settings.visible = true
+
+func _on_Settings_settings_back_button_pressed():
+	$UI/PauseLayer/Settings.visible = false
+
 func _on_QuitButton_pressed():
 	quit_level()
 
@@ -420,18 +426,22 @@ func pause():
 	# don't bother optimizing with a function xD the logic escapes me
 	if paused: # turning play
 		$UI/PauseLayer.set_frame_color(Color(0,0,0,0))
-		$UI/Buttons/Restart/RestartButton.disabled = true
-		$UI/Buttons/Quit/QuitButton.disabled = true
 		$UI/Buttons/Pause/PauseButton.text = "Pause"
+		$UI/Buttons/Restart/RestartButton.disabled = true
 		$UI/Buttons/Restart/RestartButton.visible = false
+		$UI/Buttons/Settings/SettingsButton.disabled = true
+		$UI/Buttons/Settings/SettingsButton.visible = false
+		$UI/Buttons/Quit/QuitButton.disabled = true
 		$UI/Buttons/Quit/QuitButton.visible = false
 		$UI/PauseMusic.stop()
 	else: 
 		$UI/PauseLayer.set_frame_color(Color(0,0,0,0.5))
-		$UI/Buttons/Restart/RestartButton.disabled = false
-		$UI/Buttons/Quit/QuitButton.disabled = false
 		$UI/Buttons/Pause/PauseButton.text = "Play"
+		$UI/Buttons/Restart/RestartButton.disabled = false
 		$UI/Buttons/Restart/RestartButton.visible = true
+		$UI/Buttons/Settings/SettingsButton.disabled = false
+		$UI/Buttons/Settings/SettingsButton.visible = true
+		$UI/Buttons/Quit/QuitButton.disabled = false
 		$UI/Buttons/Quit/QuitButton.visible = true
 		$UI/PauseMusic.play()
 
@@ -446,3 +456,5 @@ func restart_level():
 func quit_level():
 	get_tree().paused = false
 	var _quit = get_tree().change_scene("res://ui/scenes/main/level_select/level_select.tscn")
+
+
