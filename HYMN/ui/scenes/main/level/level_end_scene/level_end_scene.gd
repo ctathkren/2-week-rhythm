@@ -39,9 +39,9 @@ func get_globals():
 	# unlock levels
 	if level_name == "growth_easy" and laurels_earned >= 2:
 		Global.is_level_unlocked["decay_easy"] = true
-	elif level_name == "growth_easy" and laurels_earned == 3:
+	if level_name == "growth_easy" and laurels_earned == 3:
 		Global.is_level_unlocked["growth_hard"] = true
-	elif level_name == "decay_easy" and laurels_earned == 3:
+	if level_name == "decay_easy" and laurels_earned == 3:
 		Global.is_level_unlocked["decay_hard"] = true
 	
 func set_locals():
