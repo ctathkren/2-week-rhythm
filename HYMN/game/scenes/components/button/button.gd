@@ -31,23 +31,6 @@ signal score_incremented(input_type, score_to_add)
 
 
 # FUNCTIONS
-#func _unhandled_input(event):
-	#if event.is_action_pressed(input, false):
-		#print("press")
-		# registers all hits at the moment!
-		# consider: .is_action_just_pressed
-
-"""
-notes on 2nd argument of:
-.is_action_pressed(action: String, exact: bool)
-
-- if exact == false
-	- ignores additional input modifiers 
-	- for InputEventKey and InputEventMouseButton events
-	- and the direction for InputEventJoypadMotion events.
-"""
-
-		#hit_feedback()
 	
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(input):

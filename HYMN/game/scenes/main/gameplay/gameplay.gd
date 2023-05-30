@@ -88,6 +88,8 @@ var current_score_stats = {
 func _unhandled_input(event):
 	if event.is_action_pressed("button_pause"):
 		pause()
+	elif event.is_action_pressed("button_restart"):
+		restart_level()
 
 # ON READY
 func _ready():
@@ -405,13 +407,10 @@ func _on_PauseButton_pressed():
 	pause()
 
 func _on_RestartButton_pressed():
-	get_tree().paused = false
-	var _restart = get_tree().reload_current_scene()
+	restart_level()
 
 func _on_QuitButton_pressed():
-	get_tree().paused = false
-	var _quit = get_tree().change_scene("res://ui/scenes/main/level_select/level_select.tscn")
-
+	quit_level()
 
 # HELPER FUNCTIONS
 func pause():
@@ -440,4 +439,10 @@ func pause():
 
 	get_tree().set_pause(paused)
 
+func restart_level():
+	get_tree().paused = false
+	var _restart = get_tree().reload_current_scene()
 
+func quit_level():
+	get_tree().paused = false
+	var _quit = get_tree().change_scene("res://ui/scenes/main/level_select/level_select.tscn")
