@@ -141,6 +141,7 @@ func _on_HardButton_pressed():
 		Levels.EASY:
 			# Switch from EASY to HARD
 			current_level_mode = Levels.HARD
+			$Buttons/HardButton.text = "EASY"
 			
 			if Global.is_level_unlocked["growth_hard"]:
 				growth_text_unlocked()
@@ -154,6 +155,7 @@ func _on_HardButton_pressed():
 		Levels.HARD:
 			# Switch from HARD to EASY
 			current_level_mode = Levels.EASY
+			$Buttons/HardButton.text = "HARD"
 			
 			if Global.is_level_unlocked["growth_easy"]:
 				growth_text_unlocked()
