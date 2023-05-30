@@ -4,18 +4,20 @@
 [ext_resource path="res://ui/assets/fonts/typewriter.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 2.png" type="Texture" id=3]
 [ext_resource path="res://ui/assets/art/general/laurels/Laurel 1.png" type="Texture" id=4]
-[ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFont-ZV7gz.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://ui/assets/art/backgrounds/Hymn_Level Select.png" type="Texture" id=7]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 1 Final.png" type="Texture" id=8]
 [ext_resource path="res://game/assets/art/backgrounds/HYMN BG 2 Final.png" type="Texture" id=9]
 [ext_resource path="res://ui/assets/sound/music/sleepless - intro.ogg" type="AudioStream" id=10]
 
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf"
+
 [sub_resource type="DynamicFont" id=9]
-size = 150
+size = 120
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 5 )
+font_data = SubResource( 10 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 100
@@ -107,13 +109,13 @@ color = Color( 0, 0, 0, 0.392157 )
 
 [node name="SongLabel" type="Label" parent="Content/Labels"]
 margin_left = 367.0
-margin_top = 21.0
 margin_right = 1554.0
-margin_bottom = 248.0
+margin_bottom = 227.0
 custom_colors/font_color = Color( 0.921569, 0.654902, 0.180392, 1 )
 custom_fonts/font = SubResource( 9 )
 text = "Song Title"
 align = 1
+valign = 1
 
 [node name="ScoreLabel" type="Label" parent="Content/Labels"]
 margin_left = 320.0
