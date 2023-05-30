@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://ui/scenes/main/level_select/level_select.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/fonts/bananas-font/BananasFontItalic-EaLy8.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,48 @@
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L4.png" type="Texture" id=12]
 [ext_resource path="res://game/assets/art/general/vines/Purple Vine L5.png" type="Texture" id=13]
 [ext_resource path="res://ui/assets/sound/music/sleepless.ogg" type="AudioStream" id=14]
+
+[sub_resource type="DynamicFont" id=19]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 1, 1, 1, 0.784314 )
+border_color = Color( 1, 0.654902, 0.254902, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color( 0.686275, 0.368627, 0.368627, 1 )
+shadow_size = 30
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 1, 0.254902, 0.254902, 1 )
+border_color = Color( 1, 0.654902, 0.254902, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color( 0.686275, 0.368627, 0.368627, 1 )
+shadow_size = 30
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 0.654902, 0.254902, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color( 0.686275, 0.368627, 0.368627, 1 )
+shadow_size = 30
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [sub_resource type="DynamicFont" id=4]
 size = 75
@@ -125,6 +167,7 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+shadow_color = Color( 0.372549, 0.356863, 0.356863, 1 )
 shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
@@ -140,12 +183,6 @@ shadow_color = Color( 0.372549, 0.356863, 0.356863, 1 )
 shadow_size = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
-
-[sub_resource type="DynamicFont" id=19]
-size = 40
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 9 )
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource( 1 )
@@ -195,6 +232,23 @@ align = 1
 [node name="Buttons" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="HardButton" type="Button" parent="Buttons"]
+margin_left = 1770.0
+margin_right = 1920.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.439216, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.439216, 0, 0, 1 )
+custom_fonts/font = SubResource( 19 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/normal = SubResource( 20 )
+text = "Hard"
 
 [node name="GrowthButton" type="Button" parent="Buttons"]
 margin_left = 1143.0
@@ -304,23 +358,6 @@ custom_styles/pressed = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
 text = "Back"
 
-[node name="HardButton" type="Button" parent="Buttons"]
-margin_left = 1770.0
-margin_right = 1920.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_colors/font_color_disabled = Color( 0.439216, 0, 0, 1 )
-custom_colors/font_color_focus = Color( 0.439216, 0, 0, 1 )
-custom_colors/font_color = Color( 0.439216, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.439216, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.439216, 0, 0, 1 )
-custom_fonts/font = SubResource( 19 )
-custom_styles/hover = SubResource( 15 )
-custom_styles/pressed = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
-text = "Hard"
-
 [node name="DefaultMusicLabel" type="Label" parent="."]
 margin_top = 980.0
 margin_right = 539.0
@@ -335,6 +372,7 @@ valign = 1
 stream = ExtResource( 14 )
 bus = "Music"
 
+[connection signal="pressed" from="Buttons/HardButton" to="." method="_on_HardButton_pressed"]
 [connection signal="mouse_entered" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_exited"]
 [connection signal="pressed" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_pressed"]
@@ -342,4 +380,3 @@ bus = "Music"
 [connection signal="mouse_exited" from="Buttons/DecayButton" to="." method="_on_DecayButton_mouse_exited"]
 [connection signal="pressed" from="Buttons/DecayButton" to="." method="_on_DecayButton_pressed"]
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="Buttons/HardButton" to="." method="_on_HardButton_pressed"]
