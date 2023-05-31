@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/assets/fonts/grisly-beast-font/GrislyBeastRegular-0W9rG.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/assets/fonts/typewriter.tres" type="DynamicFont" id=2]
@@ -12,6 +12,18 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 28
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 28
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
@@ -77,6 +89,7 @@ custom_fonts/font = SubResource( 9 )
 all_tabs_in_front = true
 
 [node name="Volume" type="VBoxContainer" parent="SettingsBody/SettingsTabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -85,16 +98,32 @@ margin_right = -4.0
 margin_bottom = -4.0
 custom_constants/separation = 0
 
-[node name="VolumeSettingsLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume"]
-margin_right = 1320.0
-margin_bottom = 80.0
+[node name="VolumeSettingsLabelHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Volume"]
+margin_left = 1324.0
+margin_top = 270.0
+margin_right = 1324.0
+margin_bottom = 440.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="VolumeSettingsLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsLabelHBox"]
+margin_left = -1324.0
+margin_top = -270.0
+margin_right = -4.0
+margin_bottom = -190.0
 rect_min_size = Vector2( 1320, 80 )
 custom_fonts/font = SubResource( 2 )
 text = "VOLUME"
 align = 1
 valign = 1
 
-[node name="VolumeSettings" type="GridContainer" parent="SettingsBody/SettingsTabContainer/Volume"]
+[node name="VolumeSettingsHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Volume"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="VolumeSettings" type="GridContainer" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox"]
 margin_top = 80.0
 margin_right = 1320.0
 margin_bottom = 340.0
@@ -102,7 +131,7 @@ custom_constants/vseparation = 10
 custom_constants/hseparation = 20
 columns = 3
 
-[node name="MasterVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MasterVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_right = 600.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 600, 80 )
@@ -111,7 +140,7 @@ text = "Master Volume"
 align = 1
 valign = 1
 
-[node name="MasterVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MasterVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 620.0
 margin_right = 1020.0
 margin_bottom = 80.0
@@ -119,7 +148,7 @@ rect_min_size = Vector2( 400, 80 )
 step = 5.0
 value = 50.0
 
-[node name="MasterVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MasterVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 1040.0
 margin_right = 1140.0
 margin_bottom = 80.0
@@ -129,7 +158,7 @@ text = "80"
 align = 1
 valign = 1
 
-[node name="MusicVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MusicVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_top = 90.0
 margin_right = 600.0
 margin_bottom = 170.0
@@ -139,7 +168,7 @@ text = "Music Volume"
 align = 1
 valign = 1
 
-[node name="MusicVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MusicVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 620.0
 margin_top = 90.0
 margin_right = 1020.0
@@ -148,7 +177,7 @@ rect_min_size = Vector2( 400, 80 )
 step = 5.0
 value = 50.0
 
-[node name="MusicVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="MusicVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 1040.0
 margin_top = 90.0
 margin_right = 1140.0
@@ -159,7 +188,7 @@ text = "80"
 align = 1
 valign = 1
 
-[node name="SfxVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="SfxVolumeSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_top = 180.0
 margin_right = 600.0
 margin_bottom = 260.0
@@ -169,7 +198,7 @@ text = "SFX Volume"
 align = 1
 valign = 1
 
-[node name="SfxVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="SfxVolumeSettingSlider" type="HSlider" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 620.0
 margin_top = 180.0
 margin_right = 1020.0
@@ -178,7 +207,7 @@ rect_min_size = Vector2( 400, 80 )
 step = 5.0
 value = 50.0
 
-[node name="SfxVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettings"]
+[node name="SfxVolumeSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings"]
 margin_left = 1040.0
 margin_top = 180.0
 margin_right = 1140.0
@@ -190,7 +219,6 @@ align = 1
 valign = 1
 
 [node name="Controls" type="VBoxContainer" parent="SettingsBody/SettingsTabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -199,160 +227,245 @@ margin_right = -4.0
 margin_bottom = -4.0
 custom_constants/separation = 0
 
-[node name="ControlsSettingsLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls"]
+[node name="UIControlsSettingsLabelHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Controls"]
+margin_right = 1320.0
+margin_bottom = 80.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="UIControlsSettingsLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsLabelHBox"]
 margin_right = 1320.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 1320, 80 )
 custom_fonts/font = SubResource( 2 )
-text = "Controls"
+text = "UI"
 align = 1
 valign = 1
 
-[node name="Sprite" type="Sprite" parent="SettingsBody/SettingsTabContainer/Controls"]
-position = Vector2( -4, -44 )
-
-[node name="ControlsSettings" type="GridContainer" parent="SettingsBody/SettingsTabContainer/Controls"]
+[node name="UIControlsSettingsHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Controls"]
 margin_top = 80.0
 margin_right = 1320.0
-margin_bottom = 340.0
+margin_bottom = 190.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="UIControlsSettings" type="GridContainer" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsHBox"]
+margin_left = 350.0
+margin_right = 970.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 620, 0 )
+custom_constants/vseparation = 10
+custom_constants/hseparation = 20
+columns = 2
+
+[node name="PauseSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsHBox/UIControlsSettings"]
+margin_right = 300.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+custom_fonts/font = SubResource( 10 )
+text = "Pause"
+align = 1
+valign = 1
+
+[node name="PauseSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsHBox/UIControlsSettings"]
+margin_left = 320.0
+margin_right = 620.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 10 )
+text = "Esc"
+align = 1
+valign = 1
+
+[node name="RestartSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsHBox/UIControlsSettings"]
+margin_top = 60.0
+margin_right = 300.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 300, 50 )
+custom_fonts/font = SubResource( 10 )
+text = "Restart"
+align = 1
+valign = 1
+
+[node name="RestartSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/UIControlsSettingsHBox/UIControlsSettings"]
+margin_left = 320.0
+margin_top = 60.0
+margin_right = 620.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 10 )
+text = "Bksp."
+align = 1
+valign = 1
+
+[node name="ControlsSettingsLabelHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Controls"]
+margin_top = 190.0
+margin_right = 1320.0
+margin_bottom = 270.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="ControlsSettingsLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsLabelHBox"]
+margin_right = 1320.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 1320, 80 )
+custom_fonts/font = SubResource( 2 )
+text = "Controls (click to change)"
+align = 1
+valign = 1
+
+[node name="ControlsSettingsHBox" type="HBoxContainer" parent="SettingsBody/SettingsTabContainer/Controls"]
+margin_top = 270.0
+margin_right = 1320.0
+margin_bottom = 440.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="ControlsSettings" type="GridContainer" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox"]
+margin_right = 1320.0
+margin_bottom = 170.0
 rect_min_size = Vector2( 1320, 0 )
 custom_constants/vseparation = 10
 custom_constants/hseparation = 20
 columns = 4
 
-[node name="GrowthLeftSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="GrowthLeftSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_right = 450.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Growth - Left"
 align = 1
 valign = 1
 
-[node name="GrowthLeftSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="GrowthLeftSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 470.0
 margin_right = 620.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "S"
 align = 1
 valign = 1
 
-[node name="DecayLeftSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayLeftSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 640.0
 margin_right = 1090.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Decay - Left"
 align = 1
 valign = 1
 
-[node name="DecayLeftSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayLeftSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 1110.0
 margin_right = 1260.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "J"
 align = 1
 valign = 1
 
-[node name="GrowthCenterSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
-margin_top = 90.0
+[node name="GrowthCenterSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
+margin_top = 60.0
 margin_right = 450.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 110.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Growth - Center"
 align = 1
 valign = 1
 
-[node name="GrowthCenterSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="GrowthCenterSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 470.0
-margin_top = 90.0
+margin_top = 60.0
 margin_right = 620.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 110.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "D"
 align = 1
 valign = 1
 
-[node name="DecayCenterSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayCenterSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 640.0
-margin_top = 90.0
+margin_top = 60.0
 margin_right = 1090.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 110.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Decay - Center"
 align = 1
 valign = 1
 
-[node name="DecayCenterSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayCenterSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 1110.0
-margin_top = 90.0
+margin_top = 60.0
 margin_right = 1260.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 110.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "K"
 align = 1
 valign = 1
 
-[node name="GrowthRightSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
-margin_top = 180.0
+[node name="GrowthRightSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
+margin_top = 120.0
 margin_right = 450.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 170.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Growth - Right"
 align = 1
 valign = 1
 
-[node name="GrowthRightSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="GrowthRightSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 470.0
-margin_top = 180.0
+margin_top = 120.0
 margin_right = 620.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 170.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "F"
 align = 1
 valign = 1
 
-[node name="DecayRightSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayRightSettingLabel" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 640.0
-margin_top = 180.0
+margin_top = 120.0
 margin_right = 1090.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 450, 80 )
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 170.0
+rect_min_size = Vector2( 450, 50 )
+custom_fonts/font = SubResource( 11 )
 text = "Decay - Right"
 align = 1
 valign = 1
 
-[node name="DecayRightSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettings"]
+[node name="DecayRightSettingValue" type="Label" parent="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings"]
 margin_left = 1110.0
-margin_top = 180.0
+margin_top = 120.0
 margin_right = 1260.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 150, 80 )
+margin_bottom = 170.0
+rect_min_size = Vector2( 150, 50 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 11 )
 text = "L"
 align = 1
 valign = 1
@@ -372,13 +485,13 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 text = "Back"
 
-[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MasterVolumeSettingSlider" to="." method="_on_MasterVolumeSettingSlider_value_changed"]
-[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettings/MusicVolumeSettingSlider" to="." method="_on_MusicVolumeSettingSlider_value_changed"]
-[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettings/SfxVolumeSettingSlider" to="." method="_on_SfxVolumeSettingSlider_value_changed"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthLeftSettingValue" to="." method="_on_GrowthLeftSettingValue_gui_input"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayLeftSettingValue" to="." method="_on_DecayLeftSettingValue_gui_input"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthCenterSettingValue" to="." method="_on_GrowthCenterSettingValue_gui_input"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayCenterSettingValue" to="." method="_on_DecayCenterSettingValue_gui_input"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/GrowthRightSettingValue" to="." method="_on_GrowthRightSettingValue_gui_input"]
-[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettings/DecayRightSettingValue" to="." method="_on_DecayRightSettingValue_gui_input"]
+[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MasterVolumeSettingSlider" to="." method="_on_MasterVolumeSettingSlider_value_changed"]
+[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MusicVolumeSettingSlider" to="." method="_on_MusicVolumeSettingSlider_value_changed"]
+[connection signal="value_changed" from="SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/SfxVolumeSettingSlider" to="." method="_on_SfxVolumeSettingSlider_value_changed"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthLeftSettingValue" to="." method="_on_GrowthLeftSettingValue_gui_input"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayLeftSettingValue" to="." method="_on_DecayLeftSettingValue_gui_input"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthCenterSettingValue" to="." method="_on_GrowthCenterSettingValue_gui_input"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayCenterSettingValue" to="." method="_on_DecayCenterSettingValue_gui_input"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/GrowthRightSettingValue" to="." method="_on_GrowthRightSettingValue_gui_input"]
+[connection signal="gui_input" from="SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayRightSettingValue" to="." method="_on_DecayRightSettingValue_gui_input"]
 [connection signal="pressed" from="SettingsBackButton" to="." method="_on_SettingsBackButton_pressed"]
