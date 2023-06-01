@@ -3,7 +3,7 @@ extends Node2D
 # VARIABLES
 
 ### Settings
-var enable_nofail = true
+var enable_nofail = false
 var time_to_target = 1.5
 
 var settings = {

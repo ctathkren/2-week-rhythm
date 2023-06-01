@@ -290,7 +290,7 @@ func update_accuracies():
 		
 	# ---
 	
-	var print_accuracy_data = true
+	var print_accuracy_data = false
 	
 	if print_accuracy_data:
 		print("##########")
