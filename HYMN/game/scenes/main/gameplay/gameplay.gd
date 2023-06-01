@@ -85,7 +85,7 @@ var current_score_stats = {
 # fill later with mouse controls for UI
 # can consider buttons also
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("button_pause"):
 		pause()
 	elif event.is_action_pressed("button_restart"):
@@ -425,6 +425,8 @@ func pause():
 	# SET PAUSE
 	# don't bother optimizing with a function xD the logic escapes me
 	if paused: # turning play
+		$UI/Buttons/Pause/PauseButton.release_focus()
+		
 		$UI/PauseLayer.set_frame_color(Color(0,0,0,0))
 		$UI/Buttons/Pause/PauseButton.text = "Pause"
 		$UI/Buttons/Restart/RestartButton.disabled = true
@@ -435,6 +437,8 @@ func pause():
 		$UI/Buttons/Quit/QuitButton.visible = false
 		$UI/PauseMusic.stop()
 	else: 
+		$UI/Buttons/Pause/PauseButton.grab_focus()
+		
 		$UI/PauseLayer.set_frame_color(Color(0,0,0,0.5))
 		$UI/Buttons/Pause/PauseButton.text = "Play"
 		$UI/Buttons/Restart/RestartButton.disabled = false
@@ -446,7 +450,6 @@ func pause():
 		$UI/PauseMusic.play()
 
 	paused = not paused
-
 	get_tree().set_pause(paused)
 
 func restart_level():

@@ -43,9 +43,32 @@ func _input(event):
 	if InputMap.event_is_action(event, "ui_cancel"):
 		_on_BackButton_pressed()
 		
+	if get_focus_owner() == null:
+		if event.is_action_pressed("ui_up"):
+			# decay button + up = growth button
+			$Buttons/DecayButton.grab_focus()
+		elif event.is_action_pressed("ui_down"):
+			# hard button + up = growth button
+			$Buttons/HardButton.grab_focus()
+		elif event.is_action_pressed("ui_left"):
+			# decay button + left = growth button
+			$Buttons/DecayButton.grab_focus()
+		elif event.is_action_pressed("ui_right"):
+			# hard button + right = growth button
+			$Buttons/HardButton.grab_focus()
+		
 # SIGNALS
+
+func _on_HardButton_mouse_entered():
+	$Buttons/HardButton.grab_focus()
+	
+func _on_BackButton_mouse_entered():
+	$Buttons/BackButton.grab_focus()
+	
 # Growth Button
 func _on_GrowthButton_mouse_entered():
+	$Buttons/GrowthButton.grab_focus()
+	
 	match current_level_mode:
 		Levels.EASY:
 			if Global.is_level_unlocked["growth_easy"]:
@@ -94,6 +117,8 @@ func _on_GrowthButton_pressed():
 
 # Decay Button
 func _on_DecayButton_mouse_entered():
+	$Buttons/DecayButton.grab_focus()
+	
 	match current_level_mode:
 		Levels.EASY:
 			if Global.is_level_unlocked["decay_easy"]:
@@ -262,6 +287,4 @@ func decay_text_locked():
 
 func change_scene(scene):
 	var _change_scene = get_tree().change_scene(scene)
-
-
 

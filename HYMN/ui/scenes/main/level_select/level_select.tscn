@@ -253,6 +253,7 @@ custom_colors/font_color_pressed = Color( 0.439216, 0, 0, 1 )
 custom_fonts/font = SubResource( 19 )
 custom_styles/hover = SubResource( 21 )
 custom_styles/pressed = SubResource( 22 )
+custom_styles/focus = SubResource( 21 )
 custom_styles/normal = SubResource( 20 )
 text = "Hard"
 
@@ -277,6 +278,7 @@ custom_colors/font_color_pressed = Color( 1, 0.364706, 0.384314, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 9 )
 custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 9 )
 custom_styles/normal = SubResource( 11 )
 
 [node name="SongTitleLabel" type="Label" parent="Buttons/GrowthButton"]
@@ -325,6 +327,7 @@ custom_colors/font_color_pressed = Color( 0.160784, 0.113725, 0.372549, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 12 )
 custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 12 )
 custom_styles/normal = SubResource( 14 )
 
 [node name="SongTitleLabel" type="Label" parent="Buttons/DecayButton"]
@@ -379,6 +382,7 @@ custom_colors/font_color_pressed = Color( 0.372549, 0.356863, 0.356863, 1 )
 custom_fonts/font = SubResource( 18 )
 custom_styles/hover = SubResource( 15 )
 custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 15 )
 custom_styles/normal = SubResource( 17 )
 text = "Back"
 
@@ -397,6 +401,7 @@ stream = ExtResource( 14 )
 volume_db = -7.0
 bus = "Music"
 
+[connection signal="mouse_entered" from="Buttons/HardButton" to="." method="_on_HardButton_mouse_entered"]
 [connection signal="pressed" from="Buttons/HardButton" to="." method="_on_HardButton_pressed"]
 [connection signal="mouse_entered" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/GrowthButton" to="." method="_on_GrowthButton_mouse_exited"]
@@ -404,4 +409,5 @@ bus = "Music"
 [connection signal="mouse_entered" from="Buttons/DecayButton" to="." method="_on_DecayButton_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/DecayButton" to="." method="_on_DecayButton_mouse_exited"]
 [connection signal="pressed" from="Buttons/DecayButton" to="." method="_on_DecayButton_pressed"]
+[connection signal="mouse_entered" from="Buttons/BackButton" to="." method="_on_BackButton_mouse_entered"]
 [connection signal="pressed" from="Buttons/BackButton" to="." method="_on_BackButton_pressed"]
