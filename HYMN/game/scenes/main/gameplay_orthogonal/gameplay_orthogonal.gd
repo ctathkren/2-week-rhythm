@@ -136,7 +136,7 @@ func choose_level_start():
 # currently has the note mapping system from reference
 func _on_Conductor_send_beat(current_beat):
 	song_position_in_beats = current_beat
-	print(song_position_in_beats)
+	#print(song_position_in_beats)
 	
 	"""
 	to-do:
