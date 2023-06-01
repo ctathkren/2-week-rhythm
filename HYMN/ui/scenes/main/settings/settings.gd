@@ -1,7 +1,5 @@
 extends Control
 
-
-
 onready var slider_volume_master = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MasterVolumeSettingSlider
 onready var slider_volume_music = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/MusicVolumeSettingSlider
 onready var slider_volume_sfx = $SettingsBody/SettingsTabContainer/Volume/VolumeSettingsHBox/VolumeSettings/SfxVolumeSettingSlider
@@ -21,6 +19,10 @@ onready var keylabel_button_decay1 = $SettingsBody/SettingsTabContainer/Controls
 onready var keylabel_button_decay2 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayCenterSettingValue
 onready var keylabel_button_decay3 = $SettingsBody/SettingsTabContainer/Controls/ControlsSettingsHBox/ControlsSettings/DecayRightSettingValue
 
+onready var control_change_prompt_hbox = $SettingsBody/SettingsTabContainer/Controls/ControlChangePromptHBox
+
+onready var settings_back_button = $SettingsBackButton
+
 enum ChangeableKeys {
 	NONE,
 	GROWTH_LEFT,
@@ -36,7 +38,7 @@ signal settings_back_button_pressed
 
 # ---
 
-func _ready():
+func _ready():	
 	# load default settings
 	slider_volume_master.value = Global.settings['volume']['master']
 	value_volume_master.text = str(Global.settings['volume']['master'])
@@ -54,13 +56,14 @@ func _ready():
 	
 func _input(event: InputEvent):
 	if currently_changeable_key == ChangeableKeys.NONE:
-		if InputMap.event_is_action(event, "ui_cancel"):
+		if event.is_action_pressed("ui_cancel"):
 			emit_signal("settings_back_button_pressed")
 	else:
-		if InputMap.event_is_action(event, "ui_cancel"):
+		if event.is_action_pressed("ui_cancel"):
 			currently_changeable_key = ChangeableKeys.NONE
-			$SettingsBackButton.visible = true
-		elif InputMap.event_is_action(event, "button_valid_gameplay_input"):
+			settings_back_button.visible = true
+			control_change_prompt_hbox.visible = false
+		elif event.is_action_pressed("button_valid_gameplay_input"):
 			match currently_changeable_key:
 				ChangeableKeys.GROWTH_LEFT:
 					InputMap.action_erase_events("button_growth1")
@@ -94,7 +97,8 @@ func _input(event: InputEvent):
 					keylabel_button_decay3.text = char(event.scancode)
 			
 			currently_changeable_key = ChangeableKeys.NONE
-			$SettingsBackButton.visible = true
+			settings_back_button.visible = true
+			control_change_prompt_hbox.visible = false
 
 # Volume
 func _on_MasterVolumeSettingSlider_value_changed(value):
@@ -119,32 +123,38 @@ func _on_SfxVolumeSettingSlider_value_changed(value):
 # Controls
 func _on_GrowthLeftSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.GROWTH_LEFT
 		
 func _on_GrowthCenterSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.GROWTH_CENTER
 		
 func _on_GrowthRightSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.GROWTH_RIGHT
 	
 func _on_DecayLeftSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.DECAY_LEFT
 		
 func _on_DecayCenterSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.DECAY_CENTER
 		
 func _on_DecayRightSettingValue_gui_input(event):
 	if event is InputEventMouseButton:
-		$SettingsBackButton.visible = false
+		settings_back_button.visible = false
+		control_change_prompt_hbox.visible = true
 		currently_changeable_key = ChangeableKeys.DECAY_RIGHT
 
 # Back Button
