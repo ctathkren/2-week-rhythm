@@ -37,7 +37,7 @@ shape = SubResource( 2 )
 [node name="PerfectAreaHitbox" type="CollisionShape2D" parent="PerfectArea"]
 shape = SubResource( 1 )
 
-[node name="ButtonSound" type="AudioStreamPlayer2D" parent="."]
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 10.0
 bus = "Sfx"
