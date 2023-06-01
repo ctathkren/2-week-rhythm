@@ -45,8 +45,8 @@ use_filter = true
 extra_spacing_top = -14
 font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=11]
-size = 120
+[sub_resource type="DynamicFont" id=18]
+size = 100
 outline_size = 8
 use_mipmaps = true
 use_filter = true
@@ -291,16 +291,16 @@ valign = 1
 
 [node name="ScoreLabel" type="Label" parent="UI"]
 pause_mode = 1
-margin_left = 1524.0
-margin_right = 1920.0
-margin_bottom = 142.0
+margin_left = 1050.0
+margin_top = 40.0
+margin_right = 1850.0
+margin_bottom = 182.0
 theme = ExtResource( 6 )
 custom_colors/font_color = Color( 0.784314, 0, 0.313726, 1 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 18 )
 text = "0"
-align = 1
+align = 2
 valign = 1
-clip_text = true
 
 [node name="Scale" parent="UI" instance=ExtResource( 11 )]
 pause_mode = 1
