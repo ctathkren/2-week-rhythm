@@ -87,7 +87,11 @@ var current_score_stats = {
 
 func _input(event):
 	if event.is_action_pressed("button_pause"):
-		pause()
+		if $UI/PauseLayer/Settings.visible:
+			# don't unpause game if Esc is from canceling a keybind change
+			pass
+		else:
+			pause()
 	elif event.is_action_pressed("button_restart"):
 		restart_level()
 
